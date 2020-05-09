@@ -1,0 +1,66 @@
+{
+  "name": "gatsby-starter-shopify-tailwindcss",
+  "private": true,
+  "description": "A simple starter to build a blazing fast Shopify store quickly with Gatsby and Tailwind",
+  "author": "Luke Bennett <hello@lukebennett.com.au>",
+  "version": "0.1.0",
+  "license": "MIT",
+  "dependencies": {
+    "@tailwindcss/ui": "^0.1.3",
+    "autoprefixer": "^9.7.6",
+    "cssnano": "^4.1.10",
+    "dotenv": "^8.2.0",
+    "gatsby": "^2.20.17",
+    "gatsby-image": "^2.3.2",
+    "gatsby-plugin-env-variables": "^1.0.1",
+    "gatsby-plugin-manifest": "^2.3.3",
+    "gatsby-plugin-postcss": "^2.2.1",
+    "gatsby-plugin-purgecss": "^5.0.0",
+    "gatsby-plugin-react-helmet": "^3.2.2",
+    "gatsby-plugin-sharp": "^2.5.4",
+    "gatsby-source-filesystem": "^2.2.2",
+    "gatsby-source-shopify": "^3.1.2",
+    "gatsby-transformer-sharp": "^2.4.4",
+    "path": "^0.12.7",
+    "postcss-import": "^12.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.0.0",
+    "shopify-buy": "^2.9.3",
+    "tailwindcss": "^1.2.0",
+    "tailwindcss-aspect-ratio": "^3.0.0",
+    "typeface-inter": "^3.12.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-wesbos": "0.0.19",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "prettier": "^2.0.2"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "build:serve": "yarn build && yarn serve",
+    "clean": "gatsby clean",
+    "develop": "gatsby develop --host=0.0.0.0 --open",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "start": "yarn develop",
+    "serve": "gatsby serve --host=0.0.0.0 --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lukebennett88/gatsby-starter-shopify-tailwindcss"
+  },
+  "bugs": {
+    "url": "https://github.com/lukebennett88/gatsby-starter-shopify-tailwindcss/issues"
+  }
+}
