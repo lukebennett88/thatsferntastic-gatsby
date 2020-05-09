@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { StoreContextProvider } from './src/context/store-context';
-import 'typeface-inter';
+import 'typeface-courier-prime';
+import 'typeface-montserrat';
 import './src/css/tailwind.css';
 
 export const wrapRootElement = ({ element }) => (

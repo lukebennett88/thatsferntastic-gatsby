@@ -15,10 +15,9 @@ dotenv.config({
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Shopify Starter',
-    description:
-      'Kick off your next, eCommerce experience with this Gatsby starter.',
-    author: '@luke_bennett_',
+    title: '@thatsferntastic',
+    description: 'Handmade pouches, pencil cases and accessories.',
+    author: '@thatsferntastic',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -43,8 +42,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Gatsby Shopify Starter',
-        short_name: 'Shopify Starter',
+        name: 'Thats Ferntastic',
+        short_name: 'Ferntastic',
         start_url: '/',
         background_color: fullConfig.theme.colors.indigo['600'],
         theme_color: fullConfig.theme.colors.indigo['600'],
@@ -89,15 +88,26 @@ module.exports = {
         // See: https://help.shopify.com/api/custom-storefronts/storefront-api/getting-started#authentication
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
 
+        // Set the API version you want to use. For a list of available API versions,
+        // see: https://help.shopify.com/en/api/storefront-api/reference/queryroot
+        // Defaults to 2019-07
+        apiVersion: '2020-04',
+
+        // Set verbose to true to display a verbose output on `npm run develop`
+        // or `npm run build`. This prints which nodes are being fetched and how
+        // much time was required to fetch and process the data.
+        // Defaults to true.
+        verbose: true,
+
         // Number of records to fetch on each request when building the cache
         // at startup. If your application encounters timeout errors during
         // startup, try decreasing this number.
-        paginationSize: 250,
+        paginationSize: 10,
 
         // List of collections you want to fetch.
         // Possible values are: 'shop' and 'content'.
         // Defaults to ['shop', 'content'].
-        includeCollections: ['shop'],
+        // includeCollections: ['shop'],
       },
     },
   ],

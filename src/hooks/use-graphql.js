@@ -39,18 +39,20 @@ export function useGraphQL() {
             }
           }
         }
-        allShopifyProduct {
+        allShopifyProduct(
+          sort: { fields: updatedAt, order: DESC }
+          filter: {
+            availableForSale: { eq: true }
+            variants: { elemMatch: { availableForSale: { eq: true } } }
+          }
+        ) {
           nodes {
             title
             handle
+            productType
+            tags
             images {
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 512) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-              }
+              originalSrc
             }
             priceRange {
               minVariantPrice {
