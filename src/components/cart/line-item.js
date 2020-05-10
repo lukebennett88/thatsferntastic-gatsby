@@ -48,7 +48,7 @@ export const LineItem = ({ item }) => {
         </div>
         <div className="ml-4">
           <Link
-            to={`/product/${getHandleForVariant(item.variant.id)}`}
+            to={`/products/${getHandleForVariant(item.variant.id)}`}
             className="text-lg font-medium leading-6 text-gray-900 underline transition duration-150 ease-in-out hover:text-gray-600"
           >
             {item.title}
