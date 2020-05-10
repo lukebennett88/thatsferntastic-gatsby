@@ -6,14 +6,14 @@ import Footer from './footer';
 import MobileMenu from './mobile-menu';
 import Sidebar from './sidebar';
 
-const Layout = ({ children }) => {
+export function Layout({ children, hasSidebar = true }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header setMenuOpen={setMenuOpen} />
-      <div className="flex min-h-screen -mt-px font-sans font-light bg-white">
-        <MobileMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />
-        <Sidebar />
+      <MobileMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />
+      <div className="flex flex-1 w-full mx-auto -mt-px font-sans font-light bg-white max-w-7xl">
+        {hasSidebar && <Sidebar />}
         <div className="flex flex-col flex-1 w-0">
           <main
             id="main"
@@ -26,12 +26,11 @@ const Layout = ({ children }) => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
-};
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  hasSidebar: PropTypes.bool,
 };
-
-export { Layout };
