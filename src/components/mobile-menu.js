@@ -59,7 +59,12 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
                   </svg>
                 </button>
               </div>
-              <div className="px-4 font-mono text-2xl text-center">{title}</div>
+              <Link
+                to="/"
+                className="px-4 font-mono text-2xl text-center focus:outline-none focus:underline"
+              >
+                {title}
+              </Link>
               <div className="flex-1 h-0 mt-5 overflow-y-auto">
                 <nav className="px-2">
                   {navigation.map((navItem) => (
@@ -76,7 +81,6 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
                 </nav>
               </div>
             </AnimatedDialogContent>
-            {/* <!-- Dummy element to force sidebar to shrink to fit close icon --> */}
             <div className="flex-shrink-0 w-14" />
           </DialogOverlay>
         </div>
