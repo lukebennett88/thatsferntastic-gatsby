@@ -80,8 +80,7 @@ export const LineItem = ({ item }) => {
           Delete
         </button>
         <div className="ml-4 font-mono text-3xl font-bold text-gray-900">
-        <div className="ml-4 text-3xl font-bold text-gray-900">
-          ${Number(item.variant.priceV2.amount).toFixed(2)}
+          ${Number(item.variant.priceV2.amount * item.quantity).toFixed(2)}
         </div>
       </div>
     </div>
