@@ -2,3 +2,15 @@
  * These classes have lower specificity so we can override them
  * with utility classes 
  */
+
+@responsive {
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+
+  .reset-full-bleed {
+    width: auto;
+    margin-left: 0;
+  }
+}
