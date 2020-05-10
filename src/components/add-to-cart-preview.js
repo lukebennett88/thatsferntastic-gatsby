@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { animated, useTransition } from 'react-spring';
 import { FiX } from 'react-icons/fi';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
@@ -13,11 +13,7 @@ export function AddToCartPreview() {
     cartContent: { title, image, quantity },
   } = useStoreContext();
 
-  function dismiss() {
-    setAddedToCart(false);
-  }
-
-  const dismissButtonRef = useRef();
+  const close = () => setAddedToCart(false);
 
   const AnimatedDialogContent = animated(DialogContent);
 
@@ -32,8 +28,7 @@ export function AddToCartPreview() {
       item && (
         <DialogOverlay
           key={key}
-          onDismiss={dismiss}
-          initialFocusRef={dismissButtonRef}
+          onDismiss={close}
           className="fixed inset-x-0 top-0 z-50 flex items-start justify-center w-full h-full mx-auto"
         >
           <div className="fixed flex justify-center w-full max-w-screen-xl px-4 mx-auto md:justify-end sm:px-6 lg:px-8">
@@ -50,9 +45,8 @@ export function AddToCartPreview() {
                   <div className="absolute inset-y-0 right-0 flex items-center">
                     <div className="-mx-1.5">
                       <button
-                        ref={dismissButtonRef}
                         type="button"
-                        onClick={dismiss}
+                        onClick={close}
                         className="inline-flex text-gray-400 rounded-full focus:bg-gray-100 p-1.5 hover:bg-grey-100 focus:outline-none focus:text-gray-500 hover:text-gray-500 focus:bg-grey-100 transition ease-in-out duration-150"
                       >
                         <FiX className="w-5 h-5" />
@@ -79,7 +73,7 @@ export function AddToCartPreview() {
                   <span className="duration-150 ease-in-out transform rounded-full shadow-sm hover:-translate-y-px">
                     <Link
                       to="/cart/"
-                      onClick={dismiss}
+                      onClick={close}
                       className="inline-flex items-center px-6 py-3 font-mono text-base font-bold leading-6 text-pink-700 lowercase transition duration-150 ease-in-out bg-pink-100 border border-transparent rounded-full shadow-sm hover:bg-pink-50 focus:outline-none focus:border-pink-300 focus:shadow-outline-pink active:bg-pink-200 hover:shadow-lg"
                     >
                       View cart
@@ -87,7 +81,7 @@ export function AddToCartPreview() {
                   </span>
                   <button
                     type="button"
-                    onClick={dismiss}
+                    onClick={close}
                     className="pb-4 mt-2 font-bold underline focus:outline-none focus:text-pink-700"
                   >
                     Continue shopping
