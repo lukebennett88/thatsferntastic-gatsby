@@ -8,7 +8,6 @@ export default function Sidebar() {
     <div className="hidden md:flex md:flex-shrink-0">
       <div className="flex flex-col w-64 pt-5 pb-4 bg-white">
         <div className="flex flex-col flex-1 h-0 mt-5">
-          {/* <!-- Sidebar component, swap this element with another sidebar if you like --> */}
           <nav className="flex-1 px-2 bg-white">
             {navigation.map((navItem) => (
               <Link
