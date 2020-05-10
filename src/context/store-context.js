@@ -15,6 +15,14 @@ const initialStoreState = {
   client,
   isAdding: false,
   checkout: { lineItems: [] },
+  isAddedToCart: false,
+  setAddedToCart: () => {},
+  cartContent: {
+    title: '',
+    image: '',
+    quantity: 0,
+  },
+  setCartContent: () => {},
 };
 
 const StoreContext = createContext({
@@ -42,6 +50,15 @@ function setCheckoutInState(checkout, setStore) {
 
 const StoreContextProvider = ({ children }) => {
   const [store, setStore] = useState(initialStoreState);
+
+  // Manage add to cart alerts in state
+  const [isAddedToCart, setAddedToCart] = useState(false);
+
+  const [cartContent, setCartContent] = useState({
+    title: '',
+    image: '',
+    quantity: 0,
+  });
 
   useEffect(() => {
     const initializeCheckout = async () => {
@@ -75,6 +92,10 @@ const StoreContextProvider = ({ children }) => {
       value={{
         store,
         setStore,
+        isAddedToCart,
+        setAddedToCart,
+        cartContent,
+        setCartContent,
       }}
     >
       {children}
