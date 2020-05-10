@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-shopify-tailwindcss",
+  "name": "thats-ferntastic",
   "private": true,
-  "description": "A simple starter to build a blazing fast Shopify store quickly with Gatsby and Tailwind",
+  "description": "Website for thatsferntastic.com.au",
   "author": "Luke Bennett <hello@lukebennett.com.au>",
   "version": "0.1.0",
   "license": "MIT",
@@ -64,9 +64,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lukebennett88/gatsby-starter-shopify-tailwindcss"
+    "url": "https://github.com/lukebennett88/thatsferntastic.com.au"
   },
   "bugs": {
-    "url": "https://github.com/lukebennett88/gatsby-starter-shopify-tailwindcss/issues"
+    "url": "https://github.com/lukebennett88/thatsferntastic.com.au/issues"
   }
 }
