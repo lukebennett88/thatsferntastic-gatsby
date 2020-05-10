@@ -94,8 +94,8 @@ export default function ProductPageTemplate({
   return (
     <Layout hasSidebar={false}>
       <SEO title={product.title} />
-      <article className="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="rounded-lg lg:grid lg:grid-cols-2 lg:gap-8">
+      <article className="relative">
+        <div className="rounded-lg md:grid md:grid-cols-2 md:gap-8">
           <h1 className="mt-6 text-lg font-bold leading-tight md:hidden">
             {product.title}
           </h1>
@@ -111,7 +111,7 @@ export default function ProductPageTemplate({
                 alt=""
                 width={592}
                 height={592}
-                className="absolute inset-0 object-contain h-full mx-auto overflow-hidden duration-500 ease-in-out transform rounded-lg hover:scale-110"
+                className="absolute inset-0 object-contain w-full h-full mx-auto overflow-hidden duration-500 ease-in-out transform rounded-lg hover:scale-110"
               />
               {!isImgLoaded && <Spinner />}
             </div>

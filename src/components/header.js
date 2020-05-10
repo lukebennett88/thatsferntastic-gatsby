@@ -31,7 +31,7 @@ const Header = ({ setMenuOpen }) => {
   return (
     <header className="relative">
       <div className="relative bg-teal-300">
-        <div className="relative z-10 flex flex-shrink-0 w-full h-16 mx-auto bg-white shadow max-w-7xl md:bg-transparent md:shadow-none">
+        <div className="relative z-10 flex flex-shrink-0 w-full h-16 max-w-screen-xl mx-auto bg-white shadow md:bg-transparent md:shadow-none">
           <button
             type="button"
             onClick={toggleMenu}
