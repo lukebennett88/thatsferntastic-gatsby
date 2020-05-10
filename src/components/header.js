@@ -29,9 +29,9 @@ const Header = ({ setMenuOpen }) => {
   });
 
   return (
-    <header className="relative">
-      <div className="relative bg-teal-300">
-        <div className="relative z-10 flex flex-shrink-0 w-full h-16 max-w-screen-xl mx-auto bg-white shadow md:bg-transparent md:shadow-none">
+    <>
+      <div className="sticky top-0 z-10 bg-teal-200">
+        <div className="flex flex-shrink-0 w-full h-16 max-w-screen-xl mx-auto bg-white shadow md:h-auto md:bg-transparent md:shadow-none">
           <button
             type="button"
             onClick={toggleMenu}
@@ -52,7 +52,7 @@ const Header = ({ setMenuOpen }) => {
               />
             </svg>
           </button>
-          <div className="flex justify-between flex-1 px-4 md:mt-4">
+          <div className="flex justify-between flex-1 px-4 md:py-4">
             <SearchBar />
             <div className="relative flex items-center ml-4 md:ml-6">
               <Link
@@ -94,24 +94,27 @@ const Header = ({ setMenuOpen }) => {
             </div>
           </div>
         </div>
-
-        <div className="px-4 pt-12 pb-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="text-center text-gray-900">
-            <h1 className="font-mono text-2xl leading-none sm:text-6xl">
-              <Link to="/" className=" focus:outline-none focus:underline">
-                {title}
-              </Link>
-            </h1>
-            <p className="mt-1 leading-tight lowercase sm:text-xl">
-              {description}
-            </p>
+      </div>
+      <header className="relative">
+        <div className="relative bg-teal-200">
+          <div className="px-4 pt-12 pb-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="text-center text-gray-900">
+              <h1 className="font-mono text-2xl leading-none sm:text-6xl">
+                <Link to="/" className=" focus:outline-none focus:underline">
+                  {title}
+                </Link>
+              </h1>
+              <p className="mt-1 leading-tight lowercase sm:text-xl">
+                {description}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="overflow-hidden">
-        <Wave className="-mx-1 -mt-px text-teal-300" />
-      </div>
-    </header>
+        <div className="overflow-hidden">
+          <Wave className="-mx-1 -mt-px text-teal-200" />
+        </div>
+      </header>
+    </>
   );
 };
 
