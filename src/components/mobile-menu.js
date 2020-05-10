@@ -1,29 +1,22 @@
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React from 'react';
 import { useTransition, animated } from 'react-spring';
+import { DialogOverlay, DialogContent } from '@reach/dialog';
 import { Link } from 'gatsby';
 
-import { useGraphQL, useOnClickOutside } from '../hooks';
+import { useGraphQL } from '../hooks';
 import { navigation } from '../data';
 
 export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
-  // Metadata
   const {
     site: {
       siteMetadata: { title },
     },
   } = useGraphQL();
 
-  // Close menu
-  function close() {
-    setMenuOpen(false);
-  }
+  const close = () => setMenuOpen(false);
 
-  // Create a ref that we add to the element for which we want to detect outside clicks
-  const ref = useRef();
-
-  // Call hook passing in the ref and a function to call on outside click
-  useOnClickOutside(ref, () => setMenuOpen(false));
+  const AnimatedDialogContent = animated(DialogContent);
 
   // Animate transitions
   const transitions = useTransition(isMenuOpen, null, {
@@ -36,21 +29,20 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
     ({ item, key, props: { opacity, transform } }) =>
       item && (
         <div key={key} className="md:hidden">
-          <div className="fixed inset-0 z-40 flex">
+          <DialogOverlay onDismiss={close} className="fixed inset-0 z-40 flex">
             <animated.div style={{ opacity }} className="fixed inset-0">
               <div className="absolute inset-0 bg-black opacity-50" />
             </animated.div>
-            <animated.div
-              ref={ref}
+            <AnimatedDialogContent
               style={{ transform }}
-              className="relative flex flex-col flex-1 w-full max-w-xs pt-5 pb-4 bg-white"
+              className="relative flex flex-col flex-1 w-full max-w-xs pt-5 pb-4 bg-white outline-none"
             >
               <div className="absolute top-0 right-0 p-1 -mr-14">
                 <button
                   type="button"
                   onClick={close}
                   aria-label="Close sidebar"
-                  className="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none focus:bg-gray-600"
+                  className="flex items-center justify-center w-12 h-12 transition duration-150 ease-in-out bg-gray-900 bg-opacity-25 rounded-full focus:outline-none focus:bg-gray-900"
                 >
                   <svg
                     className="w-6 h-6 text-white"
@@ -83,10 +75,10 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
                   ))}
                 </nav>
               </div>
-            </animated.div>
+            </AnimatedDialogContent>
             {/* <!-- Dummy element to force sidebar to shrink to fit close icon --> */}
             <div className="flex-shrink-0 w-14" />
-          </div>
+          </DialogOverlay>
         </div>
       )
   );
