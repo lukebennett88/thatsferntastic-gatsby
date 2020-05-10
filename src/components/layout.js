@@ -12,14 +12,14 @@ export function Layout({ children, hasSidebar = true }) {
     <div className="flex flex-col min-h-screen">
       <Header setMenuOpen={setMenuOpen} />
       <MobileMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />
-      <div className="flex flex-1 w-full max-w-screen-xl mx-auto -mt-px font-sans font-light bg-white">
+      <div className="flex flex-1 w-full max-w-screen-xl py-20 mx-auto -mt-px font-sans font-light bg-white">
         {hasSidebar && <Sidebar />}
         <div className="flex flex-col flex-1 w-0">
           <main
             id="main"
-            className="relative z-0 flex-1 py-10 focus:outline-none"
+            className="relative z-0 flex-1 w-full px-4 mx-auto sm:px-6 lg:px-8 focus:outline-none"
           >
-            <div className="px-4 py-12 mx-auto sm:px-6 lg:px-8">{children}</div>
+            {children}
           </main>
         </div>
       </div>
