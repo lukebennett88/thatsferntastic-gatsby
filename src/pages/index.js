@@ -3,7 +3,7 @@ import { Layout, SEO, Tile } from '../components';
 
 import { useGraphQL } from '../hooks';
 
-const IndexPage = () => {
+export default function IndexPage() {
   const {
     allShopifyProduct: { nodes: products },
   } = useGraphQL();
@@ -24,6 +24,4 @@ const IndexPage = () => {
       </div>
     </Layout>
   );
-};
-
-export default IndexPage;
+}
