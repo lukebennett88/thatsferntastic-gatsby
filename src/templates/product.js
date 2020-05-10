@@ -1,19 +1,19 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import { FiPlus, FiMinus } from 'react-icons/fi';
 
-import { useAddItemToCart, useGraphQL, useLazyLoad } from '../hooks';
 import {
-  prepareVariantsWithOptions,
-  prepareVariantsImages,
-} from '../utilities';
-import { Layout, SEO, Alert, OptionPicker, Thumbnail } from '../components';
+  useAddItemToCart,
+  useGraphQL,
+  useLazyLoad,
+  useStoreContext,
+} from '../hooks';
+import { prepareVariantsWithOptions, prepareVariantsImages } from '../utils';
+import { Layout, SEO, OptionPicker, Thumbnail } from '../components';
 
 export default function ProductPageTemplate({
   data: { shopifyProduct: product },
 }) {
-  console.log(product);
   // Get available colors
   const colors =
     product.options.find((option) => option.name.toLowerCase() === 'color')
@@ -59,16 +59,10 @@ export default function ProductPageTemplate({
   const [size, setSize] = useState(variant.size);
 
   // Keep product quantity is state
-  const [quantity, setQuantity] = useState(1);
-
-  // Make sure we only add numbers, and values above 0
-  function handleUpdateQuantity(e) {
-    if (e.target.value > 0 || e.target.value === '')
-      setQuantity(e.target.value);
-  }
+  const [quantity] = useState(1);
 
   // Manage add to cart alerts in state
-  const [isAddedToCart, setAddedToCart] = useState(false);
+  const { setAddedToCart, setCartContent } = useStoreContext();
 
   // Use a custom hook for adding items to cart
   const addItemToCart = useAddItemToCart(false);
@@ -78,8 +72,8 @@ export default function ProductPageTemplate({
   function handleAddToCart() {
     if (quantity >= 1) {
       addItemToCart(variant.shopifyId, quantity);
+      setCartContent({ title: product.title, image: imgSrc, quantity: 1 });
       setAddedToCart(true);
-      setTimeout(() => setAddedToCart(false), 3000);
     }
   }
 
@@ -98,22 +92,17 @@ export default function ProductPageTemplate({
   const { ref, imgRef, isImgLoaded, handleImgLoaded, Spinner } = useLazyLoad();
 
   return (
-    <Layout isShop>
+    <Layout hasSidebar={false}>
       <SEO title={product.title} />
-      <article className="relative px-4 py-20 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8">
-          {isAddedToCart && (
-            <Alert
-              title={product.title}
-              image={imgSrc}
-              quantity={quantity}
-              dismiss={() => setAddedToCart(false)}
-            />
-          )}
-          <div className="grid gap-6 mt-2">
+      <article className="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="rounded-lg lg:grid lg:grid-cols-2 lg:gap-8">
+          <h1 className="mt-6 text-lg font-bold leading-tight md:hidden">
+            {product.title}
+          </h1>
+          <div className="grid gap-6 mt-6 md:mt-0">
             <div
               ref={ref}
-              className="relative w-full h-0 overflow-hidden bg-white aspect-ratio-square"
+              className="relative w-full h-0 overflow-hidden bg-white rounded-lg aspect-ratio-square"
             >
               <img
                 ref={imgRef}
@@ -122,7 +111,7 @@ export default function ProductPageTemplate({
                 alt=""
                 width={592}
                 height={592}
-                className="absolute inset-0 object-contain h-full mx-auto duration-500 ease-in-out transform hover:scale-110"
+                className="absolute inset-0 object-contain h-full mx-auto overflow-hidden duration-500 ease-in-out transform rounded-lg hover:scale-110"
               />
               {!isImgLoaded && <Spinner />}
             </div>
@@ -138,76 +127,36 @@ export default function ProductPageTemplate({
               </div>
             )}
           </div>
-          <div className="mt-12">
-            <h1 className="h2">{product.title}</h1>
-            <div
-              dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-              className="mt-6 text-base leading-6 text-gray-700"
-            />
-            {product.availableForSale && (
-              <div className="grid gap-4 mt-6 sm:grid-cols-2">
-                <OptionPicker
-                  key="Color"
-                  name="Colour"
-                  options={colors}
-                  selected={color}
-                  onChange={(event) => setColor(event.target.value)}
-                />
-                <OptionPicker
-                  key="Size"
-                  name="Size"
-                  options={sizes}
-                  selected={size}
-                  onChange={(event) => setSize(event.target.value)}
-                />
-              </div>
-            )}
-            <div className="flex items-center mt-4">
-              <button
-                type="button"
-                onClick={
-                  quantity === '' || quantity <= 1
-                    ? null
-                    : () => setQuantity((prev) => prev - 1)
-                }
-                className="text-xl"
-              >
-                <FiMinus />
-              </button>
-              <label htmlFor="quantity">
-                <div className="sr-only">Quantity:</div>
-                <input
-                  id="quantity"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  value={quantity}
-                  onChange={handleUpdateQuantity}
-                  className={`${
-                    quantity === ''
-                      ? ' border-red focus:border-red focus:shadow-outline-red'
-                      : ''
-                  } items-center justify-center w-12 rounded-none form-input`}
-                />
-              </label>
-              <button
-                type="button"
-                onClick={
-                  quantity === ''
-                    ? () => setQuantity(1)
-                    : () => setQuantity((prev) => prev + 1)
-                }
-                className="text-xl"
-              >
-                <FiPlus />
-              </button>
-            </div>
-            <div>${variant.price}</div>
-            <span className="relative inline-flex shadow-sm">
+          <div className="grid row-gap-4">
+            <h1 className="hidden text-lg font-bold leading-tight md:block">
+              {product.title}
+            </h1>
+            <div className="font-bold">${variant.price}</div>
+            {product.availableForSale &&
+              (colors.length > 1 || sizes.length > 1) && (
+                <div className="grid gap-4 mt-6 sm:grid-cols-2">
+                  <OptionPicker
+                    key="Color"
+                    name="Colour"
+                    options={colors}
+                    selected={color}
+                    onChange={(event) => setColor(event.target.value)}
+                  />
+                  <OptionPicker
+                    key="Size"
+                    name="Size"
+                    options={sizes}
+                    selected={size}
+                    onChange={(event) => setSize(event.target.value)}
+                  />
+                </div>
+              )}
+            <span className="relative inline-flex transition duration-300 ease-in-out transform rounded-full shadow-sm hover:-translate-y-1 hover:shadow-lg">
               <button
                 onClick={handleAddToCart}
                 type="button"
                 disabled={quantity < 1 || quantity === ''}
-                className="inline-flex items-center justify-center px-12 py-3 text-base font-medium leading-6 text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-none hover:bg-gray-700 focus:outline-none focus:border-gray-900 focus:shadow-outline-primary active:bg-gray-900 disabled:opacity-50"
+                className="inline-flex items-center justify-center w-full px-12 py-3 font-mono text-xl font-bold text-pink-900 lowercase bg-pink-200 rounded-full shadow-sm hover:bg-pink-100 focus:outline-none focus:shadow-outline-blue active:bg-pink-300 disabled:opacity-50"
               >
                 Add to Cart
               </button>
@@ -217,6 +166,10 @@ export default function ProductPageTemplate({
                 Please provide a quantity
               </small>
             )}
+            <div
+              dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+              className="grid row-gap-4 mt-6 text-base leading-6 text-gray-700"
+            />
           </div>
         </div>
       </article>
