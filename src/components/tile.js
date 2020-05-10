@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
 import { useGraphQL, useLazyLoad } from '../hooks';
-import { resizeShopifyImage } from '../utilities';
+import { resizeShopifyImage } from '../utils';
 
 export function Tile({ title, slug, price, image }) {
   const { placeholderImage } = useGraphQL();
@@ -18,11 +18,11 @@ export function Tile({ title, slug, price, image }) {
   return (
     <article
       ref={ref}
-      className="max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-md shadow-2xl hover:-translate-y-1"
+      className="max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg shadow-2xl hover:-translate-y-1"
     >
       <Link
         to={`/products/${slug}`}
-        className="flex flex-col pb-3 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue"
+        className="flex flex-col pb-3 bg-white rounded-lg shadow-sm focus:outline-none focus:shadow-outline-blue"
       >
         <div className="relative overflow-hidden rounded-t-md">
           <img

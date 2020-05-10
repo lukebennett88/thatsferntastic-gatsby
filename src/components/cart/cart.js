@@ -20,7 +20,7 @@ export function Cart() {
           </React.Fragment>
         ))}
         <div className="flex">
-          <div className="w-full max-w-xs px-4 py-6 ml-auto bg-gray-100 rounded-md shadow">
+          <div className="w-full max-w-xs px-4 py-6 ml-auto bg-gray-100 rounded-lg shadow">
             <h3 className="text-lg font-medium leading-6 text-gray-900">
               Cart Summary
             </h3>
@@ -51,7 +51,7 @@ export function Cart() {
               <button
                 onClick={checkout}
                 type="button"
-                className="flex items-center justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+                className="flex items-center justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-lg hover:bg-gray-800 focus:outline-none focus:shadow-outline"
               >
                 Checkout
               </button>
