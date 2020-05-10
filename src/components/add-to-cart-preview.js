@@ -74,7 +74,7 @@ export function AddToCartPreview() {
                   <Link
                     to="/cart/"
                     onClick={dismiss}
-                    className="inline-flex items-center px-6 py-3 font-mono text-base font-bold leading-6 text-pink-700 lowercase transition duration-150 ease-in-out bg-pink-100 border border-transparent rounded-full shadow-sm hover:bg-pink-50 focus:outline-none focus:border-pink-300 focus:shadow-pink-indigo active:bg-pink-200 hover:shadow-lg"
+                    className="inline-flex items-center px-6 py-3 font-mono text-base font-bold leading-6 text-pink-700 lowercase transition duration-150 ease-in-out bg-pink-100 border border-transparent rounded-full shadow-sm hover:bg-pink-50 focus:outline-none focus:border-pink-300 focus:shadow-outline-pink active:bg-pink-200 hover:shadow-lg"
                   >
                     View cart
                   </Link>
