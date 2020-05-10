@@ -18,6 +18,9 @@ module.exports = {
     title: '@thatsferntastic',
     description: 'Handmade pouches, pencil cases and accessories.',
     author: '@thatsferntastic',
+    facebook: 'https://www.facebook.com/thatsferntastic/',
+    instagram: 'https://www.instagram.com/thatsferntastic/',
+    twitter: 'https://www.twitter.com/thatsferntastic/',
   },
   plugins: [
     'gatsby-plugin-react-helmet',

@@ -1,46 +1,37 @@
 import React from 'react';
+import { FiFacebook, FiInstagram, FiTwitter } from 'react-icons/fi';
+
 import { useGraphQL } from '../hooks';
 
 export default function Footer() {
   const {
     site: {
-      siteMetadata: { title },
+      siteMetadata: { title, facebook, instagram, twitter },
     },
   } = useGraphQL();
   return (
     <footer className="bg-white">
       <div className="max-w-screen-xl px-4 py-12 mx-auto sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
+        <div className="flex justify-center md:order-2">
+          <a href={facebook} className="text-gray-400 hover:text-gray-500">
+            <span className="sr-only">Facebook</span>
+            <FiFacebook className="w-6 h-6" />
+          </a>
+          <a
+            href={instagram}
+            className="ml-6 text-gray-400 hover:text-gray-500"
+          >
+            <span className="sr-only">Instagram</span>
+            <FiInstagram className="w-6 h-6" />
+          </a>
+          <a href={twitter} className="ml-6 text-gray-400 hover:text-gray-500">
+            <span className="sr-only">Twitter</span>
+            <FiTwitter className="w-6 h-6" />
+          </a>
+        </div>
         <div className="mt-8 md:mt-0 md:order-1">
           <p className="text-base leading-6 text-center text-gray-400">
-            &copy; {new Date().getFullYear()}{' '}
-            <a
-              href="https://github.com/lukebennett88/gatsby-starter-shopify-tailwindcss"
-              className="font-medium text-gray-600 underline transition duration-150 ease-in-out hover:text-gray-500 active:text-gray-800"
-            >
-              {title}
-            </a>
-            . Built with{' '}
-            <a
-              href="https://www.gatsbyjs.org"
-              className="font-medium text-gray-600 underline transition duration-150 ease-in-out hover:text-gray-500 active:text-gray-800"
-            >
-              Gatsby
-            </a>
-            ,{' '}
-            <a
-              href="https://tailwindcss.com"
-              className="font-medium text-gray-600 underline transition duration-150 ease-in-out hover:text-gray-500 active:text-gray-800"
-            >
-              Tailwind
-            </a>{' '}
-            and{' '}
-            <a
-              href="https://www.shopify.ca"
-              className="font-medium text-gray-600 underline transition duration-150 ease-in-out hover:text-gray-500 active:text-gray-800"
-            >
-              Shopify
-            </a>
-            .
+            &copy; {new Date().getFullYear()} {title}. All rights reserved.
           </p>
         </div>
       </div>

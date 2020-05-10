@@ -13,9 +13,12 @@ export function useGraphQL() {
       {
         site {
           siteMetadata {
-            title
-            description
             author
+            description
+            facebook
+            instagram
+            title
+            twitter
           }
         }
         placeholderImage: file(relativePath: { eq: "placeholder/shoe.png" }) {
