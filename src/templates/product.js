@@ -8,7 +8,11 @@ import {
   useLazyLoad,
   useStoreContext,
 } from '../hooks';
-import { prepareVariantsWithOptions, prepareVariantsImages } from '../utils';
+import {
+  prepareVariantsWithOptions,
+  prepareVariantsImages,
+  resizeShopifyImage,
+} from '../utils';
 import { Layout, SEO, OptionPicker, Thumbnail } from '../components';
 
 export default function ProductPageTemplate({
@@ -48,7 +52,9 @@ export default function ProductPageTemplate({
   // Update the primary image whenever the variant changes
   useEffect(() => {
     if (variant.image) {
-      setImgSrc(variant.image.originalSrc);
+      setImgSrc(
+        resizeShopifyImage({ url: variant.image.originalSrc, width: 800 })
+      );
     }
   }, [variant]);
 
