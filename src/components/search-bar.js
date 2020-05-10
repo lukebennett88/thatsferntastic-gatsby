@@ -61,7 +61,7 @@ export function SearchBar() {
           </div>
         </div>
         {searchResults.length > 1 && (
-          <div className="absolute inset-x-0 top-0 z-10 p-4 overflow-hidden text-left bg-white rounded-lg shadow-2xl mt-13 full-bleed md:reset-full-bleed">
+          <div className="absolute inset-x-0 z-10 p-4 mt-16 overflow-hidden text-left bg-white border-t rounded-b-lg shadow-2xl md:border-none md:rounded-t-lg full-bleed md:reset-full-bleed">
             <div className="shadow-sm">
               <h3 className="px-4 pb-4 uppercase">Products</h3>
               <ul className="bg-white border-t">

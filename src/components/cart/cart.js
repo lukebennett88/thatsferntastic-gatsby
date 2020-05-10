@@ -9,7 +9,7 @@ export function Cart() {
   const checkout = useCheckout();
   return (
     <div className="relative pt-16 pb-20">
-      <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+      <h1 className="text-3xl font-bold leading-9 text-gray-900 sm:text-4xl sm:leading-10">
         Cart
       </h1>
       <div className="mt-3 sm:mt-4">
@@ -20,7 +20,7 @@ export function Cart() {
           </React.Fragment>
         ))}
         <div className="flex">
-          <div className="w-full max-w-xs px-4 py-6 ml-auto bg-gray-100 rounded-lg shadow">
+          <div className="w-full px-4 py-6 mx-auto bg-gray-100 rounded-lg shadow md:max-w-xs md:mr-0">
             <h3 className="text-lg font-medium leading-6 text-gray-900">
               Cart Summary
             </h3>

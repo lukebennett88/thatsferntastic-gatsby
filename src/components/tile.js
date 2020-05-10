@@ -16,21 +16,19 @@ export function Tile({ title, slug, price, image }) {
   const { ref, imgRef, isImgLoaded, handleImgLoaded, Spinner } = useLazyLoad();
 
   return (
-    <article
+    <Link
+      to={`/products/${slug}`}
       ref={ref}
-      className="max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg shadow-2xl hover:-translate-y-1"
+      className="max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 focus:outline-none focus:shadow-outline-blue hover:shadow-lg"
     >
-      <Link
-        to={`/products/${slug}`}
-        className="flex flex-col pb-3 bg-white rounded-lg shadow-sm focus:outline-none focus:shadow-outline-blue"
-      >
-        <div className="relative overflow-hidden rounded-t-md">
+      <article className="flex flex-col pb-3 bg-white rounded-lg shadow">
+        <div className="relative rounded-t-md">
           <img
             ref={imgRef}
             onLoad={handleImgLoaded}
             data-src={imageSrc}
             alt=""
-            className="object-contain w-full h-full"
+            className="object-contain w-full h-full overflow-hidden rounded-t-lg"
           />
           {!isImgLoaded && <Spinner />}
         </div>
@@ -42,8 +40,8 @@ export function Tile({ title, slug, price, image }) {
             <span className="font-bold text-gray-800">${price.toFixed(2)}</span>
           </p>
         </div>
-      </Link>
-    </article>
+      </article>
+    </Link>
   );
 }
 

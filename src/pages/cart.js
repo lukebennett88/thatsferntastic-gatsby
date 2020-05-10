@@ -5,7 +5,7 @@ import { Cart } from '../components/cart';
 
 export default function CartPage() {
   return (
-    <Layout>
+    <Layout hasSidebar={false}>
       <SEO title="Cart" />
       <Cart />
     </Layout>

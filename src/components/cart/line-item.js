@@ -41,12 +41,12 @@ export const LineItem = ({ item }) => {
   }
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center">
+    <div className="md:flex md:items-center md:justify-between">
+      <div className="md:flex md:items-center">
         <div className="w-48 overflow-hidden rounded-lg shadow">
           <Image fluid={getImageFluidForVariant(item.variant.id)} />
         </div>
-        <div className="ml-4">
+        <div className="mt-4 md:ml-4">
           <Link
             to={`/products/${getHandleForVariant(item.variant.id)}`}
             className="text-lg font-medium leading-6 text-gray-900 underline transition duration-150 ease-in-out hover:text-gray-600"
@@ -79,6 +79,7 @@ export const LineItem = ({ item }) => {
         >
           Delete
         </button>
+        <div className="ml-4 font-mono text-3xl font-bold text-gray-900">
         <div className="ml-4 text-3xl font-bold text-gray-900">
           ${Number(item.variant.priceV2.amount).toFixed(2)}
         </div>
