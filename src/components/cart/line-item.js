@@ -43,7 +43,7 @@ export const LineItem = ({ item }) => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center">
-        <div className="w-48 overflow-hidden rounded-md shadow">
+        <div className="w-48 overflow-hidden rounded-lg shadow">
           <Image fluid={getImageFluidForVariant(item.variant.id)} />
         </div>
         <div className="ml-4">

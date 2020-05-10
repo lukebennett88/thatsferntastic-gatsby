@@ -75,7 +75,7 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
                       key={navItem.slug}
                       to={navItem.slug}
                       activeClassName="text-gray-900 bg-gray-100 focus:bg-gray-200"
-                      className="flex items-center px-2 py-2 mt-1 text-base font-medium leading-6 text-gray-600 transition duration-150 ease-in-out rounded-md first:mt-0 group hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-100"
+                      className="flex items-center px-2 py-2 mt-1 text-base font-medium leading-6 text-gray-600 transition duration-150 ease-in-out rounded-lg first:mt-0 group hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-100"
                     >
                       <navItem.icon className="w-6 h-6 mr-4 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-500 group-focus:text-gray-500" />
                       {navItem.title}
