@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export const OptionPicker = ({ name, options, onChange, selected }) => {
+  if (options.length <= 1) return null;
   return (
     <div>
       <label htmlFor={name.toLowerCase()}>
