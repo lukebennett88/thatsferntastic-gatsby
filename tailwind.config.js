@@ -82,6 +82,7 @@ module.exports = {
     },
   },
   variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'odd'],
     margin: ['responsive', 'first'],
   },
   plugins: [

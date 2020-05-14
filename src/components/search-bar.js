@@ -63,16 +63,15 @@ export function SearchBar() {
         {searchResults.length > 0 && (
           <div className="absolute inset-x-0 z-10 p-4 mt-16 overflow-hidden text-left bg-white border-t rounded-b-lg shadow-2xl md:border-none md:rounded-t-lg full-bleed md:reset-full-bleed">
             <div className="shadow-sm">
-              <h3 className="px-4 pb-4 uppercase">Products</h3>
-              <ul className="bg-white border-t">
+              <h3 className="px-4 pb-3 font-mono text-2xl text-gray-500">
+                Products
+              </h3>
+              <ul className="bg-white border-t border-gray-200">
                 {searchResults.splice(0, 4).map((result) => (
-                  <li
-                    key={result.handle}
-                    className="-mx-4 hover:bg-gray-200 odd:bg-gray-50"
-                  >
+                  <li key={result.handle} className="rounded-lg odd:bg-gray-50">
                     <Link
                       to={`/products/${result.handle}`}
-                      className="flex items-center px-8 py-2"
+                      className="flex items-center px-4 py-2 rounded-lg focus:outline-none focus:bg-pink-100"
                     >
                       <img
                         src={
@@ -94,7 +93,9 @@ export function SearchBar() {
                 ))}
               </ul>
             </div>
-            <div className="px-4 pt-4 border-t">Searching for: "{query}"</div>
+            <div className="px-4 pt-4 border-t border-gray-200">
+              Searching for: "{query}"
+            </div>
           </div>
         )}
       </div>
