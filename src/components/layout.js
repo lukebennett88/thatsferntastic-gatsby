@@ -9,7 +9,7 @@ import Sidebar from './sidebar';
 export function Layout({ children, hasSidebar = true }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white">
       <Header setMenuOpen={setMenuOpen} />
       <MobileMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />
       <main className="w-full max-w-2xl px-6 mx-auto lg:max-w-screen-xl">

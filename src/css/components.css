@@ -3,6 +3,10 @@
  * with utility classes 
  */
 
+body {
+  @apply bg-teal-200;
+}
+
 @responsive {
   .full-bleed {
     width: 100vw;
