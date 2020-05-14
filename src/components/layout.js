@@ -12,17 +12,14 @@ export function Layout({ children, hasSidebar = true }) {
     <div className="flex flex-col min-h-screen">
       <Header setMenuOpen={setMenuOpen} />
       <MobileMenu isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />
-      <div className="flex flex-1 w-full max-w-screen-xl py-20 mx-auto -mt-px font-sans font-light bg-white">
-        {hasSidebar && <Sidebar />}
-        <div className="flex flex-col flex-1 w-0">
-          <main
-            id="main"
-            className="relative z-0 flex-1 w-full px-4 mx-auto sm:px-6 lg:px-8 focus:outline-none"
-          >
+      <main className="w-full max-w-2xl px-6 mx-auto lg:max-w-screen-xl">
+        <article className="grid py-12 lg:grid-cols-4 lg:gap-16">
+          {hasSidebar && <Sidebar />}
+          <div className={hasSidebar ? 'col-span-3' : 'col-span-4'}>
             {children}
-          </main>
-        </div>
-      </div>
+          </div>
+        </article>
+      </main>
       <Footer />
     </div>
   );
