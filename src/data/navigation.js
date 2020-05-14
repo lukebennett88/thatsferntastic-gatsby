@@ -24,4 +24,24 @@ Icon.propTypes = {
 export const navigation = [
   { title: 'Mini pouches', slug: '/mini-pouches/', icon: Icon },
   { title: 'Flatlay pouches', slug: '/flatlay-pouches/', icon: Icon },
+  {
+    title: 'Free Standing Pouches',
+    slug: '/free-standing-pouches/',
+    icon: Icon,
+  },
+  {
+    title: 'Limited Edition Pouches',
+    slug: '/limited-edition-pouches/',
+    icon: Icon,
+  },
+  {
+    title: 'Keyfobs',
+    slug: '/Keyfobs/',
+    icon: Icon,
+  },
+  {
+    title: 'Custom Orders',
+    slug: '/custom-orders/',
+    icon: Icon,
+  },
 ];
