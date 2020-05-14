@@ -1,6 +1,6 @@
 import React from 'react';
-import { Layout, SEO, Tile } from '../components';
 
+import { Layout, SEO, Tile } from '../components';
 import { useGraphQL } from '../hooks';
 
 export default function IndexPage() {
