@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'gatsby';
 
-import { useGraphQL } from '../hooks';
+import { useGraphQL, useOnClickOutside } from '../hooks';
 import { resizeShopifyImage } from '../utils';
 
 export function SearchBar() {
@@ -15,6 +15,9 @@ export function SearchBar() {
   // Add state for search results
   const [searchResults, setSearchResults] = useState([]);
 
+  // Display searchbar
+  const [isSearchbarVisible, setIsSearchbarVisible] = useState(false);
+
   // When query changes, update the state
   function handleChange(e) {
     setQuery(e.target.value);
@@ -27,10 +30,19 @@ export function SearchBar() {
         product.title.toLowerCase().includes(query.toLowerCase())
       );
       setSearchResults(results);
+      setIsSearchbarVisible(true);
     }
     // If the user starts typing, and then deletes their query, set it back to an empty array
-    else setSearchResults([]);
+    else {
+      setSearchResults([]);
+      setIsSearchbarVisible(false);
+    }
+
+    // setIsSearchbarVisible(false);
   }, [products, query]);
+
+  const searchResultsRef = useRef();
+  useOnClickOutside(searchResultsRef, () => setIsSearchbarVisible(false));
 
   return (
     <div className="relative flex flex-1">
@@ -60,18 +72,21 @@ export function SearchBar() {
             />
           </div>
         </div>
-        {searchResults.length > 0 && (
-          <div className="absolute inset-x-0 z-10 p-4 mt-16 overflow-hidden text-left bg-white border-t rounded-b-lg shadow-2xl md:border-none md:rounded-t-lg full-bleed md:reset-full-bleed">
+        {isSearchbarVisible && (
+          <div
+            ref={searchResultsRef}
+            className="absolute inset-x-0 z-10 p-4 mt-16 overflow-hidden text-left bg-white border-t rounded-b-lg shadow-2xl md:border-none md:rounded-t-lg full-bleed md:reset-full-bleed"
+          >
             <div className="shadow-sm">
               <h3 className="px-4 pb-3 font-mono text-2xl text-gray-500">
                 Products
               </h3>
-              <ul className="bg-white border-t border-gray-200">
+              <ul className="bg-white">
                 {searchResults.splice(0, 4).map((result) => (
                   <li key={result.handle} className="rounded-lg odd:bg-gray-50">
                     <Link
                       to={`/products/${result.handle}`}
-                      className="flex items-center px-4 py-2 rounded-lg focus:outline-none focus:bg-pink-100"
+                      className="flex items-center px-4 py-2 transition duration-150 ease-in-out rounded-lg hover:bg-pink-100 focus:outline-none focus:bg-pink-100"
                     >
                       <img
                         src={
@@ -93,8 +108,9 @@ export function SearchBar() {
                 ))}
               </ul>
             </div>
-            <div className="px-4 pt-4 border-t border-gray-200">
-              Searching for: "{query}"
+            <hr className="mx-2 border-gray-100" />
+            <div className="px-4 pt-4 text-sm">
+              Searching for: “<em>{query}</em>”
             </div>
           </div>
         )}
