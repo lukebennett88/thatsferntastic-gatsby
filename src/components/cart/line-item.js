@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
-import Image from 'gatsby-image';
 
-import { useGraphQL, useRemoveItemFromCart } from '../../hooks';
+import { useGraphQL, useRemoveItemFromCart, useLazyLoad } from '../../hooks';
 
 export const LineItem = ({ item }) => {
   const {
     allShopifyProductVariant: { nodes: variants },
     allShopifyProduct: { nodes: products },
+    placeholderImage,
   } = useGraphQL();
 
   const removeFromCart = useRemoveItemFromCart();
@@ -29,22 +29,39 @@ export const LineItem = ({ item }) => {
     return selectedProduct ? selectedProduct.handle : null;
   }
 
-  function getImageFluidForVariant(variantId) {
+  function getImageForVariant(variantId) {
     const selectedVariant = variants.find((variant) => {
       return variant.shopifyId === variantId;
     });
 
     if (selectedVariant) {
-      return selectedVariant.image.localFile.childImageSharp.fluid;
+      return selectedVariant.image
+        ? selectedVariant.image.originalSrc
+        : placeholderImage.publicURL;
     }
     return null;
   }
 
+  const { ref, imgRef, isImgLoaded, handleImgLoaded, Spinner } = useLazyLoad();
+
   return (
     <div className="md:flex md:items-center md:justify-between">
       <div className="md:flex md:items-center">
-        <div className="w-48 overflow-hidden rounded-lg shadow">
-          <Image fluid={getImageFluidForVariant(item.variant.id)} />
+        <div ref={ref} className="w-48 rounded-lg shadow">
+          <div className="relative aspect-ratio-square">
+            <img
+              ref={imgRef}
+              data-src={getImageForVariant(item.variant.id)}
+              alt=""
+              onLoad={handleImgLoaded}
+              className="absolute inset-0 object-contain w-full h-full"
+            />
+            {!isImgLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-gray-50">
+                <Spinner />
+              </div>
+            )}
+          </div>
         </div>
         <div className="mt-4 md:ml-4">
           <Link
