@@ -19,16 +19,16 @@ export function Tile({ title, slug, price, image }) {
     <Link
       to={`/products/${slug}`}
       ref={ref}
-      className="max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 focus:outline-none focus:shadow-outline-blue hover:shadow-lg"
+      className="w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 focus:outline-none focus:shadow-outline-blue hover:shadow-lg"
     >
       <article className="flex flex-col pb-3 bg-white rounded-lg shadow">
-        <div className="relative h-0 rounded-t-md aspect-ratio-square bg-teal-50">
+        <div className="relative h-0 rounded-t-md aspect-ratio-square">
           <img
             ref={imgRef}
             onLoad={handleImgLoaded}
             data-src={imageSrc}
             alt=""
-            className="absolute inset-0 object-cover w-full h-full overflow-hidden rounded-t-lg"
+            className="absolute inset-0 object-contain w-full h-full overflow-hidden rounded-t-lg"
           />
           {!isImgLoaded && <Spinner />}
         </div>
