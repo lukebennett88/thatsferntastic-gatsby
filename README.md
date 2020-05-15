@@ -1,3 +1,3 @@
 # That's Ferntastic!
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/2fb4b310-df24-4789-9c8b-ad2507068df7/deploy-status)](https://app.netlify.com/sites/thatsferntastic/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a1ba9b24-9558-45ee-b716-97a7eb7e3f2e/deploy-status)](https://app.netlify.com/sites/thatsferntastic/deploys)
