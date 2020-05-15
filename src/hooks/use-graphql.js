@@ -32,13 +32,7 @@ export function useGraphQL() {
           nodes {
             shopifyId
             image {
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 120) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-              }
+              originalSrc
             }
           }
         }
@@ -50,10 +44,7 @@ export function useGraphQL() {
           }
         ) {
           nodes {
-            title
             handle
-            productType
-            tags
             images {
               originalSrc
             }
@@ -63,6 +54,10 @@ export function useGraphQL() {
                 currencyCode
               }
             }
+            productType
+            tags
+            title
+            updatedAt
             variants {
               shopifyId
             }
