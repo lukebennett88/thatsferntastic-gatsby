@@ -4,7 +4,7 @@ const tailwindcssAspectRatio = require('tailwindcss-aspect-ratio');
 const tailwindcssLineClamp = require('tailwindcss-line-clamp');
 
 module.exports = {
-  purge: false,
+  purge: ['./src/**/*.js'],
   theme: {
     aspectRatio: {
       square: [1, 1],
