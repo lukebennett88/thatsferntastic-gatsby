@@ -4,17 +4,25 @@ import { useTransition, animated } from 'react-spring';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import { Link } from 'gatsby';
 
-import { useGraphQL } from '../hooks';
+import { useEventListener, useGraphQL } from '../hooks';
 import { navigation } from '../data';
 
 export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
+  const close = () => setMenuOpen(false);
+
+  function handleEscape(e) {
+    if (e.key === 'Escape') {
+      return close();
+    }
+  }
+
+  useEventListener('keydown', handleEscape, { target: document });
+
   const {
     site: {
       siteMetadata: { title },
     },
   } = useGraphQL();
-
-  const close = () => setMenuOpen(false);
 
   const AnimatedDialogContent = animated(DialogContent);
 
