@@ -99,7 +99,7 @@ export default function ProductPageTemplate({
 
   return (
     <Layout hasSidebar={false}>
-      <SEO title={product.title} />
+      <SEO title={product.title} image={imgSrc} />
       <article className="relative">
         <div className="rounded-lg md:grid md:grid-cols-2 md:gap-8">
           <h1 className="mt-6 text-lg font-bold leading-tight md:hidden">
