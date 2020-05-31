@@ -10,3 +10,4 @@ export * from './use-local-storage';
 export * from './use-onclick-outside';
 export * from './use-remove-item-to-cart';
 export * from './use-store-context';
+export * from './use-event-listener';
