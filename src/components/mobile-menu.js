@@ -15,8 +15,11 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
       return close();
     }
   }
+  const isBrowser = typeof window !== 'undefined';
 
-  useEventListener('keydown', handleEscape, { target: document });
+  useEventListener('keydown', handleEscape, {
+    target: isBrowser ? document : null,
+  });
 
   const {
     site: {
