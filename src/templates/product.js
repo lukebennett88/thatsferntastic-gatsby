@@ -99,7 +99,12 @@ export default function ProductPageTemplate({
 
   return (
     <Layout hasSidebar={false}>
-      <SEO title={product.title} image={imgSrc} />
+      <SEO
+        title={product.title}
+        image={
+          variant.image ? variant.image.originalSrc : placeholderImage.publicURL
+        }
+      />
       <article className="relative">
         <div className="rounded-lg md:grid md:grid-cols-2 md:gap-8">
           <h1 className="mt-6 text-lg font-bold leading-tight md:hidden">
@@ -162,7 +167,6 @@ export default function ProductPageTemplate({
                 onClick={handleAddToCart}
                 type="button"
                 disabled={quantity < 1 || quantity === ''}
-                // className="justify-center w-full px-12 py-3 font-mono text-xl font-bold text-pink-900 lowercase bg-pink-200 rounded-full shadow-sm hover:bg-pink-100 focus:outline-none focus:shadow-outline-blue active:bg-pink-300 disabled:opacity-50"
                 className="inline-flex items-center justify-center w-full px-6 py-3 font-mono text-xl font-bold leading-6 text-pink-700 lowercase transition duration-150 ease-in-out bg-pink-100 border border-transparent rounded-full shadow-sm hover:bg-pink-50 focus:outline-none focus:border-pink-300 focus:shadow-outline-pink active:bg-pink-200 hover:shadow-lg"
               >
                 Add to Cart
