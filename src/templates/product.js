@@ -133,7 +133,7 @@ export default function ProductPageTemplate({
               </div>
             )}
           </div>
-          <div className="grid row-gap-4">
+          <div className="space-y-4">
             <h1 className="hidden text-lg font-bold leading-tight md:block">
               {product.title}
             </h1>
