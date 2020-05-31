@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useGraphQL } from '../hooks';
 
-function SEO({ description, lang, meta, title }) {
+export function SEO({ description, lang, meta, title, image }) {
   const { site } = useGraphQL();
 
   const metaDescription = description || site.siteMetadata.description;
+  const metaImage = image || '/images/shoe.png';
 
   return (
     <Helmet
@@ -23,6 +24,10 @@ function SEO({ description, lang, meta, title }) {
         {
           property: `og:title`,
           content: title,
+        },
+        {
+          property: `og:image`,
+          content: metaImage,
         },
         {
           property: `og:description`,
@@ -64,6 +69,5 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 };
-
-export { SEO };
