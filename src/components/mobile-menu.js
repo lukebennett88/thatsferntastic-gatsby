@@ -34,15 +34,16 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
               <div className="absolute inset-0 bg-black opacity-50" />
             </animated.div>
             <AnimatedDialogContent
+              aria-label="Sidebar menu"
               style={{ transform }}
-              className="relative flex flex-col flex-1 w-full max-w-xs pt-5 pb-4 bg-white outline-none"
+              className="relative flex flex-col flex-1 w-full max-w-xs pb-4 bg-white outline-none"
             >
               <div className="absolute top-0 right-0 p-1 -mr-14">
                 <button
                   type="button"
                   onClick={close}
                   aria-label="Close sidebar"
-                  className="flex items-center justify-center w-12 h-12 transition duration-150 ease-in-out bg-gray-900 bg-opacity-25 rounded-full focus:outline-none focus:bg-gray-900"
+                  className="flex items-center justify-center w-12 h-12 transition duration-150 ease-in-out bg-black bg-opacity-25 rounded-full focus:outline-none focus:bg-black focus:bg-opacity-50"
                 >
                   <svg
                     className="w-6 h-6 text-white"
@@ -61,7 +62,7 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
               </div>
               <Link
                 to="/"
-                className="px-4 font-mono text-2xl text-center focus:outline-none focus:underline"
+                className="flex items-center justify-center h-16 px-4 font-mono text-2xl text-center bg-teal-200 focus:outline-none focus:underline"
               >
                 {title}
               </Link>
