@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Layout, SEO, Tile } from '../components';
+import { Layout, SEO, Tile, InstagramWidget } from '../components';
 import { useGraphQL } from '../hooks';
 
 export default function IndexPage() {
@@ -22,6 +22,7 @@ export default function IndexPage() {
           />
         ))}
       </div>
+      <InstagramWidget />
     </Layout>
   );
 }

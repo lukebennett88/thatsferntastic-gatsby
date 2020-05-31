@@ -1,16 +1,19 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const plugin = require('tailwindcss/plugin');
 const tailwindUI = require('@tailwindcss/ui');
 const tailwindcssAspectRatio = require('tailwindcss-aspect-ratio');
+const tailwindcssLineClamp = require('tailwindcss-line-clamp');
 
 module.exports = {
   purge: false,
   theme: {
     aspectRatio: {
-      none: 0,
       square: [1, 1],
-      '16/9': [16, 9],
-      '4/3': [4, 3],
+      '2/3': [2, 3],
+    },
+    lineClamp: {
+      1: 1,
+      2: 2,
+      3: 3,
     },
     extend: {
       colors: {
@@ -84,26 +87,7 @@ module.exports = {
   variants: {
     backgroundColor: ['responsive', 'hover', 'focus', 'odd'],
     margin: ['responsive', 'first'],
+    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
   },
-  plugins: [
-    tailwindcssAspectRatio,
-    tailwindUI,
-    plugin(function ({ addComponents }) {
-      const lineClamp = {
-        '.line-clamp-1': {
-          display: '-webkit-box',
-          '-webkit-line-clamp': '1',
-          '-webkit-box-orient': 'vertical',
-          overflow: 'hidden',
-        },
-        '.line-clamp-2': {
-          display: '-webkit-box',
-          '-webkit-line-clamp': '2',
-          '-webkit-box-orient': 'vertical',
-          overflow: 'hidden',
-        },
-      };
-      addComponents(lineClamp);
-    }),
-  ],
+  plugins: [tailwindcssAspectRatio, tailwindUI, tailwindcssLineClamp],
 };

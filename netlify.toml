@@ -1,0 +1,2 @@
+[dev]
+  autoLaunch = true # a Boolean value that determines if Netlify Dev launches the local server address in your browser

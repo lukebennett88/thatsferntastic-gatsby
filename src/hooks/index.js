@@ -4,6 +4,7 @@ export * from './use-cart-items';
 export * from './use-cart-totals';
 export * from './use-checkout';
 export * from './use-graphql';
+export * from './use-instagram';
 export * from './use-lazyload';
 export * from './use-local-storage';
 export * from './use-onclick-outside';

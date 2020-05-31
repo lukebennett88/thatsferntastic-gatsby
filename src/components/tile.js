@@ -21,26 +21,32 @@ export function Tile({ title, slug, price, image }) {
       ref={ref}
       className="w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 focus:outline-none focus:shadow-outline-blue hover:shadow-lg"
     >
-      <article className="flex flex-col pb-3 bg-white rounded-lg shadow">
-        <div className="relative h-0 rounded-t-md aspect-ratio-square">
-          <img
-            ref={imgRef}
-            onLoad={handleImgLoaded}
-            data-src={imageSrc}
-            alt=""
-            className="absolute inset-0 object-contain w-full h-full overflow-hidden rounded-t-lg"
-          />
-          {!isImgLoaded && <Spinner />}
-        </div>
-        <div className="p-6">
-          <h3 title={title} className="mt-2 line-clamp-1">
-            {title}
-          </h3>
-          <p className="mt-3 text-base leading-6 text-gray-500">
-            <span className="font-bold text-gray-800">${price.toFixed(2)}</span>
-          </p>
-        </div>
-      </article>
+      <div className="relative w-full h-0 aspect-ratio-2/3">
+        <article className="absolute inset-0 flex flex-col pb-3 bg-white rounded-lg shadow">
+          {/* Image */}
+          <div className="relative h-0 rounded-t-md aspect-ratio-square">
+            <img
+              ref={imgRef}
+              onLoad={handleImgLoaded}
+              data-src={imageSrc}
+              alt=""
+              className="absolute inset-0 object-contain w-full h-full overflow-hidden rounded-t-lg"
+            />
+            {!isImgLoaded && <Spinner />}
+          </div>
+          {/* Copy */}
+          <div className="flex flex-col justify-center flex-1 px-6 py-3 overflow-hidden">
+            <h3 title={title} className="mt-2 clamp-1">
+              {title}
+            </h3>
+            <p className="mt-3 text-base leading-6 text-gray-500">
+              <span className="font-bold text-gray-800">
+                ${price.toFixed(2)}
+              </span>
+            </p>
+          </div>
+        </article>
+      </div>
     </Link>
   );
 }
@@ -51,3 +57,5 @@ Tile.propTypes = {
   slug: PropTypes.string,
   title: PropTypes.string,
 };
+
+// 266 / 390
