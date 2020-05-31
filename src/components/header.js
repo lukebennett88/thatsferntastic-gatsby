@@ -52,9 +52,28 @@ const Header = ({ setMenuOpen }) => {
               />
             </svg>
           </button>
-          <div className="flex justify-between flex-1 px-4 md:py-4">
+          <div className="flex justify-between flex-1 px-4 space-x-4 md:space-x-6 md:py-4">
+            <div className="relative hidden md:flex md:items-center">
+              <Link
+                aria-label="Home page"
+                to="/"
+                className="relative p-3 text-gray-500 bg-white rounded-full md:shadow hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:shadow-outline focus:text-gray-600"
+              >
+                <svg
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              </Link>
+            </div>
             <SearchBar />
-            <div className="relative flex items-center ml-4 md:ml-6">
+            <div className="relative flex items-center">
               <Link
                 to="/cart/"
                 aria-label="Shopping cart"
