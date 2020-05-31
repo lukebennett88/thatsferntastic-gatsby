@@ -9,4 +9,5 @@ module.exports = {
     'arrow-body-style': 0,
     'react/no-danger': 0,
   },
+  root: true,
 };
