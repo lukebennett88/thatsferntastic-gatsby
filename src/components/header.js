@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { useTransition, animated } from 'react-spring';
 import { Link } from 'gatsby';
+import { useCartCount } from 'gatsby-theme-shopify-manager';
+import { useTransition, animated } from 'react-spring';
+import PropTypes from 'prop-types';
 
-import { useGraphQL, useCartCount, useStoreContext } from '../hooks';
+import { useGraphQL } from '../hooks';
 import { Wave } from './wave';
 import { SearchBar } from './search-bar';
-import { AddToCartPreview } from './add-to-cart-preview';
 
 const Header = ({ setMenuOpen }) => {
   const count = useCartCount();
@@ -19,8 +19,6 @@ const Header = ({ setMenuOpen }) => {
   function toggleMenu() {
     setMenuOpen((prevState) => !prevState);
   }
-
-  const { isAddedToCart } = useStoreContext();
 
   const transitions = useTransition(count >= 1, null, {
     from: { opacity: 0, transform: 'translate3d(0, 1rem, 0)' },
@@ -109,7 +107,6 @@ const Header = ({ setMenuOpen }) => {
                     )
                 )}
               </Link>
-              {isAddedToCart && <AddToCartPreview />}
             </div>
           </div>
         </div>

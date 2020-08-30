@@ -1,27 +1,22 @@
 import React from 'react';
+import GatsbyImage from 'gatsby-image';
 import { animated, useTransition } from 'react-spring';
 import { FiX } from 'react-icons/fi';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import { Link } from 'gatsby';
 
-import { useStoreContext } from '../hooks';
-
-export function AddToCartPreview() {
-  const {
-    isAddedToCart,
-    setAddedToCart,
-    cartContent: { title, image, quantity },
-  } = useStoreContext();
-
-  const close = () => setAddedToCart(false);
-
+function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
   const AnimatedDialogContent = animated(DialogContent);
 
-  const transitions = useTransition(isAddedToCart, null, {
+  const transitions = useTransition(isAlertShown, null, {
     from: { transform: 'translate3d(50%, 0, 0)' },
     enter: { transform: 'translate3d(0%, 0, 0)' },
     leave: { transform: 'translate3d(50%, 0, 0)' },
   });
+
+  const close = () => setIsAlertShown(false);
+
+  console.log({ product });
 
   return transitions.map(
     ({ item, key, props: { transform } }) =>
@@ -35,7 +30,7 @@ export function AddToCartPreview() {
             <AnimatedDialogContent
               aria-label="Product added to cart."
               style={{ transform }}
-              className="w-full mt-20 bg-white rounded-lg shadow-2xl md:max-w-lg"
+              className="w-full mt-20 bg-white rounded-lg shadow-2xl md:max-w-lg focus:outline-none focus:shadow-outline"
             >
               <div className="px-4 shadow-sm">
                 <div className="relative py-4">
@@ -56,17 +51,19 @@ export function AddToCartPreview() {
                 </div>
                 <div className="py-4 text-center border-t md:text-left md:grid md:gap-4 md:grid-cols-6">
                   <div className="relative hidden h-0 aspect-ratio-square md:block">
-                    <img
-                      src={image}
-                      alt=""
+                    <GatsbyImage
+                      fluid={
+                        product.variants[0].image.localFile.childImageSharp
+                          .fluid
+                      }
                       className="absolute inset-0 object-contain w-full h-full overflow-hidden transform bg-pink-100 rounded-lg"
                     />
                   </div>
                   <div className="max-w-sm col-span-4 mx-auto mt-4 md:mx-0 md:mt-0">
-                    {title}
+                    {product.title}
                   </div>
                   <div className="mt-4 md:text-right md:mt-0">
-                    Qty: {quantity}
+                    Qty: {product.quantity}
                   </div>
                 </div>
                 <div className="flex flex-col items-center text-center">
@@ -94,3 +91,5 @@ export function AddToCartPreview() {
       )
   );
 }
+
+export { AddToCartAlert };

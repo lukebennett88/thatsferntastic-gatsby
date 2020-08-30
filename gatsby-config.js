@@ -1,8 +1,6 @@
 const dotenv = require('dotenv');
-const postCssImport = require('postcss-import');
 const tailwindcss = require('tailwindcss');
 const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
 const resolveConfig = require('tailwindcss/resolveConfig');
 const tailwindConfig = require('./tailwind.config.js');
 
@@ -33,15 +31,6 @@ module.exports = {
       },
     },
     {
-      // This plugin lets me access environment variables that
-      // aren't prefixed with Gatsby. This allows me to use
-      // Shopify-related variables in the context setup script.
-      resolve: 'gatsby-plugin-env-variables',
-      options: {
-        whitelist: ['SHOP_NAME', 'SHOPIFY_ACCESS_TOKEN'],
-      },
-    },
-    {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'Thats Ferntastic',
@@ -56,12 +45,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-postcss',
       options: {
-        postCssPlugins: [
-          postCssImport,
-          tailwindcss('./tailwind.config.js'),
-          autoprefixer,
-          ...(process.env.NODE_ENV === 'production' ? [cssnano] : []),
-        ],
+        postCssPlugins: [tailwindcss(tailwindConfig), autoprefixer],
       },
     },
     {
@@ -73,7 +57,7 @@ module.exports = {
         // If you are running your shop on a custom domain, you need to use that
         // as the shop name, without a trailing slash, for example:
         // shopName: "gatsby-shop.com",
-        shopName: process.env.SHOP_NAME,
+        shopName: process.env.GATSBY_SHOPIFY_SHOP_NAME,
 
         // An API access token to your Shopify shop. This is required.
         // You can generate an access token in the "Manage private apps" section
@@ -81,12 +65,12 @@ module.exports = {
         // to select "Allow this app to access your storefront data using the
         // Storefront API".
         // See: https://help.shopify.com/api/custom-storefronts/storefront-api/getting-started#authentication
-        accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
+        accessToken: process.env.GATSBY_SHOPIFY_ACCESS_TOKEN,
 
         // Set the API version you want to use. For a list of available API versions,
         // see: https://help.shopify.com/en/api/storefront-api/reference/queryroot
         // Defaults to 2019-07
-        apiVersion: '2020-04',
+        apiVersion: '2020-07',
 
         // Set verbose to true to display a verbose output on `npm run develop`
         // or `npm run build`. This prints which nodes are being fetched and how
@@ -101,7 +85,14 @@ module.exports = {
 
         // Possible values are: 'shop' and 'content'.
         // Defaults to ['shop', 'content'].
-        // includeCollections: ['shop'],
+        includeCollections: ['shop'],
+      },
+    },
+    {
+      resolve: 'gatsby-theme-shopify-manager',
+      options: {
+        shopName: process.env.GATSBY_SHOPIFY_SHOP_NAME,
+        accessToken: process.env.GATSBY_SHOPIFY_ACCESS_TOKEN,
       },
     },
   ],

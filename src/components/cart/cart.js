@@ -1,12 +1,16 @@
 import React from 'react';
+import {
+  useCartItems,
+  useCart,
+  useCheckoutUrl,
+} from 'gatsby-theme-shopify-manager';
 
-import { useCartItems, useCartTotals, useCheckout } from '../../hooks';
 import { LineItem } from './line-item';
 
 export function Cart() {
   const lineItems = useCartItems();
-  const { tax, total } = useCartTotals();
-  const checkout = useCheckout();
+  const cart = useCart();
+  const checkout = useCheckoutUrl();
   return (
     <div className="relative pt-16 pb-20">
       <h1 className="text-3xl font-bold leading-9 text-gray-900 sm:text-4xl sm:leading-10">
@@ -25,36 +29,23 @@ export function Cart() {
               Cart Summary
             </h3>
             <hr className="my-3" />
-            <dl className="grid row-gap-3">
+            <dl className="grid gap-y-3">
               <div className="flex justify-between">
                 <dt>Subtotal:</dt>
-                <dd>{total}</dd>
+                <dd>${Number(cart.totalPrice).toFixed(2)}</dd>
               </div>
               <div className="flex justify-between">
                 <dt>Shipping:</dt>
                 <dd> - </dd>
               </div>
-              <div className="flex justify-between">
-                <dt>Tax: </dt>
-                <dd>{tax}</dd>
-              </div>
-            </dl>
-
-            <hr className="my-3" />
-            <dl className="font-medium">
-              <div className="flex justify-between">
-                <dt>Estimated Total:</dt>
-                <dd>{total}</dd>
-              </div>
             </dl>
             <div className="mt-6">
-              <button
-                onClick={checkout}
-                type="button"
+              <a
+                href={checkout}
                 className="flex items-center justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-lg hover:bg-gray-800 focus:outline-none focus:shadow-outline"
               >
                 Checkout
-              </button>
+              </a>
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ export default function CollectionPageTemplate() {
   return (
     <Layout hasHero>
       <SEO title="Collection" />
-      <div className="relative grid max-w-lg row-gap-10 col-gap-12 pb-20 mx-auto lg:grid-cols-3 lg:max-w-none">
+      <div className="relative grid max-w-lg gap-y-10 gap-x-12 pb-20 mx-auto lg:grid-cols-3 lg:max-w-none">
         {products.map((product) => (
           <Tile
             key={product.handle}

@@ -1,12 +1,16 @@
-const aspectRatio = require('tailwindcss-aspect-ratio');
 const defaultTheme = require('tailwindcss/defaultTheme');
-const lineClamp = require('tailwindcss-line-clamp');
+const customForms = require('@tailwindcss/custom-forms');
 const typography = require('@tailwindcss/typography');
+const aspectRatio = require('tailwindcss-aspect-ratio');
+const lineClamp = require('tailwindcss-line-clamp');
 
 module.exports = {
   experimental: {
     uniformColorPalette: true,
     extendedSpacingScale: true,
+  },
+  future: {
+    removeDeprecatedGapUtilities: true,
   },
   purge: {
     mode: 'all',
@@ -99,5 +103,5 @@ module.exports = {
     margin: ['responsive', 'first'],
     opacity: ['responsive', 'hover', 'focus', 'group-hover'],
   },
-  plugins: [aspectRatio, lineClamp, typography],
+  plugins: [aspectRatio, customForms, lineClamp, typography],
 };

@@ -1,7 +1,31 @@
 /*! purgecss start ignore */
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "./components.css";
+@tailwind base;
+@tailwind components;
+/**
+ * These classes have lower specificity so we can override them
+ * with utility classes
+ */
+
+body {
+  @apply bg-teal-200;
+}
+
+@responsive {
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+
+  .reset-full-bleed {
+    width: auto;
+    margin-left: 0;
+  }
+}
 /*! purgecss end ignore */
-@import "tailwindcss/utilities";
-@import "./utilities.css";
+
+@tailwind utilities;
+
+/**
+ * Utility classes
+ * These have higher specificity than component classes
+ */

@@ -12,7 +12,7 @@ export function InstagramWidget({ postsToShow = 6 }) {
       <h2 className="font-mono text-2xl leading-none text-pink-500 sm:text-4xl">
         Recent Instagram Posts
       </h2>
-      <div className="grid row-gap-10 col-gap-12 mt-6 lg:grid-cols-3">
+      <div className="grid gap-y-10 gap-x-12 mt-6 lg:grid-cols-3">
         {posts.length
           ? posts
               .slice(0, postsToShow)
