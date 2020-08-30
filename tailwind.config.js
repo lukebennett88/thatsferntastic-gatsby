@@ -1,10 +1,20 @@
+const aspectRatio = require('tailwindcss-aspect-ratio');
 const defaultTheme = require('tailwindcss/defaultTheme');
-const tailwindUI = require('@tailwindcss/ui');
-const tailwindcssAspectRatio = require('tailwindcss-aspect-ratio');
-const tailwindcssLineClamp = require('tailwindcss-line-clamp');
+const lineClamp = require('tailwindcss-line-clamp');
+const typography = require('@tailwindcss/typography');
 
 module.exports = {
-  purge: ['./src/**/*.js'],
+  experimental: {
+    uniformColorPalette: true,
+    extendedSpacingScale: true,
+  },
+  purge: {
+    mode: 'all',
+    content: ['src/**/*.js'],
+    options: {
+      keyframes: true,
+    },
+  },
   theme: {
     aspectRatio: {
       square: [1, 1],
@@ -89,5 +99,5 @@ module.exports = {
     margin: ['responsive', 'first'],
     opacity: ['responsive', 'hover', 'focus', 'group-hover'],
   },
-  plugins: [tailwindcssAspectRatio, tailwindUI, tailwindcssLineClamp],
+  plugins: [aspectRatio, lineClamp, typography],
 };
