@@ -16,8 +16,6 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
 
   const close = () => setIsAlertShown(false);
 
-  console.log({ product });
-
   return transitions.map(
     ({ item, key, props: { transform } }) =>
       item && (

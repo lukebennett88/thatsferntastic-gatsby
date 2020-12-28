@@ -24,8 +24,6 @@ function ProductPage({ data: { shopifyProduct: product } }) {
   const [isAlertShown, setIsAlertShown] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  console.log({ variant });
-
   const { register, handleSubmit } = useForm();
 
   async function handleAddToCart(options) {
@@ -33,7 +31,6 @@ function ProductPage({ data: { shopifyProduct: product } }) {
       await addItemToCart(variant.shopifyId, 1, options);
       setIsAlertShown(true);
     } catch (e) {
-      console.log(e);
       setIsAlertShown(false);
     }
   }
