@@ -32,7 +32,7 @@ export function Cart() {
             <dl className="grid gap-y-3">
               <div className="flex justify-between">
                 <dt>Subtotal:</dt>
-                <dd>${Number(cart.totalPrice).toFixed(2)}</dd>
+                <dd>${Number(cart?.totalPrice || 0).toFixed(2)}</dd>
               </div>
               <div className="flex justify-between">
                 <dt>Shipping:</dt>
