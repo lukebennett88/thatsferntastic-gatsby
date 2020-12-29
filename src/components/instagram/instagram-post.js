@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { useLazyLoad } from '../../hooks';
@@ -11,12 +11,12 @@ export function InstagramPost({ post }) {
       href={post.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 focus:outline-none focus:shadow-outline-blue hover:shadow-lg group"
+      className="w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg group"
     >
-      <div className="relative w-full h-0 aspect-ratio-2/3">
+      <div className="relative w-full h-0 aspect-w-2 aspect-h-3">
         <article className="absolute inset-0 flex flex-col pb-3 bg-white rounded-lg shadow">
           {/* Image */}
-          <div className="relative h-0 rounded-t-md aspect-ratio-square">
+          <div className="relative h-0 rounded-t-md aspect-w-1 aspect-h-1">
             <img
               ref={imgRef}
               onLoad={handleImgLoaded}
@@ -25,7 +25,7 @@ export function InstagramPost({ post }) {
               alt={post.caption}
               className="absolute inset-0 object-contain w-full h-full overflow-hidden rounded-t-lg"
             />
-            <div className="absolute w-full h-0 overflow-hidden text-white transition duration-300 ease-in-out bg-black bg-opacity-75 rounded-t-lg opacity-0 aspect-ratio-square group-hover:opacity-100">
+            <div className="absolute w-full h-0 overflow-hidden text-white transition duration-300 ease-in-out bg-black bg-opacity-75 rounded-t-lg opacity-0 aspect-w-1 aspect-h-1 group-hover:opacity-100">
               <svg
                 fill="none"
                 strokeLinecap="round"

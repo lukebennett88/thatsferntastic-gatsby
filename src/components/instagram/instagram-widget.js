@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
 import { useInstagram, useLazyLoad } from '../../hooks';
 import { InstagramPost } from './instagram-post';
@@ -24,7 +24,7 @@ export function InstagramWidget({ postsToShow = 6 }) {
                   key={index}
                   className="w-full max-w-sm mx-auto rounded-lg shadow"
                 >
-                  <div className="relative w-full h-0 aspect-ratio-square">
+                  <div className="relative w-full h-0 aspect-w-1 aspect-h-1">
                     <div className="absolute inset-0 overflow-hidden rounded">
                       <Spinner />
                     </div>

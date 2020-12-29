@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'gatsby';
 import { useCartCount } from 'gatsby-theme-shopify-manager';
 import { useTransition, animated } from 'react-spring';
@@ -34,7 +34,7 @@ const Header = ({ setMenuOpen }) => {
             type="button"
             onClick={toggleMenu}
             aria-label="Open sidebar"
-            className="px-4 text-gray-500 border-r border-gray-200 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
+            className="px-4 text-gray-500 border-r border-gray-200 focus:bg-gray-100 focus:text-gray-600 md:hidden"
           >
             <svg
               className="w-6 h-6"
@@ -55,7 +55,7 @@ const Header = ({ setMenuOpen }) => {
               <Link
                 aria-label="Home page"
                 to="/"
-                className="relative p-3 text-gray-500 bg-white rounded-full md:shadow hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:shadow-outline focus:text-gray-600"
+                className="relative p-3 text-gray-500 bg-white rounded-full md:shadow hover:bg-gray-100 hover:text-gray-600 focus:text-gray-600"
               >
                 <svg
                   fill="none"
@@ -75,7 +75,7 @@ const Header = ({ setMenuOpen }) => {
               <Link
                 to="/cart/"
                 aria-label="Shopping cart"
-                className="relative p-3 text-gray-500 bg-white rounded-full md:shadow hover:bg-gray-100 hover:text-gray-600 focus:outline-none focus:shadow-outline focus:text-gray-600"
+                className="relative p-3 text-gray-500 bg-white rounded-full md:shadow hover:bg-gray-100 hover:text-gray-600 focus:text-gray-600"
               >
                 <svg
                   fill="none"
@@ -99,7 +99,7 @@ const Header = ({ setMenuOpen }) => {
                         <span
                           className={`${
                             count >= 10 ? 'px-2' : 'w-5'
-                          } flex items-center justify-center h-5 max-w-xs pt-1 font-mono text-xs font-bold text-white transform translate-x-1/2 bg-gray-900 rounded-full shadow-lg pointer-events-auto focus:outline-none focus:shadow-outline`}
+                          } flex items-center justify-center h-5 max-w-xs pt-1 font-mono text-xs font-bold text-white transform translate-x-1/2 bg-gray-900 rounded-full shadow-lg pointer-events-auto `}
                         >
                           {count}
                         </span>
@@ -116,7 +116,7 @@ const Header = ({ setMenuOpen }) => {
           <div className="px-4 pt-12 pb-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="text-center text-gray-900">
               <h1 className="font-mono text-2xl leading-none sm:text-6xl">
-                <Link to="/" className=" focus:outline-none focus:underline">
+                <Link to="/" className=" focus:underline">
                   {title}
                 </Link>
               </h1>

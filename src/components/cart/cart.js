@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   useCartItems,
   useCart,
@@ -42,7 +42,7 @@ export function Cart() {
             <div className="mt-6">
               <a
                 href={checkout}
-                className="flex items-center justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-lg hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+                className="flex items-center justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-lg hover:bg-gray-800"
               >
                 Checkout
               </a>

@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 import Image from 'gatsby-image';
+import PropTypes from 'prop-types';
 
 export const Thumbnail = ({ src, onClick }) => {
   return (
-    <button onClick={onClick} type="button">
+    <button onClick={onClick} type="button" className="block">
       <Image fluid={src.localFile.childImageSharp.fluid} />
     </button>
   );

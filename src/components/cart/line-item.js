@@ -92,7 +92,7 @@ function LineItem({ item }) {
     <div className="md:flex md:items-center md:justify-between">
       <div className="md:flex md:items-center">
         <div className="w-48 rounded-lg shadow">
-          <div className="relative aspect-ratio-square">
+          <div className="relative aspect-w-1 aspect-h-1">
             <GatsbyImage
               fluid={getImageFluidForVariant(item.variant.id)}
               onLoad={() => setIsLoaded(true)}

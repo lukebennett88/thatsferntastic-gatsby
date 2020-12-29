@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import GatsbyImage from 'gatsby-image';
 import { animated, useTransition } from 'react-spring';
 import { FiX } from 'react-icons/fi';
@@ -28,7 +28,7 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
             <AnimatedDialogContent
               aria-label="Product added to cart."
               style={{ transform }}
-              className="w-full mt-20 bg-white rounded-lg shadow-2xl md:max-w-lg focus:outline-none focus:shadow-outline"
+              className="w-full mt-20 bg-white rounded-lg shadow-2xl md:max-w-lg"
             >
               <div className="px-4 shadow-sm">
                 <div className="relative py-4">
@@ -40,7 +40,7 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
                       <button
                         type="button"
                         onClick={close}
-                        className="inline-flex text-gray-400 rounded-full focus:bg-gray-100 p-1.5 hover:bg-grey-100 focus:outline-none focus:text-gray-500 hover:text-gray-500 focus:bg-grey-100 transition ease-in-out duration-150"
+                        className="inline-flex text-gray-400 rounded-full focus:bg-gray-100 p-1.5 hover:bg-grey-100 focus:text-gray-500 hover:text-gray-500 focus:bg-grey-100 transition ease-in-out duration-150"
                       >
                         <FiX className="w-5 h-5" />
                       </button>
@@ -48,7 +48,7 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
                   </div>
                 </div>
                 <div className="py-4 text-center border-t md:text-left md:grid md:gap-4 md:grid-cols-6">
-                  <div className="relative hidden h-0 aspect-ratio-square md:block">
+                  <div className="relative hidden h-0 aspect-w-1 aspect-h-1 md:block">
                     <GatsbyImage
                       fluid={
                         product.variants[0].image.localFile.childImageSharp
@@ -69,7 +69,7 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
                     <Link
                       to="/cart/"
                       onClick={close}
-                      className="inline-flex items-center px-6 py-3 font-mono text-base font-bold leading-6 text-pink-700 lowercase transition duration-150 ease-in-out bg-pink-100 border border-transparent rounded-full shadow-sm hover:bg-pink-50 focus:outline-none focus:border-pink-300 focus:shadow-outline-pink active:bg-pink-200 hover:shadow-lg"
+                      className="inline-flex items-center px-6 py-3 font-mono text-base font-bold leading-6 text-pink-700 lowercase transition duration-150 ease-in-out bg-pink-100 border border-transparent rounded-full shadow-sm hover:bg-pink-50 focus:border-pink-300 focus:ring focus:ring-pink-300 active:bg-pink-200 hover:shadow-lg"
                     >
                       View cart
                     </Link>
@@ -77,7 +77,7 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
                   <button
                     type="button"
                     onClick={close}
-                    className="pb-4 mt-2 font-bold underline focus:outline-none focus:text-pink-700"
+                    className="pb-4 mt-2 font-bold underline focus:text-pink-700"
                   >
                     Continue shopping
                   </button>

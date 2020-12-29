@@ -1,6 +1,4 @@
 const dotenv = require('dotenv');
-const tailwindcss = require('tailwindcss');
-const autoprefixer = require('autoprefixer');
 const resolveConfig = require('tailwindcss/resolveConfig');
 const tailwindConfig = require('./tailwind.config.js');
 
@@ -19,10 +17,21 @@ module.exports = {
     instagram: 'https://www.instagram.com/thatsferntastic/',
     twitter: 'https://www.twitter.com/thatsferntastic/',
   },
+  flags: {
+    DEV_SSR: true,
+    FAST_DEV: true,
+    FAST_REFRESH: true,
+    LAZY_IMAGES: true,
+    PARALLEL_SOURCING: true,
+    PRESERVE_FILE_DOWNLOAD_CACHE: true,
+    PRESERVE_WEBPACK_CACHE: true,
+    QUERY_ON_DEMAND: true,
+  },
   plugins: [
+    'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
-    'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -40,12 +49,6 @@ module.exports = {
         theme_color: fullConfig.theme.colors.indigo['600'],
         display: 'minimal-ui',
         icon: 'src/images/icon.png', // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-postcss',
-      options: {
-        postCssPlugins: [tailwindcss(tailwindConfig), autoprefixer],
       },
     },
     {

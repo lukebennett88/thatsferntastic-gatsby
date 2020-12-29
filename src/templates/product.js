@@ -55,7 +55,7 @@ function ProductPage({ data: { shopifyProduct: product } }) {
           <div>
             <div className="max-w-md mx-auto">
               <div className="overflow-hidden rounded-lg">
-                <div className="relative bg-gray-300 aspect-ratio-square">
+                <div className="relative bg-gray-300 aspect-w-1 aspect-h-1">
                   <div className="absolute inset-0 flex">
                     <GatsbyImage
                       fluid={
@@ -102,9 +102,9 @@ function ProductPage({ data: { shopifyProduct: product } }) {
               <span className="relative inline-flex transition duration-300 ease-in-out transform rounded-full shadow-sm hover:-translate-y-1 hover:shadow-lg">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center w-full px-6 py-3 font-mono text-xl font-bold leading-6 text-pink-700 lowercase transition duration-150 ease-in-out bg-pink-100 border border-transparent rounded-full shadow-sm hover:bg-pink-50 focus:outline-none focus:border-pink-300 focus:shadow-outline-pink active:bg-pink-200 hover:shadow-lg"
+                  className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                 >
-                  Add to Cart
+                  <span className="leading-none">Add to Cart</span>
                 </button>
               </span>
             </form>
@@ -113,7 +113,7 @@ function ProductPage({ data: { shopifyProduct: product } }) {
               dangerouslySetInnerHTML={{
                 __html: product.descriptionHtml,
               }}
-              className="grid row-gap-4 mt-6 text-base leading-6 prose text-gray-700"
+              className="grid mt-6 text-base leading-6 prose text-gray-700 gap-y-4"
             />
           </div>
         </article>

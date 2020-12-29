@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
@@ -19,12 +19,12 @@ export function Tile({ title, slug, price, image }) {
     <Link
       to={`/products/${slug}`}
       ref={ref}
-      className="w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 focus:outline-none focus:shadow-outline-blue hover:shadow-lg"
+      className="w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg"
     >
-      <div className="relative w-full h-0 aspect-ratio-2/3">
+      <div className="relative w-full h-0 aspect-w-2 aspect-h-3">
         <article className="absolute inset-0 flex flex-col pb-3 bg-white rounded-lg shadow">
           {/* Image */}
-          <div className="relative h-0 rounded-t-md aspect-ratio-square">
+          <div className="relative h-0 rounded-t-md aspect-w-1 aspect-h-1">
             <img
               ref={imgRef}
               onLoad={handleImgLoaded}

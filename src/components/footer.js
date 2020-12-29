@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { FiFacebook, FiInstagram, FiTwitter } from 'react-icons/fi';
 
 import { useGraphQL } from '../hooks';
 
-export default function Footer() {
+function Footer() {
   const {
     site: {
       siteMetadata: { title, facebook, instagram, twitter },
@@ -38,3 +38,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export { Footer };

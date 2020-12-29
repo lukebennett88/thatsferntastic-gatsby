@@ -1,13 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'gatsby';
-import { Transition } from '@tailwindui/react';
+import { Transition } from '@headlessui/react';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import PropTypes from 'prop-types';
 
 import { useEventListener, useGraphQL } from '../hooks';
 import { navigation } from '../data';
 
-export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
+function MobileMenu({ isMenuOpen, setMenuOpen }) {
   const close = () => setMenuOpen(false);
 
   function handleEscape(e) {
@@ -57,7 +57,7 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
               type="button"
               onClick={close}
               aria-label="Close sidebar"
-              className="flex items-center justify-center w-12 h-12 transition duration-150 ease-in-out bg-black bg-opacity-25 rounded-full focus:outline-none focus:bg-black focus:bg-opacity-50"
+              className="flex items-center justify-center w-12 h-12 transition duration-150 ease-in-out bg-black bg-opacity-25 rounded-full focus:bg-black focus:bg-opacity-50"
             >
               <svg
                 className="w-6 h-6 text-white"
@@ -76,7 +76,7 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
           </div>
           <Link
             to="/"
-            className="flex items-center justify-center h-16 px-4 font-mono text-2xl text-center bg-teal-200 focus:outline-none focus:underline"
+            className="flex items-center justify-center h-16 px-4 font-mono text-2xl text-center bg-teal-200 focus:underline"
           >
             {title}
           </Link>
@@ -87,7 +87,7 @@ export default function MobileMenu({ isMenuOpen, setMenuOpen }) {
                   key={navItem.slug}
                   to={navItem.slug}
                   activeClassName="text-gray-900 bg-gray-100 focus:bg-gray-200"
-                  className="flex items-center px-2 py-2 mt-1 text-base font-medium leading-6 text-gray-600 transition duration-150 ease-in-out rounded-lg first:mt-0 group hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-100"
+                  className="flex items-center px-2 py-2 mt-1 text-base font-medium leading-6 text-gray-600 transition duration-150 ease-in-out rounded-lg first:mt-0 group hover:text-gray-900 hover:bg-gray-50 focus:text-gray-900 focus:bg-gray-100"
                 >
                   <navItem.icon className="w-6 h-6 mr-4 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-500 group-focus:text-gray-500" />
                   {navItem.title}
@@ -106,3 +106,5 @@ MobileMenu.propTypes = {
   isMenuOpen: PropTypes.bool,
   setMenuOpen: PropTypes.func,
 };
+
+export { MobileMenu };

@@ -46,12 +46,8 @@ export function SearchBar() {
 
   return (
     <div className="relative flex flex-1">
-      <div className="flex flex-1 pl-6 pr-2 overflow-hidden bg-white md:rounded-full md:shadow">
+      <div className="flex flex-1 pl-6 pr-2 overflow-hidden bg-white md:rounded-full md:shadow focus-within:ring">
         <div className="flex w-full md:ml-0">
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label htmlFor="search_field" className="sr-only">
-            Search
-          </label>
           <div className="relative w-full text-gray-400 focus-within:text-gray-600">
             <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -62,14 +58,17 @@ export function SearchBar() {
                 />
               </svg>
             </div>
-            <input
-              id="search_field"
-              className="block w-full h-full py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 rounded-lg focus:outline-none focus:placeholder-gray-400 sm:text-sm"
-              placeholder="Search"
-              type="search"
-              onChange={handleChange}
-              value={query}
-            />
+            <label htmlFor="search_field">
+              <span className="sr-only">Search</span>
+              <input
+                id="search_field"
+                className="block w-full h-full py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 border-none rounded-lg focus:ring-0 focus:placeholder-gray-400 sm:text-sm"
+                placeholder="Search"
+                type="search"
+                onChange={handleChange}
+                value={query}
+              />
+            </label>
           </div>
         </div>
         {isSearchbarVisible && (
@@ -86,7 +85,7 @@ export function SearchBar() {
                   <li key={result.handle} className="rounded-lg odd:bg-gray-50">
                     <Link
                       to={`/products/${result.handle}`}
-                      className="flex items-center px-4 py-2 transition duration-150 ease-in-out rounded-lg hover:bg-pink-100 focus:outline-none focus:bg-pink-100"
+                      className="flex items-center px-4 py-2 transition duration-150 ease-in-out rounded-lg hover:bg-pink-100 focus:bg-pink-100"
                     >
                       <img
                         src={

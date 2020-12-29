@@ -1,29 +1,14 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const customForms = require('@tailwindcss/custom-forms');
+const { teal, cyan } = require('tailwindcss/colors');
+const forms = require('@tailwindcss/forms');
 const typography = require('@tailwindcss/typography');
-const aspectRatio = require('tailwindcss-aspect-ratio');
+const aspectRatio = require('@tailwindcss/aspect-ratio');
 const lineClamp = require('tailwindcss-line-clamp');
 
 module.exports = {
-  experimental: {
-    uniformColorPalette: true,
-    extendedSpacingScale: true,
-  },
-  future: {
-    removeDeprecatedGapUtilities: true,
-  },
-  purge: {
-    mode: 'all',
-    content: ['src/**/*.js'],
-    options: {
-      keyframes: true,
-    },
-  },
+  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    aspectRatio: {
-      square: [1, 1],
-      '2/3': [2, 3],
-    },
     lineClamp: {
       1: 1,
       2: 2,
@@ -31,17 +16,17 @@ module.exports = {
     },
     extend: {
       colors: {
-        yellow: {
-          50: '#fffbea',
-          100: '#fff0b2',
-          200: '#ffe16a',
-          300: '#facc15',
-          400: '#e3b708',
-          500: '#c29c03',
-          600: '#9f810a',
-          700: '#8e7510',
-          800: '#725f13',
-          900: '#635312',
+        cyan: {
+          50: '#ebfcff',
+          100: '#e1fafe',
+          200: '#c3f4fd',
+          300: '#a4f1fe',
+          400: '#76e6fa',
+          500: '#3fdcf8',
+          600: '#1cd2f2',
+          700: '#1abedb',
+          800: '#1e8c9f',
+          900: '#236a76',
         },
         teal: {
           50: '#edfafa',
@@ -54,30 +39,6 @@ module.exports = {
           700: '#037072',
           800: '#055b5c',
           900: '#015051',
-        },
-        blue: {
-          50: '#ebfcff',
-          100: '#e1fafe',
-          200: '#c3f4fd',
-          300: '#a4f1fe',
-          400: '#76e6fa',
-          500: '#3fdcf8',
-          600: '#1cd2f2',
-          700: '#1abedb',
-          800: '#1e8c9f',
-          900: '#236a76',
-        },
-        purple: {
-          50: '#faf5ff',
-          100: '#f5ebfe',
-          200: '#ebd7fe',
-          300: '#dfbffd',
-          400: '#c994fa',
-          500: '#b061f9',
-          600: '#993af2',
-          700: '#852bd9',
-          800: '#6d21b5',
-          900: '#5c1d96',
         },
         pink: {
           50: '#fdf2f9',
@@ -99,9 +60,11 @@ module.exports = {
     },
   },
   variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'odd'],
-    margin: ['responsive', 'first'],
-    opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+    extend: {
+      backgroundColor: ['odd'],
+      margin: ['first'],
+      opacity: ['group-hover'],
+    },
   },
-  plugins: [aspectRatio, customForms, lineClamp, typography],
+  plugins: [aspectRatio, forms, lineClamp, typography],
 };

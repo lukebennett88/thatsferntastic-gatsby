@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import * as React from 'react';
 
 export const OptionPicker = ({ name, options, onChange, selected }) => {
   if (options.length <= 1) return null;
@@ -11,7 +11,7 @@ export const OptionPicker = ({ name, options, onChange, selected }) => {
           onChange={onChange}
           value={selected}
           id={name.toLowerCase()}
-          className="form-select"
+          className="mt-1 border-gray-300 rounded-md shadow-sm focus:border-transparent focus:ring focus:ring-blue-500 focus:ring-opacity-50"
         >
           {options.map((option) => (
             <option value={option} key={option}>

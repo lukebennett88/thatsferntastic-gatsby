@@ -1,31 +1,56 @@
-/*! purgecss start ignore */
 @tailwind base;
 @tailwind components;
-/**
- * These classes have lower specificity so we can override them
- * with utility classes
- */
-
-body {
-  @apply bg-teal-200;
-}
-
-@responsive {
-  .full-bleed {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-  }
-
-  .reset-full-bleed {
-    width: auto;
-    margin-left: 0;
-  }
-}
-/*! purgecss end ignore */
-
 @tailwind utilities;
 
-/**
- * Utility classes
- * These have higher specificity than component classes
- */
+@layer components {
+  body {
+    @apply bg-teal-200;
+  }
+
+  /* Replace default focus styles */
+  a:focus,
+  button:focus,
+  input:focus,
+  textarea:focus,
+  select:focus,
+  [tabindex]:focus {
+    @apply outline-none ring;
+  }
+
+  /* See https://piccalil.li/quick-tip/a-safer-way-to-vertically-fill-the-viewport/ for details */
+  html,
+  body,
+  #___gatsby,
+  #gatsby-focus-wrapper {
+    height: -webkit-fill-available;
+  }
+
+  /* Use Smooth Scroll for jump links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Turn off animations for people who have the prefers-reduced-motion query enabled */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  @responsive {
+    .full-bleed {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+    }
+
+    .reset-full-bleed {
+      width: auto;
+      margin-left: 0;
+    }
+  }
+}
