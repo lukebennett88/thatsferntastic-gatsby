@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import { Transition } from '@headlessui/react';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import PropTypes from 'prop-types';
 
 import { useEventListener, useGraphQL } from '../hooks';
-import { navigation } from '../data';
 
 function MobileMenu({ isMenuOpen, setMenuOpen }) {
   const close = () => setMenuOpen(false);
@@ -26,6 +25,31 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
       siteMetadata: { title },
     },
   } = useGraphQL();
+
+  const { allShopifyProduct } = useStaticQuery(graphql`
+    {
+      allShopifyProduct {
+        nodes {
+          productType
+        }
+      }
+    }
+  `);
+
+  const types = [
+    ...new Set(
+      allShopifyProduct.nodes
+        .filter((node) => node.productType !== '')
+        .map((node) => node.productType)
+    ),
+  ];
+
+  const colours = [
+    'bg-pink-200 group-hover:bg-pink-300 group-focus:bg-pink-400',
+    'bg-teal-200 group-hover:bg-teal-300 group-focus:bg-teal-400',
+    'bg-yellow-200 group-hover:bg-yellow-300 group-focus:bg-yellow-400',
+    'bg-cyan-200 group-hover:bg-cyan-300 group-focus:bg-cyan-400',
+  ];
 
   return (
     <Transition show={isMenuOpen} className="md:hidden">
@@ -80,17 +104,39 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
           >
             {title}
           </Link>
-          <div className="flex-1 h-0 mt-5 overflow-y-auto">
-            <nav className="px-2">
-              {navigation.map((navItem) => (
+          <div className="flex-1 h-0 overflow-y-auto">
+            <nav className="px-2 mt-5">
+              <Link
+                to="/"
+                onClick={close}
+                activeClassName="text-gray-900 bg-gray-100 hover:bg-gray-100 focus:bg-gray-200"
+                className="relative flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg focus:z-10 group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
+              >
+                <span
+                  aria-hidden
+                  className="inline-block w-5 h-5 mr-3 transition duration-150 ease-in-out bg-indigo-200 rounded-full group-focus:text-indigo-600 group-hover:bg-indigo-300 group-focus:bg-indigo-400"
+                />
+                All Products
+              </Link>
+              {types.map((type, index) => (
                 <Link
-                  key={navItem.slug}
-                  to={navItem.slug}
-                  activeClassName="text-gray-900 bg-gray-100 focus:bg-gray-200"
-                  className="flex items-center px-2 py-2 mt-1 text-base font-medium leading-6 text-gray-600 transition duration-150 ease-in-out rounded-lg first:mt-0 group hover:text-gray-900 hover:bg-gray-50 focus:text-gray-900 focus:bg-gray-100"
+                  key={type}
+                  to={`/?q=${type.split(' ').join('+')}`}
+                  onClick={close}
+                  activeClassName="text-gray-900 bg-gray-100 hover:bg-gray-100 focus:bg-gray-200"
+                  className="relative flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg focus:z-10 group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
                 >
-                  <navItem.icon className="w-6 h-6 mr-4 text-gray-400 transition duration-150 ease-in-out group-hover:text-gray-500 group-focus:text-gray-500" />
-                  {navItem.title}
+                  <span
+                    aria-hidden
+                    className={`inline-block transition duration-150 ease-in-out rounded-full w-5 h-5 mr-3 group-focus:text-gray-600 ${
+                      colours[
+                        index + 1 > colours.length
+                          ? index - colours.length
+                          : index
+                      ]
+                    }`}
+                  />
+                  {type}
                 </Link>
               ))}
             </nav>

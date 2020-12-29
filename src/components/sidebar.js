@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { graphql, Link } from 'gatsby';
-
-import { useGraphQL } from '../hooks';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 
 function Sidebar() {
-  const { allShopifyProduct } = useGraphQL(graphql`
+  const { allShopifyProduct } = useStaticQuery(graphql`
     {
       allShopifyProduct {
         nodes {
