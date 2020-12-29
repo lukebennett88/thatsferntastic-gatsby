@@ -35,6 +35,15 @@
     scroll-behavior: smooth;
   }
 
+  .gallery {
+    grid-auto-columns: calc(100% / 3 - theme('spacing.4'));
+    scroll-snap-type: x mandatory;
+  }
+
+  .gallery > * {
+    scroll-snap-align: start;
+  }
+
   /* Turn off animations for people who have the prefers-reduced-motion query enabled */
   @media (prefers-reduced-motion: reduce) {
     * {
