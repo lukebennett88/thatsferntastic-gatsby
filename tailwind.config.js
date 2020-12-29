@@ -1,5 +1,4 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const { teal, cyan } = require('tailwindcss/colors');
 const forms = require('@tailwindcss/forms');
 const typography = require('@tailwindcss/typography');
 const aspectRatio = require('@tailwindcss/aspect-ratio');
@@ -61,7 +60,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      backgroundColor: ['odd'],
+      backgroundColor: ['group-focus', 'odd'],
       margin: ['first'],
       opacity: ['group-hover'],
     },
