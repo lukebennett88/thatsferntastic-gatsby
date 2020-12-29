@@ -3,6 +3,7 @@ import {
   useCartItems,
   useCart,
   useCheckoutUrl,
+  useCartCount,
 } from 'gatsby-theme-shopify-manager';
 
 import { LineItem } from './line-item';
@@ -10,12 +11,11 @@ import { LineItem } from './line-item';
 export function Cart() {
   const lineItems = useCartItems();
   const cart = useCart();
+  const count = useCartCount();
   const checkout = useCheckoutUrl();
   return (
     <div className="relative pt-16 pb-20">
-      <h1 className="text-3xl font-bold leading-9 text-gray-900 sm:text-4xl sm:leading-10">
-        Cart
-      </h1>
+      <h1 className="heading-1">Cart</h1>
       <div className="mt-3 sm:mt-4">
         {lineItems.map((item) => (
           <React.Fragment key={item.id}>
@@ -31,12 +31,12 @@ export function Cart() {
             <hr className="my-3" />
             <dl className="grid gap-y-3">
               <div className="flex justify-between">
-                <dt>Subtotal:</dt>
-                <dd>${Number(cart?.totalPrice || 0).toFixed(2)}</dd>
+                <dt>Items in cart:</dt>
+                <dd>{count}</dd>
               </div>
               <div className="flex justify-between">
-                <dt>Shipping:</dt>
-                <dd> - </dd>
+                <dt>Subtotal:</dt>
+                <dd>${Number(cart?.totalPrice || 0).toFixed(2)}</dd>
               </div>
             </dl>
             <div className="mt-6">

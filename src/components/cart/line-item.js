@@ -1,11 +1,12 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import * as React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 import {
   useRemoveItemFromCart,
   useUpdateItemQuantity,
 } from 'gatsby-theme-shopify-manager';
+import { HiChevronLeft, HiChevronRight, HiTrash } from 'react-icons/hi';
+import PropTypes from 'prop-types';
 
 import { Spinner } from '../spinner';
 
@@ -43,8 +44,6 @@ function LineItem({ item }) {
   const removeFromCart = useRemoveItemFromCart();
   const updateQuantity = useUpdateItemQuantity();
 
-  const [quantity, setQuantity] = useState(item.quantity);
-
   const betterProductHandles = products.map((product) => {
     const newVariants = product.variants.map((variant) => variant.shopifyId);
     return {
@@ -72,36 +71,40 @@ function LineItem({ item }) {
     return null;
   }
 
-  function handleChange(event) {
-    if (event.target.value >= 1) {
-      setQuantity(event.target.value);
-      updateQuantity(item.variant.id, parseInt(event.target.value, 10));
-    } else if (event.target.value === '') {
-      setQuantity('');
-      updateQuantity(item.variant.id, 1);
+  const [quantity, setQuantity] = React.useState(item.quantity);
+
+  function handleDecreaseQuantity() {
+    if (quantity > 0) {
+      setQuantity((prev) => prev - 1);
     }
   }
 
-  function handleBlur() {
-    if (quantity === '') setQuantity(1);
+  function handleIncreaseQuantity() {
+    setQuantity((prev) => prev + 1);
   }
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  React.useEffect(() => {
+    if (quantity <= 0) {
+      removeFromCart(item.variant.id);
+      return;
+    }
+    updateQuantity(item.variant.id, quantity);
+  }, [item.variant.id, quantity, removeFromCart, updateQuantity]);
+
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
   return (
     <div className="md:flex md:items-center md:justify-between">
       <div className="md:flex md:items-center">
-        <div className="w-48 rounded-lg shadow">
+        <div className="flex-shrink-0 rounded-lg shadow md:w-48">
           <div className="relative aspect-w-1 aspect-h-1">
-            <GatsbyImage
-              fluid={getImageFluidForVariant(item.variant.id)}
-              onLoad={() => setIsLoaded(true)}
-            />
-            {!isLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-gray-50">
-                <Spinner />
-              </div>
-            )}
+            <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-gray-50">
+              <GatsbyImage
+                fluid={getImageFluidForVariant(item.variant.id)}
+                onLoad={() => setIsLoaded(true)}
+              />
+              {!isLoaded && <Spinner />}
+            </div>
           </div>
         </div>
         <div className="mt-4 md:ml-4">
@@ -120,26 +123,41 @@ function LineItem({ item }) {
                 </dd>
               </div>
             ))}
-            <div key="quantity">
-              <dt className="inline font-medium text-gray-500">Quantity: </dt>
-              <dd className="inline mt-1 text-gray-900 sm:mt-0 sm:col-span-2">
-                <input
-                  id="cart_qty"
-                  className="form-input"
-                  type="number"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={quantity}
-                  min={0}
-                  pattern="[0-9]*"
-                />
-                {/* {item.quantity} */}
-              </dd>
-            </div>
           </dl>
+          <div className="mt-2">
+            <div>Quantity</div>
+            <div className="relative z-0 inline-flex mt-1 -space-x-px shadow-sm">
+              <button
+                type="button"
+                onClick={handleDecreaseQuantity}
+                disabled={item.quantity < 1}
+                className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-10"
+              >
+                <span className="sr-only">
+                  {quantity <= 1 ? 'Remove from cart' : 'Decrease quantity'}
+                </span>
+                {quantity <= 1 ? (
+                  <HiTrash className="w-5 h-5" aria-hidden />
+                ) : (
+                  <HiChevronLeft className="w-5 h-5" aria-hidden />
+                )}
+              </button>
+              <span className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300">
+                {quantity}
+              </span>
+              <button
+                type="button"
+                onClick={handleIncreaseQuantity}
+                className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 focus:z-10"
+              >
+                <span className="sr-only">Increase quantity</span>
+                <HiChevronRight className="w-5 h-5" aria-hidden />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="flex items-baseline">
+      <div className="hidden md:items-baseline md:flex">
         <button
           onClick={() => removeFromCart(item.variant.id)}
           type="button"
@@ -147,8 +165,8 @@ function LineItem({ item }) {
         >
           Remove from cart
         </button>
-        <div className="ml-4 font-mono text-3xl font-bold text-gray-900">
-          ${Number(item.variant.priceV2.amount).toFixed(2)}
+        <div className="font-mono text-3xl font-bold text-gray-900 md:ml-4">
+          ${Number(item.variant.priceV2.amount * quantity).toFixed(2)}
         </div>
       </div>
     </div>
