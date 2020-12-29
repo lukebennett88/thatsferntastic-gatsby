@@ -22,7 +22,7 @@ module.exports = {
     FAST_DEV: true,
     FAST_REFRESH: true,
     LAZY_IMAGES: true,
-    PARALLEL_SOURCING: true,
+    PARALLEL_SOURCING: false,
     PRESERVE_FILE_DOWNLOAD_CACHE: true,
     PRESERVE_WEBPACK_CACHE: true,
     QUERY_ON_DEMAND: true,
@@ -73,7 +73,7 @@ module.exports = {
         // Set the API version you want to use. For a list of available API versions,
         // see: https://help.shopify.com/en/api/storefront-api/reference/queryroot
         // Defaults to 2019-07
-        apiVersion: '2020-07',
+        apiVersion: '2020-10',
 
         // Set verbose to true to display a verbose output on `npm run develop`
         // or `npm run build`. This prints which nodes are being fetched and how
