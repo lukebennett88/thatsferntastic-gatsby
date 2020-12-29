@@ -44,6 +44,7 @@ export function useGraphQL() {
           }
         ) {
           nodes {
+            description
             handle
             images {
               originalSrc
