@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@headlessui/react": "^0.2.0",
+    "@reach/combobox": "^0.12.1",
     "@reach/dialog": "^0.12.1",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.2.1",
@@ -23,6 +24,7 @@
     "gatsby-source-shopify": "^3.7.1",
     "gatsby-theme-shopify-manager": "^0.1.8",
     "gatsby-transformer-sharp": "^2.9.0",
+    "match-sorter": "^6.0.2",
     "path": "^0.12.7",
     "postcss": "^8.2.1",
     "prop-types": "^15.7.2",

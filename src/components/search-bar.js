@@ -1,51 +1,77 @@
-import React, { useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { Link } from 'gatsby';
+import { matchSorter } from 'match-sorter';
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from '@reach/combobox';
 
-import { useGraphQL, useOnClickOutside } from '../hooks';
+import { useGraphQL } from '../hooks';
 import { resizeShopifyImage } from '../utils';
 
-export function SearchBar() {
+function useThrottle(value, limit) {
+  const [throttledValue, setThrottledValue] = React.useState(value);
+  const lastRan = React.useRef(Date.now());
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handler = window.setTimeout(() => {
+        if (Date.now() - lastRan.current >= limit) {
+          setThrottledValue(value);
+          lastRan.current = Date.now();
+        }
+      }, limit - (Date.now() - lastRan.current));
+
+      return () => window.clearTimeout(handler);
+    }
+  }, [value, limit]);
+
+  return throttledValue;
+}
+
+function useProductMatch(products, term) {
+  const throttledTerm = useThrottle(term, 100);
+  return React.useMemo(
+    () =>
+      term.trim() === ''
+        ? null
+        : matchSorter(products, term, {
+            keys: [(item) => `${item.city}, ${item.state}`],
+          }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [throttledTerm]
+  );
+}
+
+function SearchBar() {
   const {
     allShopifyProduct: { nodes: products },
   } = useGraphQL();
 
-  // Add state for query
-  const [query, setQuery] = useState('');
+  const [term, setTerm] = React.useState('');
 
-  // Add state for search results
-  const [searchResults, setSearchResults] = useState([]);
+  const results = useProductMatch(products, term);
 
-  // Display searchbar
-  const [isSearchbarVisible, setIsSearchbarVisible] = useState(false);
+  const inputRef = React.useRef(null);
 
-  // When query changes, update the state
-  function handleChange(e) {
-    setQuery(e.target.value);
+  function handleChange(event) {
+    setTerm(event.target.value);
   }
 
-  useEffect(() => {
-    // Whenever query is not an empty string, update the productResults
-    if (query !== '') {
-      const results = products.filter((product) =>
-        product.title.toLowerCase().includes(query.toLowerCase())
-      );
-      setSearchResults(results);
-      setIsSearchbarVisible(true);
-    }
-    // If the user starts typing, and then deletes their query, set it back to an empty array
-    else {
-      setSearchResults([]);
-      setIsSearchbarVisible(false);
-    }
-
-    // setIsSearchbarVisible(false);
-  }, [products, query]);
-
-  const searchResultsRef = useRef();
-  useOnClickOutside(searchResultsRef, () => setIsSearchbarVisible(false));
+  function handleSelect(value) {
+    setTerm(value);
+  }
 
   return (
-    <div className="relative flex flex-1">
+    <Combobox
+      openOnFocus
+      onSelect={handleSelect}
+      aria-label="Product search"
+      className="relative flex flex-1"
+    >
       <div className="flex flex-1 pl-6 pr-2 overflow-hidden bg-white md:rounded-full md:shadow focus-within:ring">
         <div className="flex w-full md:ml-0">
           <div className="relative w-full text-gray-400 focus-within:text-gray-600">
@@ -58,34 +84,31 @@ export function SearchBar() {
                 />
               </svg>
             </div>
-            <label htmlFor="search_field">
-              <span className="sr-only">Search</span>
-              <input
-                id="search_field"
-                className="block w-full h-full py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 border-none rounded-lg focus:ring-0 focus:placeholder-gray-400 sm:text-sm"
-                placeholder="Search"
-                type="search"
-                onChange={handleChange}
-                value={query}
-              />
-            </label>
+            <ComboboxInput
+              ref={inputRef}
+              value={term}
+              onChange={handleChange}
+              placeholder="Search"
+              className="block w-full h-full py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 border-none rounded-lg focus:ring-0 focus:placeholder-gray-400 sm:text-sm"
+            />
           </div>
         </div>
-        {isSearchbarVisible && (
-          <div
-            ref={searchResultsRef}
-            className="absolute inset-x-0 z-10 p-4 mt-16 overflow-hidden text-left bg-white border-t rounded-b-lg shadow-2xl md:border-none md:rounded-t-lg full-bleed md:reset-full-bleed"
-          >
-            <div className="shadow-sm">
+        {results && (
+          <ComboboxPopover className="absolute inset-x-0 z-10 mt-16 overflow-hidden text-left bg-white border-t rounded-b-lg shadow-2xl md:border-none md:rounded-t-lg full-bleed md:reset-full-bleed">
+            <div className="p-4 shadow-sm">
               <h3 className="px-4 pb-3 font-mono text-2xl text-gray-500">
                 Products
               </h3>
-              <ul className="bg-white">
-                {searchResults.splice(0, 4).map((result) => (
-                  <li key={result.handle} className="rounded-lg odd:bg-gray-50">
+              <ComboboxList className="bg-white">
+                {results.slice(0, 10).map((result) => (
+                  <ComboboxOption
+                    key={result.handle}
+                    value={result.title}
+                    className="rounded-lg odd:bg-gray-50"
+                  >
                     <Link
                       to={`/products/${result.handle}`}
-                      className="flex items-center px-4 py-2 transition duration-150 ease-in-out rounded-lg hover:bg-pink-100 focus:bg-pink-100"
+                      className="relative flex items-center px-4 py-2 transition duration-150 ease-in-out rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:z-10"
                     >
                       <img
                         src={
@@ -103,17 +126,19 @@ export function SearchBar() {
                       />
                       <span className="ml-2">{result.title}</span>
                     </Link>
-                  </li>
+                  </ComboboxOption>
                 ))}
-              </ul>
+              </ComboboxList>
+              <hr className="mt-4 border-gray-100" />
+              <div className="p-4 pb-0 text-sm">
+                Searching for: “<em>{term}</em>”
+              </div>
             </div>
-            <hr className="mx-2 border-gray-100" />
-            <div className="px-4 pt-4 text-sm">
-              Searching for: “<em>{query}</em>”
-            </div>
-          </div>
+          </ComboboxPopover>
         )}
       </div>
-    </div>
+    </Combobox>
   );
 }
+
+export { SearchBar };

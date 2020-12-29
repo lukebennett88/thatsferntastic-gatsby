@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer components {
+  :root {
+    --reach-combobox: 1;
+    --reach-dialog: 1;
+  }
+
   body {
     @apply bg-teal-200;
   }
