@@ -39,7 +39,7 @@ function useProductMatch(products, term) {
       term.trim() === ''
         ? null
         : matchSorter(products, term, {
-            keys: [(item) => `${item.city}, ${item.state}`],
+            keys: ['title', 'description'],
           }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [throttledTerm]
