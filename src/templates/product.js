@@ -52,23 +52,20 @@ function ProductPage({ data: { shopifyProduct: product } }) {
           <h1 className="mt-6 text-lg font-bold leading-tight md:hidden">
             {product.title}
           </h1>
-          <div>
-            <div className="max-w-md mx-auto">
-              <div className="overflow-hidden rounded-lg">
-                <div className="relative bg-gray-300 aspect-w-1 aspect-h-1">
-                  <div className="absolute inset-0 flex">
-                    <GatsbyImage
-                      fluid={
-                        product.images[activeImageIndex].localFile
-                          .childImageSharp.fluid
-                      }
-                      className="flex-1 duration-500 ease-in-out transform hover:scale-110"
-                    />
-                  </div>
+          <div className="flex flex-col w-full max-w-md mx-auto space-y-4">
+            <div className="overflow-hidden rounded-lg">
+              <div className="relative bg-gray-300 aspect-w-1 aspect-h-1">
+                <div className="absolute inset-0 flex">
+                  <GatsbyImage
+                    fluid={
+                      product.images[activeImageIndex].localFile.childImageSharp
+                        .fluid
+                    }
+                    className="flex-1 duration-500 ease-in-out transform hover:scale-110"
+                  />
                 </div>
               </div>
             </div>
-
             <Gallery
               images={product.images}
               setActiveImage={setActiveImageIndex}
