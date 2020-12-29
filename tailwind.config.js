@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 const forms = require('@tailwindcss/forms');
 const typography = require('@tailwindcss/typography');
 const aspectRatio = require('@tailwindcss/aspect-ratio');
@@ -15,6 +16,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        indigo: colors.indigo,
         cyan: {
           50: '#ebfcff',
           100: '#e1fafe',

@@ -32,10 +32,21 @@ function Sidebar() {
   return (
     <aside className="hidden lg:block">
       <nav className="sticky rounded-lg top-28">
+        <Link
+          to="/"
+          activeClassName="text-gray-900 bg-gray-100 hover:bg-gray-100 focus:bg-gray-200"
+          className="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
+        >
+          <span
+            aria-hidden
+            className="inline-block w-5 h-5 mr-3 transition duration-150 ease-in-out bg-indigo-200 rounded-full group-focus:text-indigo-600 group-hover:bg-indigo-300 group-focus:bg-indigo-400"
+          />
+          All Products
+        </Link>
         {types.map((type, index) => (
           <Link
             key={type}
-            to={`/products/?q=${type.split(' ').join('-').toLowerCase()}/`}
+            to={`/?q=${type.split(' ').join('+')}`}
             activeClassName="text-gray-900 bg-gray-100 hover:bg-gray-100 focus:bg-gray-200"
             className="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
           >

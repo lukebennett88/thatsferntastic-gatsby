@@ -1,17 +1,28 @@
 import * as React from 'react';
+import { useLocation } from '@reach/router';
+import queryString from 'query-string';
 
 import { Layout, SEO, Tile, InstagramWidget } from '../components';
 import { useGraphQL } from '../hooks';
 
 export default function IndexPage() {
-  const {
-    allShopifyProduct: { nodes: products },
-  } = useGraphQL();
+  const { allShopifyProduct } = useGraphQL();
+
+  const { search } = useLocation();
+
+  const products = search
+    ? allShopifyProduct.nodes.filter(
+        (product) => product.productType === queryString.parse(search).q
+      )
+    : allShopifyProduct.nodes;
 
   return (
     <Layout hasHero>
       <SEO title="Home" />
-      <div className="relative grid max-w-lg gap-y-10 gap-x-12 pb-20 mx-auto lg:grid-cols-3 lg:max-w-none">
+      <h1 className="font-mono text-2xl leading-none text-pink-500 sm:text-4xl">
+        {queryString.parse(search).q || 'All Products'}
+      </h1>
+      <div className="relative grid max-w-lg pb-20 mx-auto mt-6 gap-y-10 gap-x-12 lg:grid-cols-3 lg:max-w-none">
         {products.map((product) => (
           <Tile
             key={product.handle}
