@@ -94,7 +94,10 @@ function SearchBar() {
           </div>
         </div>
         {results && (
-          <ComboboxPopover className="absolute inset-x-0 z-10 mt-16 overflow-hidden text-left bg-white border-t rounded-b-lg shadow-2xl md:border-none md:rounded-t-lg full-bleed md:reset-full-bleed">
+          <ComboboxPopover
+            portal={false}
+            className="absolute inset-x-0 z-10 mt-16 overflow-hidden text-left bg-white border-t rounded-b-lg shadow-2xl md:border-none md:rounded-t-lg full-bleed md:reset-full-bleed"
+          >
             <div className="p-4 shadow-sm">
               <h3 className="px-4 pb-3 font-mono text-2xl text-gray-500">
                 Products

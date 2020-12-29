@@ -60,11 +60,11 @@
     .full-bleed {
       width: 100vw;
       margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
     }
 
     .reset-full-bleed {
-      width: auto;
-      margin-left: 0;
+      @apply w-auto mx-0;
     }
   }
 }
