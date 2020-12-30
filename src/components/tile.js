@@ -7,11 +7,11 @@ import { useGraphQL } from '../hooks';
 import { Spinner } from './spinner';
 
 export function Tile({ title, slug, price, image }) {
-  const { placeholderImage } = useGraphQL();
+  const { ogImage } = useGraphQL();
 
   const imageSrc = image
     ? image.localFile.childImageSharp.gatsbyImageData
-    : placeholderImage.localFile.childImageSharp.gatsbyImageData;
+    : ogImage.localFile.childImageSharp.gatsbyImageData;
 
   const [isLoading, setIsLoading] = React.useState(true);
 

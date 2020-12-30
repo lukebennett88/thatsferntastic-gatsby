@@ -7,7 +7,7 @@
 
 import { graphql, useStaticQuery } from 'gatsby';
 
-export function useGraphQL() {
+function useGraphQL() {
   const data = useStaticQuery(
     graphql`
       {
@@ -21,7 +21,8 @@ export function useGraphQL() {
             twitter
           }
         }
-        placeholderImage: file(relativePath: { eq: "placeholder/shoe.png" }) {
+        ogImage: file(relativePath: { eq: "og-image.png" }) {
+          publicURL
           childImageSharp {
             gatsbyImageData(maxWidth: 600, layout: FLUID)
           }
@@ -72,3 +73,5 @@ export function useGraphQL() {
   );
   return data;
 }
+
+export { useGraphQL };
