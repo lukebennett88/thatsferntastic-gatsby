@@ -5,7 +5,17 @@ import queryString from 'query-string';
 import { Layout, SEO, Tile, InstagramWidget } from '../components';
 import { useGraphQL } from '../hooks';
 
-export default function IndexPage() {
+function IndexPage() {
+  return (
+    <Layout hasHero>
+      <SEO title="Home" />
+      <AllProducts />
+      <InstagramWidget />
+    </Layout>
+  );
+}
+
+function AllProducts() {
   const { allShopifyProduct } = useGraphQL();
 
   const { search } = useLocation();
@@ -17,11 +27,10 @@ export default function IndexPage() {
     : allShopifyProduct.nodes;
 
   return (
-    <Layout hasHero>
-      <SEO title="Home" />
-      <h1 className="text-center heading-1 sm:text-left">
+    <article>
+      <h2 className="text-center heading-1 sm:text-left">
         {queryString.parse(search).q || 'All Products'}
-      </h1>
+      </h2>
       <div className="relative grid pb-20 mx-auto mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
           <Tile
@@ -33,7 +42,8 @@ export default function IndexPage() {
           />
         ))}
       </div>
-      <InstagramWidget />
-    </Layout>
+    </article>
   );
 }
+
+export default IndexPage;

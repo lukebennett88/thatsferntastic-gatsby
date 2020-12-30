@@ -8,7 +8,7 @@ export function InstagramWidget({ postsToShow = 6 }) {
   const posts = useInstagram();
   const { Spinner } = useLazyLoad();
   return (
-    <div className="pb-20 mx-auto">
+    <article className="pb-20">
       <h2 className="text-center heading-1 sm:text-left">
         Recent Instagram Posts
       </h2>
@@ -32,7 +32,7 @@ export function InstagramWidget({ postsToShow = 6 }) {
                 </div>
               ))}
       </div>
-    </div>
+    </article>
   );
 }
 
