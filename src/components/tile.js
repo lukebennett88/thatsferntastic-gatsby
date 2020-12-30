@@ -23,7 +23,6 @@ export function Tile({ title, slug, price, image }) {
     >
       <div className="relative w-full h-0 aspect-w-2 aspect-h-3">
         <article className="absolute inset-0 flex flex-col pb-3 bg-white rounded-lg shadow">
-          {/* Image */}
           <div className="relative h-0 rounded-t-md aspect-w-1 aspect-h-1">
             <img
               ref={imgRef}
@@ -34,15 +33,12 @@ export function Tile({ title, slug, price, image }) {
             />
             {!isImgLoaded && <Spinner />}
           </div>
-          {/* Copy */}
           <div className="flex flex-col justify-center flex-1 px-6 py-3 overflow-hidden">
-            <h3 title={title} className="mt-2 clamp-1">
+            <h3 title={title} className="mt-2 clamp-2">
               {title}
             </h3>
-            <p className="mt-3 text-base leading-6 text-gray-500">
-              <span className="font-bold text-gray-800">
-                ${price.toFixed(2)}
-              </span>
+            <p className="pt-3 mt-auto font-mono text-3xl leading-none text-pink-500">
+              ${price.toFixed(2)}
             </p>
           </div>
         </article>
