@@ -17,6 +17,7 @@ export function Tile({ title, slug, price, image }) {
 
   return (
     <Link
+      aria-label={title}
       to={`/products/${slug}/`}
       className="flex w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg"
     >
