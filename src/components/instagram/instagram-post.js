@@ -6,7 +6,6 @@ import { useLazyLoad } from '../../hooks';
 
 export function InstagramPost({ post }) {
   const { ref, imgRef, isImgLoaded, handleImgLoaded, Spinner } = useLazyLoad();
-  console.table(post);
   return (
     <a
       ref={ref}
