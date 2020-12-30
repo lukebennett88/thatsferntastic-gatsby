@@ -19,6 +19,7 @@ function useGraphQL() {
             instagram
             title
             twitter
+            siteUrl
           }
         }
         ogImage: file(relativePath: { eq: "og-image.png" }) {
