@@ -10,10 +10,9 @@ const cache = {
 function formatData(response) {
   return response.data.user.edge_owner_to_timeline_media.edges.map((edge) => ({
     src: edge.node.thumbnail_src,
-    srcSet: edge.node.thumbnail_resources.map((img) => ({
-      src: img.src,
-      width: img.config_width,
-    })),
+    srcSet: edge.node.thumbnail_resources.map(
+      (img) => `${img.src} ${img.config_width}w`
+    ),
     url: `https://instagram.com/p/${edge.node.shortcode}`,
     caption: edge.node.edge_media_to_caption.edges[0]
       ? edge.node.edge_media_to_caption.edges[0].node.text
