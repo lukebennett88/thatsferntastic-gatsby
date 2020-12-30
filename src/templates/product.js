@@ -36,7 +36,15 @@ function ProductPage({ data: { shopifyProduct: product } }) {
 
   return (
     <Layout hasSidebar={false}>
-      <SEO title={product.title} />
+      <SEO
+        title={product.title}
+        description={product.description}
+        type="product"
+        image={
+          product.images[0]?.localFile.childImageSharp.gatsbyImageData.images
+            .fallback.src
+        }
+      />
       <div className="relative">
         <article className="rounded-lg lg:grid lg:grid-cols-2 lg:gap-8">
           <h1 className="text-xl font-medium text-center lg:hidden">
@@ -149,6 +157,7 @@ export const ProductPageQuery = graphql`
     shopifyProduct(id: { eq: $productId }) {
       id
       title
+      description
       descriptionHtml
       productType
       options {
