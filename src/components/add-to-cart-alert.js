@@ -4,8 +4,9 @@ import { animated, useTransition } from 'react-spring';
 import { FiX } from 'react-icons/fi';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
 
-function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
+function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
   const AnimatedDialogContent = animated(DialogContent);
 
   const transitions = useTransition(isAlertShown, null, {
@@ -32,7 +33,7 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
             >
               <div className="px-4 shadow-sm">
                 <div className="relative py-4">
-                  <h2 className="text-sm font-bold leading-none tracking-wide text-center md:text-lg">
+                  <h2 className="font-mono text-sm leading-none text-center text-pink-500 md:text-lg">
                     Just added to your cart
                   </h2>
                   <div className="absolute inset-y-0 right-0 flex items-center">
@@ -49,38 +50,45 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
                 </div>
                 <div className="py-4 text-center border-t md:text-left md:grid md:gap-4 md:grid-cols-6">
                   <div className="relative hidden h-0 aspect-w-1 aspect-h-1 md:block">
-                    <GatsbyImage
-                      image={
-                        product.variants[0].image.localFile.childImageSharp
-                          .gatsbyImageData
-                      }
-                      className="absolute inset-0 object-contain w-full h-full overflow-hidden transform bg-pink-100 rounded-lg"
-                    />
+                    <div className="absolute inset-0 flex">
+                      <GatsbyImage
+                        image={
+                          product.variants[0].image.localFile.childImageSharp
+                            .gatsbyImageData
+                        }
+                        className="flex-1 rounded-lg"
+                      />
+                    </div>
                   </div>
-                  <div className="max-w-sm col-span-4 mx-auto mt-4 md:mx-0 md:mt-0">
-                    {product.title}
-                  </div>
-                  <div className="mt-4 md:text-right md:mt-0">
-                    Qty: {product.quantity}
+                  <div className="max-w-sm col-span-4 mx-auto mt-4 font-medium md:mx-0 md:mt-0">
+                    <div>{product.title}</div>
+                    <dl className="font-normal text-gray-500">
+                      <dt className="inline">
+                        {variant.selectedOptions[0].name}:{' '}
+                      </dt>
+                      <dd className="inline">
+                        {variant.selectedOptions[0].value}
+                      </dd>
+                    </dl>
                   </div>
                 </div>
-                <div className="flex flex-col items-center text-center">
+                <div className="flex items-center justify-between pb-4 text-center">
+                  <button
+                    type="button"
+                    onClick={close}
+                    className="mt-2 underline focus:text-pink-700"
+                  >
+                    Continue shopping
+                  </button>
                   <span className="duration-150 ease-in-out transform rounded-full shadow-sm hover:-translate-y-px">
                     <Link
                       to="/cart/"
                       onClick={close}
-                      className="inline-flex items-center px-6 py-3 font-mono text-base font-bold leading-6 text-pink-700 lowercase transition duration-150 ease-in-out bg-pink-100 border border-transparent rounded-full shadow-sm hover:bg-pink-50 focus:border-pink-300 focus:ring focus:ring-pink-300 active:bg-pink-200 hover:shadow-lg"
+                      className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg"
                     >
                       View cart
                     </Link>
                   </span>
-                  <button
-                    type="button"
-                    onClick={close}
-                    className="pb-4 mt-2 font-bold underline focus:text-pink-700"
-                  >
-                    Continue shopping
-                  </button>
                 </div>
               </div>
             </AnimatedDialogContent>
@@ -89,5 +97,17 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
       )
   );
 }
+
+AddToCartAlert.propTypes = {
+  isAlertShown: PropTypes.bool.isRequired,
+  product: PropTypes.shape({
+    title: PropTypes.string,
+    variants: PropTypes.array.isRequired,
+  }),
+  setIsAlertShown: PropTypes.func.isRequired,
+  variant: PropTypes.shape({
+    selectedOptions: PropTypes.array.isRequired,
+  }),
+};
 
 export { AddToCartAlert };

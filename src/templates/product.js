@@ -113,6 +113,7 @@ function ProductPage({ data: { shopifyProduct: product } }) {
       </div>
       <AddToCartAlert
         product={product}
+        variant={variant}
         isAlertShown={isAlertShown}
         setIsAlertShown={setIsAlertShown}
       />

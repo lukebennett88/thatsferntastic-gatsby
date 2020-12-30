@@ -89,7 +89,7 @@ function LineItem({ item }) {
   }, [item.variant.id, quantity]);
 
   return (
-    <div className="flex max-w-sm px-4 py-6 pt-4 mx-auto bg-white rounded-lg shadow lg:max-w-none lg:items-center lg:justify-between sm:max-w-none">
+    <div className="flex w-full max-w-sm px-4 py-6 pt-4 mx-auto bg-white rounded-lg shadow lg:max-w-none lg:items-center lg:justify-between sm:max-w-none">
       <div className="flex flex-wrap w-full space-y-4 sm:space-y-0 sm:space-x-4 lg:items-center">
         <div className="w-full sm:w-36 lg:w-48">
           <div className="relative h-0 aspect-w-1 aspect-h-1">

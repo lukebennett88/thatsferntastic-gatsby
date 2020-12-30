@@ -9,7 +9,9 @@ export function InstagramWidget({ postsToShow = 6 }) {
   const { Spinner } = useLazyLoad();
   return (
     <div className="pb-20 mx-auto">
-      <h2 className="heading-1">Recent Instagram Posts</h2>
+      <h2 className="text-center heading-1 sm:text-left">
+        Recent Instagram Posts
+      </h2>
       <div className="grid mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
         {posts.length
           ? posts

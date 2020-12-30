@@ -19,13 +19,13 @@ export default function IndexPage() {
   return (
     <Layout hasHero>
       <SEO title="Home" />
-      <h1 className="heading-1">
+      <h1 className="text-center heading-1 sm:text-left">
         {queryString.parse(search).q || 'All Products'}
       </h1>
       <div className="relative grid pb-20 mx-auto mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
           <Tile
-            key={product.handle}
+            key={product.id}
             slug={product.handle}
             title={product.title}
             price={Number(product.priceRange.minVariantPrice.amount)}

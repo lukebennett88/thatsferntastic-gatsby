@@ -54,8 +54,6 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
 
   const { pathname, search } = useLocation();
 
-  console.log(pathname === '/' && search === '');
-
   return (
     <Transition show={isMenuOpen} className="md:hidden">
       <DialogOverlay onDismiss={close} className="fixed inset-0 z-40 flex">
