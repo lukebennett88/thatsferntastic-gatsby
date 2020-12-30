@@ -14,7 +14,7 @@ export function Cart() {
   const count = useCartCount();
   const checkout = useCheckoutUrl();
   return (
-    <div className="relative pt-16 pb-20">
+    <div className="relative pb-20">
       <h1 className="heading-1">Cart</h1>
       <div className="mt-3 sm:mt-4">
         {lineItems.map((item) => (
