@@ -12,6 +12,7 @@ export const Thumbnail = ({ src, onClick }) => {
       >
         <GatsbyImage
           image={src.localFile.childImageSharp.gatsbyImageData}
+          alt=""
           className="flex-1"
         />
       </button>

@@ -96,6 +96,7 @@ function LineItem({ item }) {
             <div className="absolute inset-0 flex bg-white">
               <GatsbyImage
                 image={getImageFluidForVariant(item.variant.id)}
+                alt=""
                 className="flex-1 rounded-lg"
               />
             </div>

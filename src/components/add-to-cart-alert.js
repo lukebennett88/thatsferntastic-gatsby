@@ -56,6 +56,7 @@ function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
                           product.variants[0].image.localFile.childImageSharp
                             .gatsbyImageData
                         }
+                        alt=""
                         className="flex-1 rounded-lg"
                       />
                     </div>

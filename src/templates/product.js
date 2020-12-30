@@ -49,6 +49,7 @@ function ProductPage({ data: { shopifyProduct: product } }) {
                       product.images[activeImageIndex].localFile.childImageSharp
                         .gatsbyImageData
                     }
+                    alt=""
                     className="flex-1 duration-500 ease-in-out transform hover:scale-110"
                   />
                 </div>
