@@ -81,13 +81,14 @@ function LineItem({ item }) {
     setQuantity((prev) => prev + 1);
   }
 
-  // React.useEffect(() => {
-  //   if (quantity <= 0) {
-  //     removeFromCart(item.variant.id);
-  //     return;
-  //   }
-  //   updateQuantity(item.variant.id, quantity);
-  // }, [item.variant.id, quantity, removeFromCart, updateQuantity]);
+  React.useEffect(() => {
+    if (quantity <= 0) {
+      removeFromCart(item.variant.id);
+      return;
+    }
+    updateQuantity(item.variant.id, quantity);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item.variant.id, quantity]);
 
   return (
     <div className="flex max-w-sm px-4 py-6 pt-4 bg-white rounded-lg shadow lg:max-w-none lg:items-center lg:justify-between">
