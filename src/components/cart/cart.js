@@ -17,14 +17,16 @@ export function Cart() {
     <div className="relative pb-20">
       <h1 className="heading-1">Cart</h1>
       <div className="mt-3 sm:mt-4">
-        {lineItems.map((item) => (
-          <React.Fragment key={item.id}>
-            <LineItem key={item.id} item={item} />
-            <hr className="my-4" />
-          </React.Fragment>
-        ))}
+        {count
+          ? lineItems.map((item) => (
+              <React.Fragment key={item.id}>
+                <LineItem key={item.id} item={item} />
+                <hr className="my-4" />
+              </React.Fragment>
+            ))
+          : 'Nothing to see here, your cart is empty!'}
         <div className="flex">
-          <div className="w-full px-4 py-6 mx-auto bg-gray-100 rounded-lg shadow md:max-w-xs md:mr-0">
+          <div className="w-full px-4 py-6 mx-auto bg-white rounded-lg shadow md:max-w-xs md:mr-0">
             <h3 className="text-lg font-medium leading-6 text-gray-900">
               Cart Summary
             </h3>
@@ -41,8 +43,11 @@ export function Cart() {
             </dl>
             <div className="mt-6">
               <a
-                href={checkout}
-                className="flex items-center justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-lg hover:bg-gray-800"
+                aria-hidden={!count}
+                href={count ? checkout : null}
+                className={`inline-flex items-center justify-center w-full px-6 py-3 font-mono text-base font-medium text-center text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg ${
+                  !count ? 'cursor-not-allowed opacity-75' : ''
+                }`}
               >
                 Checkout
               </a>
