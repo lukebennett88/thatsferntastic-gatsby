@@ -22,7 +22,7 @@ export default function IndexPage() {
       <h1 className="heading-1">
         {queryString.parse(search).q || 'All Products'}
       </h1>
-      <div className="relative grid max-w-lg pb-20 mx-auto mt-6 gap-y-10 gap-x-12 lg:grid-cols-3 lg:max-w-none">
+      <div className="relative grid pb-20 mx-auto mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
           <Tile
             key={product.handle}
