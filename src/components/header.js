@@ -116,7 +116,7 @@ const Header = ({ setMenuOpen }) => {
           <div className="px-4 pt-12 pb-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="text-center text-gray-900">
               <h1 className="font-mono text-2xl leading-none sm:text-6xl">
-                <Link to="/" className=" focus:underline">
+                <Link to="/" className="focus:underline focus:ring-0">
                   {title}
                 </Link>
               </h1>
