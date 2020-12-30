@@ -99,7 +99,7 @@ const Header = ({ setMenuOpen }) => {
                         <span
                           className={`${
                             count >= 10 ? 'px-2' : 'w-5'
-                          } flex items-center justify-center h-5 max-w-xs pt-1 font-mono text-xs font-bold text-white transform translate-x-1/2 bg-gray-900 rounded-full shadow-lg pointer-events-auto `}
+                          } flex items-center justify-center h-5 max-w-xs pt-1 font-mono text-xs text-white transform translate-x-1/2 bg-pink-600 rounded-full shadow-lg pointer-events-auto `}
                         >
                           {count}
                         </span>
