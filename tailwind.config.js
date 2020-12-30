@@ -4,11 +4,15 @@ const forms = require('@tailwindcss/forms');
 const typography = require('@tailwindcss/typography');
 const aspectRatio = require('@tailwindcss/aspect-ratio');
 const lineClamp = require('tailwindcss-line-clamp');
+const tailwindFilters = require('tailwindcss-filters');
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    backdropFilter: {
+      blur: `blur(${defaultTheme.spacing[1]})`,
+    },
     lineClamp: {
       1: 1,
       2: 2,
@@ -67,5 +71,5 @@ module.exports = {
       opacity: ['group-hover'],
     },
   },
-  plugins: [aspectRatio, forms, lineClamp, typography],
+  plugins: [aspectRatio, forms, lineClamp, typography, tailwindFilters],
 };

@@ -1,37 +1,41 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
-import { useGraphQL, useLazyLoad } from '../hooks';
-import { resizeShopifyImage } from '../utils';
+import { useGraphQL } from '../hooks';
+import { Spinner } from './spinner';
 
 export function Tile({ title, slug, price, image }) {
   const { placeholderImage } = useGraphQL();
 
   const imageSrc = image
-    ? image.originalSrc &&
-      resizeShopifyImage({ url: image.originalSrc, width: 384 })
-    : placeholderImage.publicURL;
+    ? image.localFile.childImageSharp.gatsbyImageData
+    : placeholderImage.localFile.childImageSharp.gatsbyImageData;
 
-  const { ref, imgRef, isImgLoaded, handleImgLoaded, Spinner } = useLazyLoad();
+  const [isLoading, setIsLoading] = React.useState(true);
 
   return (
     <Link
-      to={`/products/${slug}`}
-      ref={ref}
-      className="w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg"
+      to={`/products/${slug}/`}
+      className="flex w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg"
     >
-      <div className="relative w-full h-0 aspect-w-2 aspect-h-3">
-        <article className="absolute inset-0 flex flex-col pb-3 bg-white rounded-lg shadow">
+      <div className="relative flex flex-1 w-full">
+        <article className="flex flex-col w-full pb-3 bg-white rounded-lg shadow">
           <div className="relative h-0 rounded-t-md aspect-w-1 aspect-h-1">
-            <img
-              ref={imgRef}
-              onLoad={handleImgLoaded}
-              data-src={imageSrc}
-              alt=""
-              className="absolute inset-0 object-contain w-full h-full overflow-hidden rounded-t-lg"
-            />
-            {!isImgLoaded && <Spinner />}
+            <div className="absolute inset-0 flex">
+              <GatsbyImage
+                onLoad={() => setIsLoading(false)}
+                image={imageSrc}
+                alt=""
+                className="flex-1 rounded-t-lg"
+              />
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 backdrop-blur">
+                  <Spinner />
+                </div>
+              )}
+            </div>
           </div>
           <div className="flex flex-col justify-center flex-1 px-6 py-3 overflow-hidden">
             <h3 title={title} className="mt-2 clamp-2">

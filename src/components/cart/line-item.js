@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link, useStaticQuery, graphql } from 'gatsby';
-import GatsbyImage from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import {
   useRemoveItemFromCart,
   useUpdateItemQuantity,
@@ -13,16 +13,14 @@ function LineItem({ item }) {
     allShopifyProductVariant: { nodes: variants },
     allShopifyProduct: { nodes: products },
   } = useStaticQuery(graphql`
-    query {
+    {
       allShopifyProductVariant {
         nodes {
           shopifyId
           image {
             localFile {
               childImageSharp {
-                fluid(maxWidth: 630) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+                gatsbyImageData(maxWidth: 630, layout: FLUID)
               }
             }
           }
@@ -64,7 +62,7 @@ function LineItem({ item }) {
     });
 
     if (selectedVariant) {
-      return selectedVariant.image.localFile.childImageSharp.fluid;
+      return selectedVariant.image.localFile.childImageSharp.gatsbyImageData;
     }
     return null;
   }
@@ -91,17 +89,19 @@ function LineItem({ item }) {
   }, [item.variant.id, quantity]);
 
   return (
-    <div className="flex max-w-sm px-4 py-6 pt-4 bg-white rounded-lg shadow lg:max-w-none lg:items-center lg:justify-between">
-      <div className="flex flex-col w-full lg:flex-row lg:items-center">
-        <div className="relative w-full h-0 lg:h-auto lg:w-48 aspect-w-1 aspect-h-1 lg:aspect-none">
-          <div className="absolute inset-0 flex bg-white">
-            <GatsbyImage
-              fluid={getImageFluidForVariant(item.variant.id)}
-              className="flex-1 rounded-lg"
-            />
+    <div className="flex max-w-sm px-4 py-6 pt-4 mx-auto bg-white rounded-lg shadow lg:max-w-none lg:items-center lg:justify-between sm:max-w-none">
+      <div className="flex flex-wrap w-full space-y-4 sm:space-y-0 sm:space-x-4 lg:items-center">
+        <div className="w-full sm:w-36 lg:w-48">
+          <div className="relative h-0 aspect-w-1 aspect-h-1">
+            <div className="absolute inset-0 flex bg-white">
+              <GatsbyImage
+                image={getImageFluidForVariant(item.variant.id)}
+                className="flex-1 rounded-lg"
+              />
+            </div>
           </div>
         </div>
-        <div className="flex flex-col flex-1 lg:ml-4">
+        <div className="flex flex-col flex-1">
           <Link
             to={`/products/${getHandleForVariant(item.variant.id)}`}
             className="text-lg font-medium transition duration-150 ease-in-out hover:text-gray-600"

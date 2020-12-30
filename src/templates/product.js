@@ -1,5 +1,5 @@
 import * as React from 'react';
-import GatsbyImage from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { graphql } from 'gatsby';
 import { useAddItemToCart } from 'gatsby-theme-shopify-manager';
 import PropTypes from 'prop-types';
@@ -45,9 +45,9 @@ function ProductPage({ data: { shopifyProduct: product } }) {
               <div className="relative bg-gray-300 aspect-w-1 aspect-h-1">
                 <div className="absolute inset-0 flex">
                   <GatsbyImage
-                    fluid={
+                    image={
                       product.images[activeImageIndex].localFile.childImageSharp
-                        .fluid
+                        .gatsbyImageData
                     }
                     className="flex-1 duration-500 ease-in-out transform hover:scale-110"
                   />
@@ -144,9 +144,7 @@ export const ProductPageQuery = graphql`
         image {
           localFile {
             childImageSharp {
-              fluid(maxWidth: 600, quality: 100) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
+              gatsbyImageData(maxWidth: 600, quality: 100, layout: FLUID)
             }
           }
         }
@@ -158,9 +156,7 @@ export const ProductPageQuery = graphql`
       images {
         localFile {
           childImageSharp {
-            fluid(maxWidth: 600, quality: 100) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+            gatsbyImageData(maxWidth: 600, quality: 100, layout: FLUID)
           }
         }
       }

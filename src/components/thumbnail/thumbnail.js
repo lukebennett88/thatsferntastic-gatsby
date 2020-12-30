@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Image from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 
 export const Thumbnail = ({ src, onClick }) => {
@@ -10,7 +10,10 @@ export const Thumbnail = ({ src, onClick }) => {
         type="button"
         className="absolute inset-0 flex p-1 overflow-hidden rounded-lg"
       >
-        <Image fluid={src.localFile.childImageSharp.fluid} className="flex-1" />
+        <GatsbyImage
+          image={src.localFile.childImageSharp.gatsbyImageData}
+          className="flex-1"
+        />
       </button>
     </div>
   );

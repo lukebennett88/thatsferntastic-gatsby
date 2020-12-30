@@ -7,7 +7,7 @@ import tailwindConfig from '../../tailwind.config.js';
 
 const fullConfig = resolveConfig(tailwindConfig);
 
-export function Spinner({ color = fullConfig.theme.colors.teal['400'] }) {
+export function Spinner({ color = fullConfig.theme.colors.cyan['600'] }) {
   return (
     <ReactSVGSpinner size="2em" color={color} thickness={3} speed="slow" />
   );

@@ -23,9 +23,7 @@ export function useGraphQL() {
         }
         placeholderImage: file(relativePath: { eq: "placeholder/shoe.png" }) {
           childImageSharp {
-            fluid(maxWidth: 600) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+            gatsbyImageData(maxWidth: 600, layout: FLUID)
           }
         }
         allShopifyProductVariant {
@@ -44,10 +42,15 @@ export function useGraphQL() {
           }
         ) {
           nodes {
+            id
             description
             handle
             images {
-              originalSrc
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(maxWidth: 600, layout: FLUID)
+                }
+              }
             }
             priceRange {
               minVariantPrice {

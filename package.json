@@ -17,6 +17,7 @@
     "dotenv": "^8.2.0",
     "gatsby": "^2.29.2",
     "gatsby-image": "^2.8.0",
+    "gatsby-plugin-image": "^0.4.1",
     "gatsby-plugin-manifest": "^2.9.1",
     "gatsby-plugin-postcss": "^3.4.0",
     "gatsby-plugin-react-helmet": "^3.7.0",
@@ -40,6 +41,7 @@
     "react-svg-spinner": "^1.0.4",
     "shopify-buy": "^2.11.0",
     "tailwindcss": "^2.0.2",
+    "tailwindcss-filters": "^3.0.0",
     "tailwindcss-line-clamp": "^1.0.5",
     "typeface-courier-prime": "^1.1.13",
     "typeface-montserrat": "^1.1.13"

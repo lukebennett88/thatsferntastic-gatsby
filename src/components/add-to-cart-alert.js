@@ -1,5 +1,5 @@
 import * as React from 'react';
-import GatsbyImage from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { animated, useTransition } from 'react-spring';
 import { FiX } from 'react-icons/fi';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
@@ -50,9 +50,9 @@ function AddToCartAlert({ product, isAlertShown, setIsAlertShown }) {
                 <div className="py-4 text-center border-t md:text-left md:grid md:gap-4 md:grid-cols-6">
                   <div className="relative hidden h-0 aspect-w-1 aspect-h-1 md:block">
                     <GatsbyImage
-                      fluid={
+                      image={
                         product.variants[0].image.localFile.childImageSharp
-                          .fluid
+                          .gatsbyImageData
                       }
                       className="absolute inset-0 object-contain w-full h-full overflow-hidden transform bg-pink-100 rounded-lg"
                     />
