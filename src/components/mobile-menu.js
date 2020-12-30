@@ -2,6 +2,7 @@ import * as React from 'react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import { Transition } from '@headlessui/react';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
+import { useLocation } from '@reach/router';
 import PropTypes from 'prop-types';
 
 import { useEventListener, useGraphQL } from '../hooks';
@@ -50,6 +51,10 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
     'bg-yellow-200 group-hover:bg-yellow-300 group-focus:bg-yellow-400',
     'bg-cyan-200 group-hover:bg-cyan-300 group-focus:bg-cyan-400',
   ];
+
+  const { pathname, search } = useLocation();
+
+  console.log(pathname === '/' && search === '');
 
   return (
     <Transition show={isMenuOpen} className="md:hidden">
@@ -100,7 +105,7 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
           </div>
           <Link
             to="/"
-            className="flex items-center justify-center h-16 px-4 font-mono text-2xl text-center bg-teal-200 focus:underline"
+            className="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
           >
             {title}
           </Link>
@@ -109,8 +114,11 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
               <Link
                 to="/"
                 onClick={close}
-                activeClassName="text-gray-900 bg-gray-100 hover:bg-gray-100 focus:bg-gray-200"
-                className="relative flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg focus:z-10 group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
+                className={`relative flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg focus:z-10 group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100 ${
+                  pathname === '/' && search === ''
+                    ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 focus:bg-gray-200'
+                    : ''
+                }`}
               >
                 <span
                   aria-hidden
@@ -118,27 +126,33 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
                 />
                 All Products
               </Link>
-              {types.map((type, index) => (
-                <Link
-                  key={type}
-                  to={`/?q=${type.split(' ').join('+')}`}
-                  onClick={close}
-                  activeClassName="text-gray-900 bg-gray-100 hover:bg-gray-100 focus:bg-gray-200"
-                  className="relative flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg focus:z-10 group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
-                >
-                  <span
-                    aria-hidden
-                    className={`inline-block transition duration-150 ease-in-out rounded-full w-5 h-5 mr-3 group-focus:text-gray-600 ${
-                      colours[
-                        index + 1 > colours.length
-                          ? index - colours.length
-                          : index
-                      ]
+              {types.map((type, index) => {
+                const to = `?q=${type.split(' ').join('+')}`;
+                return (
+                  <Link
+                    key={type}
+                    to={`/${to}`}
+                    onClick={close}
+                    className={`flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100 ${
+                      search === to
+                        ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 focus:bg-gray-200'
+                        : ''
                     }`}
-                  />
-                  {type}
-                </Link>
-              ))}
+                  >
+                    <span
+                      aria-hidden
+                      className={`inline-block transition duration-150 ease-in-out rounded-full w-5 h-5 mr-3 group-focus:text-gray-600 ${
+                        colours[
+                          index + 1 > colours.length
+                            ? index - colours.length
+                            : index
+                        ]
+                      }`}
+                    />
+                    {type}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         </Transition.Child>
