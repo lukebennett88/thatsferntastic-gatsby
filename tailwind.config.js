@@ -11,7 +11,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     backdropFilter: {
-      blur: `blur(${defaultTheme.spacing[1]})`,
+      blur: `blur(${defaultTheme.spacing[2]})`,
     },
     lineClamp: {
       1: 1,
