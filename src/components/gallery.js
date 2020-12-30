@@ -6,8 +6,8 @@ import { Thumbnail } from './thumbnail';
 function Gallery({ images, setActiveImage }) {
   if (images.length > 1)
     return (
-      <div className="overflow-hidden">
-        <div className="grid grid-flow-col p-1 overflow-x-auto gap-x-4 gallery">
+      <div className="-ml-4 overflow-hidden">
+        <div className="flex overflow-x-auto">
           {images.map((src, index) => (
             <Thumbnail
               key={index}

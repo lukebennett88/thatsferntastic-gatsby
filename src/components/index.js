@@ -4,5 +4,6 @@ export * from './instagram';
 export * from './layout';
 export * from './option-picker';
 export * from './seo';
+export * from './spinner';
 export * from './thumbnail';
 export * from './tile';

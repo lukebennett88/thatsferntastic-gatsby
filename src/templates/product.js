@@ -10,12 +10,14 @@ import {
   Gallery,
   AddToCartAlert,
   OptionPicker,
+  Spinner,
 } from '../components';
 import { prepareVariantsWithOptions } from '../utils';
 
 function ProductPage({ data: { shopifyProduct: product } }) {
   const addItemToCart = useAddItemToCart();
   const [isAlertShown, setIsAlertShown] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [activeImageIndex, setActiveImageIndex] = React.useState(0);
   const variants = React.useMemo(
     () => prepareVariantsWithOptions(product.variants),
@@ -36,15 +38,26 @@ function ProductPage({ data: { shopifyProduct: product } }) {
     <Layout hasSidebar={false}>
       <SEO title={product.title} />
       <div className="relative">
-        <article className="rounded-lg md:grid md:grid-cols-2 md:gap-8">
-          <h1 className="mt-6 text-lg font-bold leading-tight md:hidden">
+        <article className="rounded-lg lg:grid lg:grid-cols-2 lg:gap-8">
+          <h1 className="text-xl font-medium text-center lg:hidden">
             {product.title}
           </h1>
-          <div className="flex flex-col w-full max-w-md mx-auto space-y-4">
+
+          {Number(variant?.priceV2?.amount) > 0 && (
+            <dl className="mt-4 text-center lg:hidden">
+              <dt className="sr-only">Price:</dt>
+              <dd className="heading-1">
+                ${Number(variant.priceV2.amount).toFixed(2)}{' '}
+              </dd>
+            </dl>
+          )}
+
+          <div className="flex flex-col w-full mx-auto mt-6 space-y-4 lg:mt-0 max-w-prose">
             <div className="overflow-hidden rounded-lg">
               <div className="relative bg-gray-300 aspect-w-1 aspect-h-1">
                 <div className="absolute inset-0 flex">
                   <GatsbyImage
+                    onLoad={() => setIsLoading(false)}
                     image={
                       product.images[activeImageIndex].localFile.childImageSharp
                         .gatsbyImageData
@@ -53,6 +66,11 @@ function ProductPage({ data: { shopifyProduct: product } }) {
                     className="flex-1 duration-500 ease-in-out transform hover:scale-110"
                   />
                 </div>
+                {isLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 backdrop-blur">
+                    <Spinner />
+                  </div>
+                )}
               </div>
             </div>
             <Gallery
@@ -61,12 +79,12 @@ function ProductPage({ data: { shopifyProduct: product } }) {
             />
           </div>
           <div className="flex flex-col space-y-4">
-            <h1 className="hidden text-lg font-bold leading-tight md:block">
+            <h1 className="hidden text-lg font-bold leading-tight lg:block">
               {product.title}
             </h1>
 
             {Number(variant?.priceV2?.amount) > 0 && (
-              <dl className="mt-4">
+              <dl className="hidden mt-4 lg:block">
                 <dt className="sr-only">Price:</dt>
                 <dd className="font-bold">
                   ${Number(variant.priceV2.amount).toFixed(2)}{' '}
