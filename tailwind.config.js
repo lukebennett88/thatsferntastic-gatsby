@@ -59,7 +59,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        mono: ['Courier Prime', ...defaultTheme.fontFamily.mono],
+        mono: ['Courier Prime', 'Courier New', ...defaultTheme.fontFamily.mono],
         sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
       },
     },
