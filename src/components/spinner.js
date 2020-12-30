@@ -1,18 +1,34 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
-import ReactSVGSpinner from 'react-svg-spinner';
-import resolveConfig from 'tailwindcss/resolveConfig';
+import { useId } from '@reach/auto-id';
 
-import tailwindConfig from '../../tailwind.config.js';
-
-const fullConfig = resolveConfig(tailwindConfig);
-
-export function Spinner({ color = fullConfig.theme.colors.cyan['600'] }) {
+function Spinner() {
+  const id = useId();
+  const title = `title-${id}`;
+  const desc = `desc-${id}`;
   return (
-    <ReactSVGSpinner size="2em" color={color} thickness={3} speed="slow" />
+    <svg
+      height="1em"
+      width="1em"
+      className="w-7 h-7 text-cyan-600 animate-spin"
+      role="img"
+      aria-labelledby={`${title} ${desc}`}
+      viewBox="0 0 32 32"
+    >
+      <title id={title}>Circle loading spinner</title>
+      <desc id={desc}>Image of a partial circle indicating "loading."</desc>
+      <circle
+        role="presentation"
+        cx={16}
+        cy={16}
+        r={12}
+        stroke="currentColor"
+        fill="none"
+        strokeWidth={4}
+        strokeDasharray="45"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
 
-Spinner.propTypes = {
-  color: PropTypes.string,
-};
+export { Spinner };

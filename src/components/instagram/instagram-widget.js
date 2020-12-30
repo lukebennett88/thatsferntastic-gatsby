@@ -22,10 +22,10 @@ export function InstagramWidget({ postsToShow = 6 }) {
               .map((_, index) => (
                 <div
                   key={index}
-                  className="w-full max-w-sm mx-auto rounded-lg shadow"
+                  className="w-full max-w-sm mx-auto overflow-hidden rounded-lg shadow"
                 >
                   <div className="relative w-full h-0 aspect-w-1 aspect-h-1">
-                    <div className="absolute inset-0 overflow-hidden rounded">
+                    <div className="absolute inset-0">
                       <Spinner />
                     </div>
                   </div>

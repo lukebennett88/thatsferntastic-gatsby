@@ -5,7 +5,7 @@ import { Spinner } from '../components/spinner';
 
 function LoadingSpinner() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-gray-50">
+    <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-white">
       <Spinner />
     </div>
   );

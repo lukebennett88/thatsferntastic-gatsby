@@ -1552,7 +1552,7 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@reach/auto-id@0.12.1":
+"@reach/auto-id@0.12.1", "@reach/auto-id@^0.12.1":
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/@reach/auto-id/-/auto-id-0.12.1.tgz#2e4a7250d2067ec16a9b4ea732695bc75572405c"
   integrity sha512-s8cdY6dF0hEBB/28BbidB2EX6JfEBVIWLP6S2Jg0Xqq2H3xijL+zrsjL40jACwXRkignjuP+CvYsuFuO0+/GRA==
@@ -11566,23 +11566,6 @@ react-style-singleton@^2.1.0:
     get-nonce "^1.0.0"
     invariant "^2.2.4"
     tslib "^1.0.0"
-
-react-svg-spinner@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-svg-spinner/-/react-svg-spinner-1.0.4.tgz#32427f8987b3393cfd91c14f9b3751a67ec35546"
-  integrity sha512-lpOdpptU5sutxdToI5vffuWAqQDatfz1cbWa1ThEmX5fonmdH8UgoM/iAb6ToKf6iv0z+X4jZxSqDar5EtcEjQ==
-  dependencies:
-    prop-types "^15.7.2"
-    react "^16.0.0"
-
-react@^16.0.0:
-  version "16.14.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
-  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
 
 react@^17.0.1:
   version "17.0.1"
