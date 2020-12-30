@@ -1,21 +1,22 @@
 const dotenv = require('dotenv');
-const resolveConfig = require('tailwindcss/resolveConfig');
-const tailwindConfig = require('./tailwind.config.js');
-
-const fullConfig = resolveConfig(tailwindConfig);
 
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+// Declare variables so these values can be reused
+const title = '@thatsferntastic';
+const siteUrl = 'https://www.thatsferntastic.com.au';
+
 module.exports = {
   siteMetadata: {
-    title: '@thatsferntastic',
+    title,
     description: 'Handmade pouches, pencil cases and accessories.',
     author: '@thatsferntastic',
     facebook: 'https://www.facebook.com/thatsferntastic/',
     instagram: 'https://www.instagram.com/thatsferntastic/',
     twitter: 'https://www.twitter.com/thatsferntastic/',
+    siteUrl,
   },
   flags: {
     DEV_SSR: true,
@@ -29,15 +30,17 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-image',
+    'gatsby-plugin-netlify',
     'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-robots-txt',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-sitemap',
     'gatsby-transformer-sharp',
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        name: 'images',
-        path: 'src/images',
+        siteUrl,
       },
     },
     {
@@ -46,10 +49,15 @@ module.exports = {
         name: 'Thats Ferntastic',
         short_name: 'Ferntastic',
         start_url: '/',
-        background_color: fullConfig.theme.colors.indigo['600'],
-        theme_color: fullConfig.theme.colors.indigo['600'],
         display: 'minimal-ui',
-        icon: 'src/images/icon.png', // This path is relative to the root of the site.
+        icon: 'src/images/favicon.png', // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: 'src/images',
       },
     },
     {
