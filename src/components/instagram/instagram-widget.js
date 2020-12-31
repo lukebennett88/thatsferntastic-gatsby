@@ -40,8 +40,8 @@ function Posts({ postsToShow }) {
                 key={index}
                 className="w-full max-w-sm mx-auto overflow-hidden rounded-lg shadow"
               >
-                <div className="relative w-full h-0 aspect-w-1 aspect-h-1">
-                  <div className="absolute inset-0">
+                <div className="relative w-full h-0 bg-white aspect-w-1 aspect-h-1">
+                  <div className="absolute inset-0 flex items-center justify-center">
                     <Spinner />
                   </div>
                 </div>
