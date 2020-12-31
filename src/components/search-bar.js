@@ -8,9 +8,9 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 import { useGraphQL, useThrottle } from '../hooks';
-import { resizeShopifyImage } from '../utils';
 
 function useProductMatch(products, term) {
   const throttledTerm = useThrottle(term, 100);
@@ -93,19 +93,15 @@ function SearchBar() {
                       to={`/products/${result.handle}`}
                       className="relative flex items-center px-4 py-2 transition duration-150 ease-in-out rounded-lg hover:bg-pink-100 focus:bg-pink-100 focus:z-10"
                     >
-                      <img
-                        src={
-                          result.images[0]
-                            ? resizeShopifyImage({
-                                url: result.images[0].originalSrc,
-                                width: 44,
-                              })
-                            : ''
+                      <GatsbyImage
+                        image={
+                          result.images[0]?.localFile.childImageSharp
+                            .gatsbyImageData
                         }
                         alt=""
                         width={44}
                         height={44}
-                        className="object-contain bg-white h-11 w-11"
+                        className="object-contain bg-white rounded h-11 w-11"
                       />
                       <span className="ml-2">{result.title}</span>
                     </Link>
