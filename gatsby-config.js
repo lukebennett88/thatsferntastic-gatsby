@@ -5,7 +5,6 @@ dotenv.config({
 });
 
 // Declare variables so these values can be reused
-const title = '@thatsferntastic';
 const siteUrl = 'https://www.thatsferntastic.com.au';
 
 // Check what node environment is running for Sanity plugin
@@ -13,12 +12,6 @@ const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   siteMetadata: {
-    title,
-    description: 'Handmade pouches, pencil cases and accessories.',
-    author: '@thatsferntastic',
-    facebook: 'https://www.facebook.com/thatsferntastic/',
-    instagram: 'https://www.instagram.com/thatsferntastic/',
-    twitter: 'https://www.twitter.com/thatsferntastic/',
     siteUrl,
   },
   flags: {
