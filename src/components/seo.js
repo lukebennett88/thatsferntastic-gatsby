@@ -27,11 +27,19 @@ function SEO({
   const metaDescription = description || sanitySiteSettings.description;
   const metaType = type || 'website';
   const metaUrl = `${sanitySiteSettings.siteUrl}${pathname}`;
-  const metaImage = image?.startsWith('https://')
-    ? image
-    : `${sanitySiteSettings.siteUrl}${
-        image || sanitySiteSettings.shareImage.asset.url
-      }`;
+
+  let metaImage;
+  // if an image is passed to the SEO component and it's on a separate domain, link to directly
+  if (image && image.startsWith('https://')) metaImage = image;
+
+  // if an image is passed to the SEO component and it's on our domain (e.g. it's an absolute path) prefix it with our domain
+  if (image && !image.startsWith('https://'))
+    metaImage = `${sanitySiteSettings.siteUrl}${
+      image || sanitySiteSettings.shareImage.asset.url
+    }`;
+
+  // if no image is passed, use the image from Sanity CDN
+  if (!image) metaImage = sanitySiteSettings.shareImage.asset.url;
 
   return (
     <Helmet
