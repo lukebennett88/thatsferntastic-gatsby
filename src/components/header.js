@@ -10,11 +10,7 @@ import { SearchBar } from './search-bar';
 
 const Header = ({ setMenuOpen }) => {
   const count = useCartCount();
-  const {
-    site: {
-      siteMetadata: { title, description },
-    },
-  } = useGraphQL();
+  const { sanitySiteSettings } = useGraphQL();
 
   function toggleMenu() {
     setMenuOpen((prevState) => !prevState);
@@ -117,11 +113,11 @@ const Header = ({ setMenuOpen }) => {
             <div className="text-center text-gray-900">
               <h1 className="font-mono text-2xl leading-none sm:text-6xl">
                 <Link to="/" className="focus:underline focus:ring-0">
-                  {title}
+                  {sanitySiteSettings.title}
                 </Link>
               </h1>
               <p className="mt-1 leading-tight lowercase sm:text-xl">
-                {description}
+                {sanitySiteSettings.description}
               </p>
             </div>
           </div>

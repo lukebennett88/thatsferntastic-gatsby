@@ -11,15 +11,19 @@ function useGraphQL() {
   const data = useStaticQuery(
     graphql`
       {
-        site {
-          siteMetadata {
-            author
-            description
-            facebook
-            instagram
-            title
-            twitter
-            siteUrl
+        sanitySiteSettings {
+          title
+          description
+          siteUrl
+          shareImage {
+            asset {
+              url
+            }
+          }
+          socialLinks {
+            _key
+            socialNetwork
+            link
           }
         }
         ogImage: file(relativePath: { eq: "og-image.png" }) {

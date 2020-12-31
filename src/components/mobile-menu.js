@@ -21,11 +21,7 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
     target: isBrowser ? document : null,
   });
 
-  const {
-    site: {
-      siteMetadata: { title },
-    },
-  } = useGraphQL();
+  const { sanitySiteSettings } = useGraphQL();
 
   const { allShopifyProduct } = useStaticQuery(graphql`
     {
@@ -105,7 +101,7 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
             to="/"
             className="flex items-center px-2 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-md group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
           >
-            {title}
+            {sanitySiteSettings.title}
           </Link>
           <div className="flex-1 h-0 overflow-y-auto">
             <nav className="px-2 mt-5">

@@ -20,17 +20,16 @@ function SEO({
   meta = [],
   title,
 }) {
-  const {
-    site: { siteMetadata },
-    ogImage,
-  } = useGraphQL();
+  const { sanitySiteSettings } = useGraphQL();
 
   const { pathname } = useLocation();
 
-  const metaDescription = description || siteMetadata.description;
+  const metaDescription = description || sanitySiteSettings.description;
   const metaType = type || 'website';
-  const metaUrl = `${siteMetadata.siteUrl}${pathname}`;
-  const metaImage = `${siteMetadata.siteUrl}${image || ogImage.publicURL}`;
+  const metaUrl = `${sanitySiteSettings.siteUrl}${pathname}`;
+  const metaImage = `${sanitySiteSettings.siteUrl}${
+    image || sanitySiteSettings.shareImage.asset.url
+  }`;
 
   return (
     <Helmet
@@ -38,7 +37,7 @@ function SEO({
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${siteMetadata.title}`}
+      titleTemplate={`%s | ${sanitySiteSettings.title}`}
       meta={[
         {
           name: 'description',
@@ -70,7 +69,7 @@ function SEO({
         },
         {
           name: 'twitter:creator',
-          content: siteMetadata.author,
+          content: sanitySiteSettings.author,
         },
         {
           name: 'twitter:title',
