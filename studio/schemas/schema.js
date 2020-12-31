@@ -6,6 +6,7 @@ import createSchema from 'part:@sanity/base/schema-creator';
 import schemaTypes from 'all:part:@sanity/base/schema-type';
 
 // We import object and document schemas
+import page from './page';
 import siteSettings from './siteSettings';
 import socialLinks from './socialLinks';
 
@@ -18,6 +19,7 @@ export default createSchema({
   types: schemaTypes.concat([
     // The following are document types which will appear
     // in the studio.
+    page,
     siteSettings,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
