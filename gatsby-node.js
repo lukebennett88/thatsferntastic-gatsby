@@ -13,7 +13,6 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       allShopifyCollection(sort: { fields: handle, order: DESC }) {
         nodes {
           handle
-          id
         }
       }
       allSanityPage {
@@ -47,7 +46,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       path: `/collections/${node.handle}`,
       component: path.resolve(`./src/templates/collection.js`),
       context: {
-        productId: node.id,
+        handle: node.handle,
       },
     });
   });
