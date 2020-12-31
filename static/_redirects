@@ -1,0 +1,10 @@
+# Redirect old domain to new one:
+http://thatsferntastic.com/*         https://www.thatsferntastic.com.au/:splat 301!
+https://thatsferntastic.com/*        https://www.thatsferntastic.com.au/:splat 301!
+http://www.thatsferntastic.com/*     https://www.thatsferntastic.com.au/:splat 301!
+https://www.thatsferntastic.com/*    https://www.thatsferntastic.com.au/:splat 301!
+
+# Redirect all traffic to the https www subdomain:
+http://thatsferntastic.com.au/*      https://www.thatsferntastic.com.au/:splat 301!
+https://thatsferntastic.com.au/*     https://www.thatsferntastic.com.au/:splat 301!
+http://www.thatsferntastic.com.au/*  https://www.thatsferntastic.com.au/:splat 301!
