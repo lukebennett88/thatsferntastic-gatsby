@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { OutboundLink } from 'gatsby-plugin-google-analytics';
+import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import { FiFacebook, FiInstagram, FiLinkedin, FiTwitter } from 'react-icons/fi';
 
 import { useGraphQL } from '../hooks';

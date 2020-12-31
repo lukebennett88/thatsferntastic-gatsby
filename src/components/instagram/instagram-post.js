@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { HiExternalLink } from 'react-icons/hi';
-import { OutboundLink } from 'gatsby-plugin-google-analytics';
+import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import PropTypes from 'prop-types';
 
 import { useLazyLoad } from '../../hooks';
