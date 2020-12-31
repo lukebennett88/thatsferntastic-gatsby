@@ -27,9 +27,11 @@ function SEO({
   const metaDescription = description || sanitySiteSettings.description;
   const metaType = type || 'website';
   const metaUrl = `${sanitySiteSettings.siteUrl}${pathname}`;
-  const metaImage = `${sanitySiteSettings.siteUrl}${
-    image || sanitySiteSettings.shareImage.asset.url
-  }`;
+  const metaImage = image?.startsWith('https://')
+    ? image
+    : `${sanitySiteSettings.siteUrl}${
+        image || sanitySiteSettings.shareImage.asset.url
+      }`;
 
   return (
     <Helmet
