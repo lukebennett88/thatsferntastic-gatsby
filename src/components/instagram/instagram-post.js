@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { HiExternalLink } from 'react-icons/hi';
+import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import PropTypes from 'prop-types';
 
 import { useLazyLoad } from '../../hooks';
@@ -7,7 +8,7 @@ import { useLazyLoad } from '../../hooks';
 export function InstagramPost({ post }) {
   const { ref, imgRef, isImgLoaded, handleImgLoaded, Spinner } = useLazyLoad();
   return (
-    <a
+    <OutboundLink
       ref={ref}
       aria-label="View post on Instagram"
       href={post.url}
@@ -45,7 +46,7 @@ export function InstagramPost({ post }) {
           </div>
         </article>
       </div>
-    </a>
+    </OutboundLink>
   );
 }
 

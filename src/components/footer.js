@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { OutboundLink } from 'gatsby-plugin-google-analytics';
 import { FiFacebook, FiInstagram, FiLinkedin, FiTwitter } from 'react-icons/fi';
 
 import { useGraphQL } from '../hooks';
@@ -19,14 +20,14 @@ function Footer() {
           {sanitySiteSettings.socialLinks.map((socialLink) => {
             const Icon = SOCIAL_ICON[socialLink.socialNetwork];
             return (
-              <a
+              <OutboundLink
                 key={socialLink._key}
                 href={socialLink.link}
                 className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">{socialLink.socialNetwork}</span>
                 <Icon className="w-6 h-6" />
-              </a>
+              </OutboundLink>
             );
           })}
         </div>
