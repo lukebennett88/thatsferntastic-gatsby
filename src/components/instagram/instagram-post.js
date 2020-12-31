@@ -9,6 +9,7 @@ export function InstagramPost({ post }) {
   return (
     <a
       ref={ref}
+      aria-label="View post on Instagram"
       href={post.url}
       target="_blank"
       rel="noopener noreferrer"
