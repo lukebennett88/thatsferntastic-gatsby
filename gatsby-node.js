@@ -4,13 +4,13 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   // Query our data sources
   const result = await graphql(`
     query {
-      allShopifyProduct(sort: { fields: handle, order: DESC }) {
+      allShopifyProduct(sort: { fields: handle, order: ASC }) {
         nodes {
           handle
           id
         }
       }
-      allShopifyCollection(sort: { fields: handle, order: DESC }) {
+      allShopifyCollection(sort: { fields: handle, order: ASC }) {
         nodes {
           handle
         }
