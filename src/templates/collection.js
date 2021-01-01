@@ -22,6 +22,7 @@ function CollectionPageTemplate({ data }) {
             title={product.title}
             price={Number(product.priceRange.minVariantPrice.amount)}
             image={product.images[0]}
+            soldOut={!product.availableForSale}
           />
         ))}
       </div>
@@ -40,6 +41,7 @@ const query = graphql`
       title
       description
       products {
+        availableForSale
         title
         handle
         priceRange {

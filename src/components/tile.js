@@ -6,7 +6,7 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import { useGraphQL } from '../hooks';
 import { Spinner } from './spinner';
 
-export function Tile({ title, slug, price, image }) {
+export function Tile({ title, slug, price, image, soldOut = false }) {
   const { ogImage } = useGraphQL();
 
   const imageSrc = image
@@ -19,7 +19,9 @@ export function Tile({ title, slug, price, image }) {
     <Link
       aria-label={title}
       to={`/products/${slug}/`}
-      className="flex w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg"
+      className={`flex w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg ${
+        soldOut ? 'opacity-50' : ''
+      }`}
     >
       <div className="relative flex flex-1 w-full">
         <article className="flex flex-col w-full pb-3 bg-white rounded-lg shadow">
@@ -43,7 +45,7 @@ export function Tile({ title, slug, price, image }) {
               {title}
             </h3>
             <p className="pt-3 mt-auto font-mono text-3xl leading-none text-pink-500">
-              ${price.toFixed(2)}
+              {soldOut ? `Sold out!` : `$${price.toFixed(2)}`}
             </p>
           </div>
         </article>
@@ -54,9 +56,10 @@ export function Tile({ title, slug, price, image }) {
 
 Tile.propTypes = {
   image: PropTypes.object,
-  price: PropTypes.number,
-  slug: PropTypes.string,
-  title: PropTypes.string,
+  price: PropTypes.number.isRequired,
+  slug: PropTypes.string.isRequired,
+  soldOut: PropTypes.bool,
+  title: PropTypes.string.isRequired,
 };
 
 // 266 / 390
