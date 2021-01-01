@@ -16,7 +16,7 @@ function IndexPage() {
 }
 
 function AllProducts() {
-  const { allShopifyProduct } = useGraphQL();
+  const { allShopifyProduct, sanitySiteSettings } = useGraphQL();
 
   const { search } = useLocation();
 
@@ -28,6 +28,7 @@ function AllProducts() {
 
   return (
     <article>
+      <h1 className="sr-only">{sanitySiteSettings.title}</h1>
       <h2 className="text-center heading-1 sm:text-left">
         {queryString.parse(search).q || 'All Products'}
       </h2>

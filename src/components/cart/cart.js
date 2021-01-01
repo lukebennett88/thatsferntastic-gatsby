@@ -42,9 +42,9 @@ function CartSummary({ open }) {
     <aside className="w-full lg:max-w-sm">
       <nav className="sticky top-28">
         <div className="w-full max-w-sm px-4 py-6 mx-auto bg-white rounded-lg shadow sm:max-w-none">
-          <h3 className="text-lg font-medium leading-6 text-gray-900">
+          <h2 className="text-lg font-medium leading-6 text-gray-900">
             Cart Summary
-          </h3>
+          </h2>
           <hr className="my-3" />
           <dl className="grid gap-y-3">
             <div className="flex justify-between">

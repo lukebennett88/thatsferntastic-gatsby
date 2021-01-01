@@ -111,11 +111,11 @@ const Header = ({ setMenuOpen }) => {
         <div className="relative bg-teal-200">
           <div className="px-4 pt-12 pb-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="text-center text-teal-900">
-              <h1 className="font-mono text-2xl leading-none sm:text-6xl">
+              <p className="font-mono text-2xl leading-none sm:text-6xl">
                 <Link to="/" className="focus:underline focus:ring-0">
                   {sanitySiteSettings.title}
                 </Link>
-              </h1>
+              </p>
               <p className="mt-1 leading-tight lowercase sm:text-xl">
                 {sanitySiteSettings.description}
               </p>
