@@ -62,6 +62,16 @@ module.exports = {
         mono: ['Courier Prime', 'Courier New', ...defaultTheme.fontFamily.mono],
         sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            'h1, h2, h3, h4': {
+              color: theme('colors.pink.500'),
+              fontWeight: theme('fontWeight.medium'),
+            },
+          },
+        },
+      }),
     },
   },
   variants: {
