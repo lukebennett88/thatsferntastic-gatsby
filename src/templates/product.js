@@ -51,7 +51,7 @@ function ProductPage({ data: { shopifyProduct: product } }) {
             {product.title}
           </h1>
 
-          {Number(variant?.priceV2?.amount) > 0 && (
+          {product.availableForSale && Number(variant?.priceV2?.amount) > 0 && (
             <dl className="mt-4 text-center lg:hidden">
               <dt className="sr-only">Price:</dt>
               <dd className="heading-1">
@@ -62,7 +62,7 @@ function ProductPage({ data: { shopifyProduct: product } }) {
 
           <div className="flex flex-col w-full mx-auto mt-6 space-y-4 lg:mt-0 max-w-prose">
             <div className="overflow-hidden rounded-lg">
-              <div className="relative bg-gray-300 aspect-w-1 aspect-h-1">
+              <div className="relative bg-white aspect-w-1 aspect-h-1">
                 <div className="absolute inset-0 flex">
                   <GatsbyImage
                     onLoad={() => setIsLoading(false)}
@@ -71,6 +71,7 @@ function ProductPage({ data: { shopifyProduct: product } }) {
                         .gatsbyImageData
                     }
                     alt=""
+                    imgStyle={{ objectFit: 'contain' }}
                     className="flex-1 duration-500 ease-in-out transform hover:scale-110"
                   />
                 </div>
@@ -87,14 +88,14 @@ function ProductPage({ data: { shopifyProduct: product } }) {
             />
           </div>
           <div className="flex flex-col space-y-4">
-            <h1 className="hidden text-lg font-bold leading-tight lg:block">
+            <h1 className="hidden text-xl font-medium lg:block">
               {product.title}
             </h1>
 
-            {Number(variant?.priceV2?.amount) > 0 && (
+            {product.availableForSale && Number(variant?.priceV2?.amount) > 0 && (
               <dl className="hidden mt-4 lg:block">
                 <dt className="sr-only">Price:</dt>
-                <dd className="font-bold">
+                <dd className="heading-1">
                   ${Number(variant.priceV2.amount).toFixed(2)}{' '}
                 </dd>
               </dl>
@@ -119,15 +120,23 @@ function ProductPage({ data: { shopifyProduct: product } }) {
               ))}
             </div>
 
-            <span className="relative transition duration-300 ease-in-out transform rounded-full hover:-translate-y-0.5">
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg"
-              >
-                <span className="leading-none">Add to Cart</span>
-              </button>
-            </span>
+            {product.availableForSale ? (
+              <span className="relative transition duration-300 ease-in-out transform rounded-full hover:-translate-y-0.5">
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg"
+                >
+                  <span className="leading-none">Add to Cart</span>
+                </button>
+              </span>
+            ) : (
+              <div>
+                <span className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 bg-pink-100 border border-transparent rounded-full">
+                  <span className="leading-none">Sold out</span>
+                </span>
+              </div>
+            )}
 
             <div
               dangerouslySetInnerHTML={{
@@ -155,6 +164,7 @@ ProductPage.propTypes = {
 export const ProductPageQuery = graphql`
   query productPage($productId: String!) {
     shopifyProduct(id: { eq: $productId }) {
+      availableForSale
       id
       title
       description
