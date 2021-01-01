@@ -8,6 +8,7 @@ module.exports = {
   rules: {
     'arrow-body-style': 0,
     'react/no-danger': 0,
+    'react/jsx-props-no-spreading': 0,
   },
   root: true,
 };
