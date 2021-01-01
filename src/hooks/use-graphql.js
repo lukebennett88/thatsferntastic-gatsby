@@ -26,6 +26,22 @@ function useGraphQL() {
             link
           }
         }
+        allSanityPage(sort: { order: ASC, fields: title }) {
+          nodes {
+            _id
+            slug {
+              current
+            }
+            title
+          }
+        }
+        allShopifyCollection(sort: { fields: handle, order: ASC }) {
+          nodes {
+            handle
+            id
+            title
+          }
+        }
         ogImage: file(relativePath: { eq: "og-image.png" }) {
           publicURL
           childImageSharp {
