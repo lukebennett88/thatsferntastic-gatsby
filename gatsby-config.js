@@ -130,8 +130,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-sanity',
       options: {
-        projectId: process.env.SANITY_PROJECT_ID,
-        dataset: 'production',
+        projectId: process.env.GATSBY_SANITY_PROJECT_ID,
+        dataset: process.env.GATSBY_SANITY_DATASET,
 
         // Set to `true` in order for drafts to replace their published version. By default, drafts will be skipped.
         overlayDrafts: !isProd,

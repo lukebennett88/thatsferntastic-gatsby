@@ -20,9 +20,14 @@ function SanityPageTemplate({ data }) {
         {content.map((c, index) => {
           if (c._type === 'richText')
             return (
-              <div key={index} className="prose">
-                <SanityBlockContent blocks={c._rawBlockContent} />
-              </div>
+              <SanityBlockContent
+                key={index}
+                blocks={c._rawBlockContent}
+                renderContainerOnSingleChild
+                projectId={process.env.GATSBY_SANITY_PROJECT_ID}
+                dataset={process.env.GATSBY_SANITY_DATASET}
+                className="mt-5 prose"
+              />
             );
           return null;
         })}
