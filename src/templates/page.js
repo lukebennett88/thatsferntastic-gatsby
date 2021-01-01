@@ -23,6 +23,7 @@ function SanityPageTemplate({ data }) {
               <SanityBlockContent
                 key={index}
                 blocks={c._rawBlockContent}
+                imageOptions={{ w: 600, fit: 'max' }}
                 renderContainerOnSingleChild
                 projectId={process.env.GATSBY_SANITY_PROJECT_ID}
                 dataset={process.env.GATSBY_SANITY_DATASET}
