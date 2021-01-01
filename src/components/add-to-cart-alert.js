@@ -63,14 +63,16 @@ function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
                   </div>
                   <div className="max-w-sm col-span-4 mx-auto mt-4 font-medium md:mx-0 md:mt-0">
                     <div>{product.title}</div>
-                    <dl className="font-normal text-gray-500">
-                      <dt className="inline">
-                        {variant.selectedOptions[0].name}:{' '}
-                      </dt>
-                      <dd className="inline">
-                        {variant.selectedOptions[0].value}
-                      </dd>
-                    </dl>
+                    {variant.selectedOptions[0].name !== 'Title' && (
+                      <dl className="font-normal text-gray-500">
+                        <dt className="inline">
+                          {variant.selectedOptions[0].name}:{' '}
+                        </dt>
+                        <dd className="inline">
+                          {variant.selectedOptions[0].value}
+                        </dd>
+                      </dl>
+                    )}
                   </div>
                 </div>
                 <div className="flex items-center justify-between pb-4 text-center">
