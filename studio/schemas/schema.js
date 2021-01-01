@@ -12,6 +12,7 @@ import socialLinks from './objects/socialLinks';
 import richText from './objects/richText';
 
 // import document schemas
+import blogPost from './documents/blogPost';
 import page from './documents/page';
 import siteSettings from './documents/siteSettings';
 
@@ -30,6 +31,7 @@ export default createSchema({
     richText,
     // The following are document types which will appear
     // in the studio.
+    blogPost,
     page,
     siteSettings,
   ]),

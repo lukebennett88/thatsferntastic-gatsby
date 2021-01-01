@@ -22,6 +22,13 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           }
         }
       }
+      allSanityBlogPost(sort: { fields: _updatedAt, order: ASC }) {
+        nodes {
+          slug {
+            current
+          }
+        }
+      }
     }
   `);
 
@@ -59,6 +66,20 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     createPage({
       path: slug,
       component: path.resolve('./src/templates/page.js'),
+      context: {
+        slug,
+      },
+    });
+  });
+
+  // Create blog posts from Sanity
+  result.data.allSanityBlogPost.nodes.forEach((page) => {
+    const {
+      slug: { current: slug },
+    } = page;
+    createPage({
+      path: slug,
+      component: path.resolve('./src/templates/post.js'),
       context: {
         slug,
       },
