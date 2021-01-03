@@ -28,17 +28,7 @@ export default {
     {
       title: 'Share image',
       name: 'shareImage',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          title: 'Alt text',
-          name: 'alt',
-          type: 'string',
-        },
-      ],
+      type: 'imageWithAltText',
     },
     {
       title: 'Post',

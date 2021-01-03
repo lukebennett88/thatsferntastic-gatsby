@@ -62,14 +62,6 @@ export default {
       title: 'Image',
       name: 'image',
       type: 'image',
-      options: { hotspot: true },
-      fields: [
-        {
-          title: 'Alt text',
-          name: 'alt',
-          type: 'string',
-        },
-      ],
     },
   ],
   preview: {
