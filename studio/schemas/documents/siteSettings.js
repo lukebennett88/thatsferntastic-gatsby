@@ -28,6 +28,13 @@ export default {
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          title: 'Alt text',
+          name: 'alt',
+          type: 'string',
+        },
+      ],
     },
     {
       title: 'Social Links',
