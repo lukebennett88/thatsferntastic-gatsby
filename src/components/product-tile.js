@@ -6,19 +6,29 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import { useGraphQL } from '../hooks';
 import { Spinner } from './spinner';
 
-export function Tile({ title, slug, price, image, soldOut = false }) {
+function ProductTile({ product }) {
   const { ogImage } = useGraphQL();
 
-  const imageSrc = image
-    ? image.localFile.childImageSharp.gatsbyImageData
-    : ogImage.localFile.childImageSharp.gatsbyImageData;
+  const imageSrc = product.images
+    ? product.images[0].localFile.childImageSharp?.gatsbyImageData
+    : ogImage.childImageSharp.gatsbyImageData;
 
   const [isLoading, setIsLoading] = React.useState(true);
 
+  const soldOut = !product.availableForSale;
+
+  const maxPrice = Number(product.priceRange.maxVariantPrice.amount).toFixed(2);
+  const minPrice = Number(product.priceRange.minVariantPrice?.amount).toFixed(
+    2
+  );
+
+  const price =
+    maxPrice - minPrice === 0 ? `$${minPrice}` : `from $${minPrice}`;
+
   return (
     <Link
-      aria-label={title}
-      to={`/products/${slug}/`}
+      aria-label={product.title}
+      to={`/products/${product.slug}/`}
       className={`flex w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg ${
         soldOut ? 'opacity-50' : ''
       }`}
@@ -41,11 +51,11 @@ export function Tile({ title, slug, price, image, soldOut = false }) {
             </div>
           </div>
           <div className="flex flex-col justify-center flex-1 px-6 py-3 overflow-hidden">
-            <h3 title={title} className="mt-2 clamp-2">
-              {title}
+            <h3 title={product.title} className="mt-2 clamp-2">
+              {product.title}
             </h3>
             <p className="pt-3 mt-auto font-mono text-3xl leading-none text-pink-500">
-              {soldOut ? `Sold out!` : `$${price.toFixed(2)}`}
+              {soldOut ? `Sold out!` : price}
             </p>
           </div>
         </article>
@@ -54,12 +64,8 @@ export function Tile({ title, slug, price, image, soldOut = false }) {
   );
 }
 
-Tile.propTypes = {
-  image: PropTypes.object,
-  price: PropTypes.number.isRequired,
-  slug: PropTypes.string.isRequired,
-  soldOut: PropTypes.bool,
-  title: PropTypes.string.isRequired,
+ProductTile.propTypes = {
+  product: PropTypes.object,
 };
 
-// 266 / 390
+export { ProductTile };

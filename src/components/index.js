@@ -3,7 +3,7 @@ export * from './gallery';
 export * from './instagram';
 export * from './layout';
 export * from './option-picker';
+export * from './product-tile';
 export * from './seo';
 export * from './spinner';
 export * from './thumbnail';
-export * from './tile';

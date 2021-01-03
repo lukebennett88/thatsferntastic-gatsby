@@ -65,6 +65,7 @@ function useGraphQL() {
         ) {
           nodes {
             id
+            availableForSale
             description
             handle
             images {
@@ -77,7 +78,9 @@ function useGraphQL() {
             priceRange {
               minVariantPrice {
                 amount
-                currencyCode
+              }
+              maxVariantPrice {
+                amount
               }
             }
             productType
