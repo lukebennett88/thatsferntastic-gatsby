@@ -20,6 +20,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        gray: colors.gray,
         indigo: colors.indigo,
         cyan: {
           50: '#ebfcff',
