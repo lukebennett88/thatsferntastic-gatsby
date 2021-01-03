@@ -19,7 +19,7 @@ function useProductMatch(products, term) {
       term.trim() === ''
         ? null
         : matchSorter(products, term, {
-            keys: ['title', 'description'],
+            keys: ['title', 'tags'],
           }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [throttledTerm]
