@@ -61,7 +61,9 @@ function Post({ post }) {
               <p>{post.description}</p>
             ) : (
               <SanityBlockContent
-                blocks={post.content._rawBlockContent.slice(0, 3)}
+                blocks={post.content._rawBlockContent
+                  .filter((line) => line._type !== 'image')
+                  .slice(0, 3)}
                 renderContainerOnSingleChild
                 projectId={process.env.GATSBY_SANITY_PROJECT_ID}
                 dataset={process.env.GATSBY_SANITY_DATASET}
