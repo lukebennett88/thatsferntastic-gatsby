@@ -9,13 +9,13 @@ function IndexPage() {
   return (
     <Layout>
       <SEO title="Home" />
-      <AllProducts />
+      <LatestProducts />
       <InstagramWidget />
     </Layout>
   );
 }
 
-function AllProducts() {
+function LatestProducts() {
   const { allShopifyProduct, sanitySiteSettings } = useGraphQL();
 
   const { search } = useLocation();
@@ -30,7 +30,7 @@ function AllProducts() {
     <article>
       <h1 className="sr-only">{sanitySiteSettings.title}</h1>
       <h2 className="text-center heading-1 sm:text-left">
-        {queryString.parse(search).q || 'All Products'}
+        {queryString.parse(search).q || 'Latest Products'}
       </h2>
       <div className="relative grid pb-20 mx-auto mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
         {products.slice(0, 18).map((product) => (
