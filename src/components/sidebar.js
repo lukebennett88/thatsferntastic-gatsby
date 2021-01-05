@@ -59,7 +59,7 @@ function Sidebar() {
             >
               <span
                 aria-hidden
-                className={`inline-block transition duration-150 ease-in-out rounded-full w-5 h-5 mr-3 group-focus:text-gray-600 ${
+                className={`flex-shrink-0 inline-block transition duration-150 ease-in-out rounded-full w-5 h-5 mr-3 group-focus:text-gray-600 ${
                   colours[
                     index + 1 > colours.length ? index - colours.length : index
                   ]
