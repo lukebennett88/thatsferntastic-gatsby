@@ -48,7 +48,7 @@ const query = graphql`
         images {
           localFile {
             childImageSharp {
-              gatsbyImageData(maxWidth: 600, layout: FLUID)
+              gatsbyImageData(width: 600, layout: CONSTRAINED)
             }
           }
         }

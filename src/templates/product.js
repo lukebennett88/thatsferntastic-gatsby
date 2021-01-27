@@ -183,7 +183,7 @@ export const ProductPageQuery = graphql`
         image {
           localFile {
             childImageSharp {
-              gatsbyImageData(maxWidth: 600, quality: 100, layout: FLUID)
+              gatsbyImageData(width: 600, quality: 100, layout: CONSTRAINED)
             }
           }
         }
@@ -195,7 +195,7 @@ export const ProductPageQuery = graphql`
       images {
         localFile {
           childImageSharp {
-            gatsbyImageData(maxWidth: 600, quality: 100, layout: FLUID)
+            gatsbyImageData(width: 600, quality: 100, layout: CONSTRAINED)
           }
         }
       }

@@ -18,16 +18,14 @@ module.exports = {
   siteMetadata: {
     siteUrl,
   },
-  // flags: {
-  //   DEV_SSR: true,
-  //   FAST_DEV: true,
-  //   FAST_REFRESH: true,
-  //   LAZY_IMAGES: true,
-  //   PARALLEL_SOURCING: false,
-  //   PRESERVE_FILE_DOWNLOAD_CACHE: true,
-  //   PRESERVE_WEBPACK_CACHE: true,
-  //   QUERY_ON_DEMAND: true,
-  // },
+  flags: {
+    DEV_SSR: true,
+    FAST_DEV: true,
+    FAST_REFRESH: true,
+    PARALLEL_SOURCING: false,
+    PRESERVE_FILE_DOWNLOAD_CACHE: true,
+    PRESERVE_WEBPACK_CACHE: true,
+  },
   plugins: [
     'gatsby-plugin-image',
     'gatsby-plugin-netlify',

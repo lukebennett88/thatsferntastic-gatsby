@@ -45,7 +45,7 @@ function useGraphQL() {
         ogImage: file(relativePath: { eq: "og-image.png" }) {
           publicURL
           childImageSharp {
-            gatsbyImageData(maxWidth: 600, layout: FLUID)
+            gatsbyImageData(width: 600, layout: CONSTRAINED)
           }
         }
         allShopifyProductVariant {
@@ -71,7 +71,7 @@ function useGraphQL() {
             images {
               localFile {
                 childImageSharp {
-                  gatsbyImageData(maxWidth: 600, layout: FLUID)
+                  gatsbyImageData(width: 600, layout: CONSTRAINED)
                 }
               }
             }

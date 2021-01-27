@@ -20,7 +20,7 @@ function LineItem({ item }) {
           image {
             localFile {
               childImageSharp {
-                gatsbyImageData(maxWidth: 630, layout: FLUID)
+                gatsbyImageData(width: 630, layout: CONSTRAINED)
               }
             }
           }
