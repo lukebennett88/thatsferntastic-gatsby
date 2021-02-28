@@ -109,7 +109,7 @@ function Terms({ showDialog, close }) {
         {/* This element is to trick the browser into centering the modal contents. */}
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
+          aria-hidden
         >
           ​
         </span>
@@ -127,9 +127,7 @@ function Terms({ showDialog, close }) {
           aria-label="Terms and Conditions"
           ref={contentRef}
           className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-headline"
+          aria-modal
         >
           <div className="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
             <button
