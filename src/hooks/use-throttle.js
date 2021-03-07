@@ -1,9 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+/* eslint-disable no-undef */
+import { useEffect, useRef, useState } from 'react';
 
 function useThrottle(value, limit) {
   const [throttledValue, setThrottledValue] = useState(value);
   const lastRan = useRef(Date.now());
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const handler = window.setTimeout(() => {

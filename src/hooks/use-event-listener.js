@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react';
 export function useEventListener(
   eventType,
   handler,
+  // eslint-disable-next-line no-undef
   { enabled = true, target = document } = {}
 ) {
   const handlerRef = useRef(handler);
@@ -25,6 +26,7 @@ export function useEventListener(
 
     target.addEventListener(eventType, internalHandler);
 
+    // eslint-disable-next-line consistent-return
     return () => {
       target.removeEventListener(eventType, internalHandler);
     };

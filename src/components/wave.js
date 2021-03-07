@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
-export function Wave({ className }) {
+function Wave({ className }) {
   return (
     <svg
       viewBox="0 0 1440 96"
@@ -14,6 +13,4 @@ export function Wave({ className }) {
   );
 }
 
-Wave.propTypes = {
-  className: PropTypes.string,
-};
+export { Wave };

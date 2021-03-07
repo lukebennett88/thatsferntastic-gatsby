@@ -1,10 +1,9 @@
-import * as React from 'react';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { animated, useTransition } from 'react-spring';
-import { FiX } from 'react-icons/fi';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
+import { DialogContent, DialogOverlay } from '@reach/dialog';
 import { Link } from 'gatsby';
-import PropTypes from 'prop-types';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import * as React from 'react';
+import { FiX } from 'react-icons/fi';
+import { animated, useTransition } from 'react-spring';
 
 function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
   const AnimatedDialogContent = animated(DialogContent);
@@ -53,9 +52,10 @@ function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
                     <div className="absolute inset-0 flex">
                       <GatsbyImage
                         image={
-                          product.variants[0].image.localFile.childImageSharp
+                          product.images[0].localFile.childImageSharp
                             .gatsbyImageData
                         }
+                        width={70}
                         alt=""
                         className="flex-1 rounded-lg"
                       />
@@ -100,17 +100,5 @@ function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
       )
   );
 }
-
-AddToCartAlert.propTypes = {
-  isAlertShown: PropTypes.bool.isRequired,
-  product: PropTypes.shape({
-    title: PropTypes.string,
-    variants: PropTypes.array.isRequired,
-  }),
-  setIsAlertShown: PropTypes.func.isRequired,
-  variant: PropTypes.shape({
-    selectedOptions: PropTypes.array.isRequired,
-  }),
-};
 
 export { AddToCartAlert };

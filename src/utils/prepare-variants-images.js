@@ -34,18 +34,15 @@ export function prepareVariantsImages(variants, optionKey) {
   //   [optionKey]: image
   // }
   const imageDictionary = variants.reduce((dictImages, variant) => {
+    // eslint-disable-next-line no-param-reassign
     dictImages[variant[optionKey]] = variant.image;
     return dictImages;
   }, {});
 
   // prepare an array of image objects that include both the image
   // and the optionkey value.
-  const images = Object.keys(imageDictionary).map((key) => {
-    return {
-      [optionKey]: key,
-      src: imageDictionary[key],
-    };
-  });
-
-  return images;
+  return Object.keys(imageDictionary).map((key) => ({
+    [optionKey]: key,
+    src: imageDictionary[key],
+  }));
 }

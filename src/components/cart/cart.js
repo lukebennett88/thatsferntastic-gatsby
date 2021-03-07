@@ -1,19 +1,12 @@
-import * as React from 'react';
-import {
-  useCartItems,
-  useCart,
-  useCheckoutUrl,
-  useCartCount,
-} from 'gatsby-theme-shopify-manager';
-import PropTypes from 'prop-types';
-
-import { HiX } from 'react-icons/hi';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
+import * as React from 'react';
+import { HiX } from 'react-icons/hi';
+
 import { LineItem } from './line-item';
 
 export function Cart() {
-  const lineItems = useCartItems();
-  const count = useCartCount();
+  // const lineItems = useCartItems();
+  // const count = useCartCount();
   const [showDialog, setShowDialog] = React.useState(false);
   const open = () => setShowDialog(true);
   const close = () => setShowDialog(false);
@@ -23,11 +16,11 @@ export function Cart() {
       <h1 className="text-center heading-1 sm:text-left">Cart</h1>
       <div className="flex flex-wrap py-12 lg:space-x-16">
         <div className="relative grid flex-1 pb-20 mx-auto gap-y-10 gap-x-12 lg:col-span-3">
-          {count
+          {/* {count
             ? lineItems.map(
                 (item) => item.variant && <LineItem key={item.id} item={item} />
               )
-            : 'Nothing to see here, your cart is empty!'}
+            : 'Nothing to see here, your cart is empty!'} */}
         </div>
         <CartSummary open={open} />
         <Terms showDialog={showDialog} close={close} />
@@ -37,8 +30,8 @@ export function Cart() {
 }
 
 function CartSummary({ open }) {
-  const cart = useCart();
-  const count = useCartCount();
+  // const cart = useCart();
+  // const count = useCartCount();
 
   return (
     <aside className="w-full lg:max-w-sm">
@@ -51,11 +44,11 @@ function CartSummary({ open }) {
           <dl className="grid gap-y-3">
             <div className="flex justify-between">
               <dt>Items in cart:</dt>
-              <dd>{count}</dd>
+              {/* <dd>{count}</dd> */}
             </div>
             <div className="flex justify-between">
               <dt>Subtotal:</dt>
-              <dd>${Number(cart?.totalPrice || 0).toFixed(2)}</dd>
+              {/* <dd>${Number(cart?.totalPrice || 0).toFixed(2)}</dd> */}
             </div>
             <div className="flex justify-between">
               <dt>Shipping:</dt>
@@ -66,10 +59,10 @@ function CartSummary({ open }) {
             <button
               type="button"
               onClick={open}
-              disabled={!count}
-              className={`inline-flex items-center justify-center w-full px-6 py-3 font-mono text-base font-medium text-center text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg ${
-                !count ? 'cursor-not-allowed opacity-75' : ''
-              }`}
+              // disabled={!count}
+              // className={`inline-flex items-center justify-center w-full px-6 py-3 font-mono text-base font-medium text-center text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg ${
+              //   !count ? 'cursor-not-allowed opacity-75' : ''
+              // }`}
             >
               Checkout
             </button>
@@ -80,15 +73,11 @@ function CartSummary({ open }) {
   );
 }
 
-CartSummary.propTypes = {
-  open: PropTypes.func.isRequired,
-};
-
 function Terms({ showDialog, close }) {
   const overlayRef = React.useRef(null);
   const contentRef = React.useRef(null);
   const [isChecked, setIsChecked] = React.useState(false);
-  const checkout = useCheckoutUrl();
+  // const checkout = useCheckoutUrl();
 
   return (
     <DialogOverlay
@@ -177,7 +166,7 @@ function Terms({ showDialog, close }) {
             </label>
 
             <a
-              href={isChecked ? checkout : null}
+              // href={isChecked ? checkout : null}
               className={`inline-flex items-center justify-center px-12 py-3 font-mono text-base font-medium text-center border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 ${
                 isChecked
                   ? 'text-pink-700 bg-pink-100 hover:bg-pink-200'
@@ -192,8 +181,3 @@ function Terms({ showDialog, close }) {
     </DialogOverlay>
   );
 }
-
-Terms.propTypes = {
-  close: PropTypes.func.isRequired,
-  showDialog: PropTypes.bool.isRequired,
-};

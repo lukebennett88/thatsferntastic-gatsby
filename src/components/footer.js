@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import { Link } from 'gatsby';
-import { FacebookIcon, InstagramIcon, TwitterIcon } from './icons';
+import { OutboundLink } from 'gatsby-plugin-google-gtag';
+import * as React from 'react';
 
 import { useGraphQL } from '../hooks';
+import { FacebookIcon, InstagramIcon, TwitterIcon } from './icons';
 
 const SOCIAL_ICON = {
   Facebook: FacebookIcon,
@@ -15,7 +15,7 @@ function Footer() {
   const {
     sanitySiteSettings,
     allSanityPage,
-    allShopifyCollection,
+    // allShopifyCollection,
   } = useGraphQL();
   return (
     <footer className="bg-white" aria-labelledby="footerHeading">
@@ -86,7 +86,7 @@ function Footer() {
                 <h3 className="text-sm font-semibold tracking-wider text-gray-400 uppercase">
                   Collections
                 </h3>
-                <ul className="mt-4 space-y-4">
+                {/* <ul className="mt-4 space-y-4">
                   {allShopifyCollection.nodes.map(({ id, handle, title }) => (
                     <li key={id}>
                       <Link
@@ -97,7 +97,7 @@ function Footer() {
                       </Link>
                     </li>
                   ))}
-                </ul>
+                </ul> */}
               </div>
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">

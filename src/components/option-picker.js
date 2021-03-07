@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 function OptionPicker({ name, options, onChange }) {
   if (options.length <= 1) return null;
@@ -23,13 +22,5 @@ function OptionPicker({ name, options, onChange }) {
     </div>
   );
 }
-
-OptionPicker.propTypes = {};
-
-OptionPicker.propTypes = {
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  options: PropTypes.array.isRequired,
-};
 
 export { OptionPicker };

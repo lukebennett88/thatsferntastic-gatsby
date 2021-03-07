@@ -1,8 +1,8 @@
 import * as React from 'react';
-
 import resolveConfig from 'tailwindcss/resolveConfig';
-import { Layout, SEO } from '../components';
+
 import tailwindConfig from '../../tailwind.config';
+import { Layout, SEO } from '../components';
 
 const fullConfig = resolveConfig(tailwindConfig);
 
@@ -26,6 +26,7 @@ function ColoursPage() {
       <div>
         <ul className="grid gap-8">
           {colorArray.map((color, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <li key={index}>
               <h2
                 style={{ color: color.colours[700] }}

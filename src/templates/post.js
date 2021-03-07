@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { graphql } from 'gatsby';
 import SanityBlockContent from '@sanity/block-content-to-react';
-import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
+import * as React from 'react';
 
 import { Layout, SEO } from '../components';
 
@@ -28,13 +27,7 @@ function SanityBlogPostTemplate({ data }) {
   );
 }
 
-SanityBlogPostTemplate.propTypes = {
-  data: PropTypes.shape({
-    sanityBlogPost: PropTypes.object.isRequired,
-  }),
-};
-
-const query = graphql`
+export const query = graphql`
   query($slug: String!) {
     sanityBlogPost(slug: { current: { eq: $slug } }) {
       title
@@ -51,4 +44,4 @@ const query = graphql`
   }
 `;
 
-export { SanityBlogPostTemplate as default, query };
+export default SanityBlogPostTemplate;

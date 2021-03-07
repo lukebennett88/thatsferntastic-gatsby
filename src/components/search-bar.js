@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { Link } from 'gatsby';
-import { matchSorter } from 'match-sorter';
 import {
   Combobox,
   ComboboxInput,
-  ComboboxPopover,
   ComboboxList,
   ComboboxOption,
+  ComboboxPopover,
 } from '@reach/combobox';
+import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { matchSorter } from 'match-sorter';
+import * as React from 'react';
 
 import { useGraphQL, useThrottle } from '../hooks';
 
@@ -27,28 +27,28 @@ function useProductMatch(products, term) {
 }
 
 function SearchBar() {
-  const {
-    allShopifyProduct: { nodes: products },
-  } = useGraphQL();
+  // const {
+  //   allShopifyProduct: { nodes: products },
+  // } = useGraphQL();
 
-  const [term, setTerm] = React.useState('');
+  // const [term, setTerm] = React.useState('');
 
-  const results = useProductMatch(products, term);
+  // const results = useProductMatch(products, term);
 
   const inputRef = React.useRef(null);
 
-  function handleChange(event) {
-    setTerm(event.target.value);
-  }
+  // function handleChange(event) {
+  //   setTerm(event.target.value);
+  // }
 
-  function handleSelect(value) {
-    setTerm(value);
-  }
+  // function handleSelect(value) {
+  //   setTerm(value);
+  // }
 
   return (
     <Combobox
       openOnFocus
-      onSelect={handleSelect}
+      // onSelect={handleSelect}
       aria-label="Product search"
       className="relative flex flex-1"
     >
@@ -66,14 +66,14 @@ function SearchBar() {
             </div>
             <ComboboxInput
               ref={inputRef}
-              value={term}
-              onChange={handleChange}
+              // value={term}
+              // onChange={handleChange}
               placeholder="Search"
               className="block w-full h-full py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 border-none rounded-lg focus:ring-0 focus:placeholder-gray-400 sm:text-sm"
             />
           </div>
         </div>
-        {results && (
+        {/* {results && (
           <ComboboxPopover
             portal={false}
             className="absolute inset-x-0 z-10 mt-16 overflow-hidden text-left bg-white border-t rounded-b-lg shadow-2xl md:border-none md:rounded-t-lg full-bleed md:reset-full-bleed"
@@ -114,7 +114,7 @@ function SearchBar() {
               </div>
             </div>
           </ComboboxPopover>
-        )}
+        )} */}
       </div>
     </Combobox>
   );

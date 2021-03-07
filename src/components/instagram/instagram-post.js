@@ -1,11 +1,10 @@
+import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
 import { HiExternalLink } from 'react-icons/hi';
-import { OutboundLink } from 'gatsby-plugin-google-gtag';
-import PropTypes from 'prop-types';
 
 import { useLazyLoad } from '../../hooks';
 
-export function InstagramPost({ post }) {
+function InstagramPost({ post }) {
   const { ref, imgRef, isImgLoaded, handleImgLoaded, Spinner } = useLazyLoad();
   return (
     <OutboundLink
@@ -50,11 +49,4 @@ export function InstagramPost({ post }) {
   );
 }
 
-InstagramPost.propTypes = {
-  post: PropTypes.shape({
-    caption: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    srcSet: PropTypes.array.isRequired,
-    url: PropTypes.string.isRequired,
-  }),
-};
+export { InstagramPost };

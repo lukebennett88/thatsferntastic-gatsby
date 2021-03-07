@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { graphql } from 'gatsby';
 import SanityBlockContent from '@sanity/block-content-to-react';
-import PropTypes from 'prop-types';
+import { graphql } from 'gatsby';
+import * as React from 'react';
 
 import { Layout, SEO } from '../components';
 
@@ -21,6 +20,7 @@ function SanityPageTemplate({ data }) {
           if (c._type === 'richText')
             return (
               <SanityBlockContent
+                // eslint-disable-next-line react/no-array-index-key
                 key={index}
                 blocks={c._rawBlockContent}
                 imageOptions={{ w: 600, fit: 'max' }}
@@ -37,13 +37,7 @@ function SanityPageTemplate({ data }) {
   );
 }
 
-SanityPageTemplate.propTypes = {
-  data: PropTypes.shape({
-    sanityPage: PropTypes.object.isRequired,
-  }),
-};
-
-const query = graphql`
+export const query = graphql`
   query($slug: String!) {
     sanityPage(slug: { current: { eq: $slug } }) {
       title
@@ -63,4 +57,4 @@ const query = graphql`
   }
 `;
 
-export { SanityPageTemplate as default, query };
+export default SanityPageTemplate;

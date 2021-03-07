@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
-import * as React from 'react';
-import { graphql, Link, useStaticQuery } from 'gatsby';
 import { useLocation } from '@reach/router';
+import { graphql, Link, useStaticQuery } from 'gatsby';
+import * as React from 'react';
 
 import { useGraphQL } from '../hooks';
 
@@ -135,12 +134,5 @@ function NavLink({ to, label, active, Icon }) {
     </Link>
   );
 }
-
-NavLink.propTypes = {
-  active: PropTypes.bool,
-  Icon: PropTypes.func,
-  label: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
-};
 
 export { Sidebar };
