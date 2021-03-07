@@ -32,6 +32,7 @@ export function useLazyLoad() {
   // When image enters the screen swap out src for the data-src
   useEffect(() => {
     if (inView) {
+      // eslint-disable-next-line scanjs-rules/assign_to_src
       imgRef.current.src = imgRef.current.dataset.src;
     }
   }, [inView]);

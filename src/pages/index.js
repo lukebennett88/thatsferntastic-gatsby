@@ -1,30 +1,31 @@
-import * as React from 'react';
 import { useLocation } from '@reach/router';
+import { graphql } from 'gatsby';
 import queryString from 'query-string';
+import * as React from 'react';
 
-import { Layout, SEO, ProductTile, InstagramWidget } from '../components';
+import { InstagramWidget, Layout, ProductTile, SEO } from '../components';
 import { useGraphQL } from '../hooks';
 
-function IndexPage() {
+function IndexPage({ data }) {
   return (
     <Layout>
       <SEO title="Home" />
-      <LatestProducts />
+      <LatestProducts allProducts={data.allShopifyProduct.nodes} />
       <InstagramWidget />
     </Layout>
   );
 }
 
-function LatestProducts() {
-  const { allShopifyProduct, sanitySiteSettings } = useGraphQL();
+function LatestProducts({ allProducts }) {
+  const { sanitySiteSettings } = useGraphQL();
 
   const { search } = useLocation();
 
   const products = search
-    ? allShopifyProduct.nodes.filter(
+    ? allProducts.filter(
         (product) => product.productType === queryString.parse(search).q
       )
-    : allShopifyProduct.nodes;
+    : allProducts;
 
   return (
     <article>
@@ -40,5 +41,15 @@ function LatestProducts() {
     </article>
   );
 }
+
+export const query = graphql`
+  {
+    allShopifyProduct(sort: { fields: publishedAt, order: ASC }) {
+      nodes {
+        ...ProductCard
+      }
+    }
+  }
+`;
 
 export default IndexPage;

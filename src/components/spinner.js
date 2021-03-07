@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { useId } from '@reach/auto-id';
+import * as React from 'react';
 
 function Spinner() {
   const id = useId();

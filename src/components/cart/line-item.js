@@ -1,71 +1,70 @@
-import * as React from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import {
-  useRemoveItemFromCart,
-  useUpdateItemQuantity,
-} from 'gatsby-theme-shopify-manager';
+// import {
+//   useRemoveItemFromCart,
+//   useUpdateItemQuantity,
+// } from 'gatsby-theme-shopify-manager';
+import * as React from 'react';
 import { HiChevronLeft, HiChevronRight, HiTrash } from 'react-icons/hi';
-import PropTypes from 'prop-types';
 
 function LineItem({ item }) {
-  const {
-    allShopifyProductVariant: { nodes: variants },
-    allShopifyProduct: { nodes: products },
-  } = useStaticQuery(graphql`
-    {
-      allShopifyProductVariant {
-        nodes {
-          shopifyId
-          image {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(width: 630, layout: CONSTRAINED)
-              }
-            }
-          }
-        }
-      }
-      allShopifyProduct {
-        nodes {
-          handle
-          variants {
-            shopifyId
-          }
-        }
-      }
-    }
-  `);
+  // const {
+  //   allShopifyProductVariant: { nodes: variants },
+  //   allShopifyProduct: { nodes: products },
+  // } = useStaticQuery(graphql`
+  //   {
+  //     allShopifyProductVariant {
+  //       nodes {
+  //         shopifyId
+  //         # image {
+  //         #   localFile {
+  //         #     childImageSharp {
+  //         #       gatsbyImageData(width: 630, layout: CONSTRAINED)
+  //         #     }
+  //         #   }
+  //         # }
+  //       }
+  //     }
+  //     allShopifyProduct {
+  //       nodes {
+  //         handle
+  //         variants {
+  //           shopifyId
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
-  const removeFromCart = useRemoveItemFromCart();
-  const updateQuantity = useUpdateItemQuantity();
+  // const removeFromCart = useRemoveItemFromCart();
+  // const updateQuantity = useUpdateItemQuantity();
 
-  const betterProductHandles = products.map((product) => {
-    const newVariants = product.variants.map((variant) => variant.shopifyId);
-    return {
-      variants: newVariants,
-      handle: product.handle,
-    };
-  });
+  // const betterProductHandles = products.map((product) => {
+  //   const newVariants = product.variants.map((variant) => variant.shopifyId);
+  //   return {
+  //     variants: newVariants,
+  //     handle: product.handle,
+  //   };
+  // });
 
-  function getHandleForVariant(variantId) {
-    const selectedProduct = betterProductHandles.find((product) => {
-      return product.variants.includes(variantId);
-    });
+  // function getHandleForVariant(variantId) {
+  //   const selectedProduct = betterProductHandles.find((product) =>
+  //     product.variants.includes(variantId)
+  //   );
 
-    return selectedProduct ? selectedProduct.handle : null;
-  }
+  //   return selectedProduct ? selectedProduct.handle : null;
+  // }
 
-  function getImageFluidForVariant(variantId) {
-    const selectedVariant = variants.find((variant) => {
-      return variant.shopifyId === variantId;
-    });
+  // function getImageFluidForVariant(variantId) {
+  //   const selectedVariant = variants.find(
+  //     (variant) => variant.shopifyId === variantId
+  //   );
 
-    if (selectedVariant) {
-      return selectedVariant.image.localFile.childImageSharp.gatsbyImageData;
-    }
-    return null;
-  }
+  //   if (selectedVariant) {
+  //     return selectedVariant.image.localFile.childImageSharp.gatsbyImageData;
+  //   }
+  //   return null;
+  // }
 
   const [quantity, setQuantity] = React.useState(item.quantity);
 
@@ -79,14 +78,14 @@ function LineItem({ item }) {
     setQuantity((prev) => prev + 1);
   }
 
-  React.useEffect(() => {
-    if (quantity <= 0) {
-      removeFromCart(item.variant.id);
-      return;
-    }
-    updateQuantity(item.variant.id, quantity);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [item.variant.id, quantity]);
+  // React.useEffect(() => {
+  //   if (quantity <= 0) {
+  //     removeFromCart(item.variant.id);
+  //     return;
+  //   }
+  //   updateQuantity(item.variant.id, quantity);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [item.variant.id, quantity]);
 
   return (
     <div className="flex w-full max-w-sm px-4 py-6 pt-4 mx-auto bg-white rounded-lg shadow lg:max-w-none lg:items-center lg:justify-between sm:max-w-none">
@@ -94,15 +93,15 @@ function LineItem({ item }) {
         <div className="w-full sm:w-36 lg:w-48">
           <div className="relative h-0 aspect-w-1 aspect-h-1">
             <div className="absolute inset-0 flex bg-white">
-              <GatsbyImage
+              {/* <GatsbyImage
                 image={getImageFluidForVariant(item.variant.id)}
                 alt=""
                 className="flex-1 rounded-lg"
-              />
+              /> */}
             </div>
           </div>
         </div>
-        <div className="flex flex-col flex-1">
+        {/* <div className="flex flex-col flex-1">
           <Link
             to={`/products/${getHandleForVariant(item.variant.id)}`}
             className="text-lg font-medium transition duration-150 ease-in-out hover:text-gray-600"
@@ -169,14 +168,10 @@ function LineItem({ item }) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
 }
-
-LineItem.propTypes = {
-  item: PropTypes.object,
-};
 
 export { LineItem };

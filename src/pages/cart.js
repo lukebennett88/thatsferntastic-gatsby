@@ -7,7 +7,7 @@ export default function CartPage() {
   return (
     <Layout hasSidebar={false}>
       <SEO title="Cart" />
-      <Cart />
+      {/* <Cart /> */}
     </Layout>
   );
 }

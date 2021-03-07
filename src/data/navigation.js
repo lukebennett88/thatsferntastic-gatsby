@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
 function Icon({ className }) {
@@ -16,10 +15,6 @@ function Icon({ className }) {
     </svg>
   );
 }
-
-Icon.propTypes = {
-  className: PropTypes.string,
-};
 
 export const navigation = [
   { title: 'Mini pouches', slug: '/mini-pouches/', icon: Icon },

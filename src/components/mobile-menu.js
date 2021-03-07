@@ -1,25 +1,13 @@
-import * as React from 'react';
-import { graphql, Link, useStaticQuery } from 'gatsby';
 import { Transition } from '@headlessui/react';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
+import { DialogContent, DialogOverlay } from '@reach/dialog';
 import { useLocation } from '@reach/router';
-import PropTypes from 'prop-types';
+import { graphql, Link, useStaticQuery } from 'gatsby';
+import * as React from 'react';
 
-import { useEventListener, useGraphQL } from '../hooks';
+import { useGraphQL } from '../hooks';
 
 function MobileMenu({ isMenuOpen, setMenuOpen }) {
   const close = () => setMenuOpen(false);
-
-  function handleEscape(e) {
-    if (e.key === 'Escape') {
-      return close();
-    }
-  }
-  const isBrowser = typeof window !== 'undefined';
-
-  useEventListener('keydown', handleEscape, {
-    target: isBrowser ? document : null,
-  });
 
   const { sanitySiteSettings } = useGraphQL();
 
@@ -155,10 +143,5 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
     </Transition>
   );
 }
-
-MobileMenu.propTypes = {
-  isMenuOpen: PropTypes.bool,
-  setMenuOpen: PropTypes.func,
-};
 
 export { MobileMenu };

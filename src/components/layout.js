@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
+import { Footer } from './footer';
 import { Header } from './header';
 import { MobileMenu } from './mobile-menu';
 import { Sidebar } from './sidebar';
-import { Footer } from './footer';
 
-export function Layout({ children, hasSidebar = true }) {
+function Layout({ children, hasSidebar = true }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
@@ -23,7 +22,4 @@ export function Layout({ children, hasSidebar = true }) {
   );
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  hasSidebar: PropTypes.bool,
-};
+export { Layout };

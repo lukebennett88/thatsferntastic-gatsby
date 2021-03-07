@@ -4,12 +4,6 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   // Query our data sources
   const result = await graphql(`
     query {
-      allShopifyProduct(sort: { fields: handle, order: ASC }) {
-        nodes {
-          handle
-          id
-        }
-      }
       allShopifyCollection(sort: { fields: handle, order: ASC }) {
         nodes {
           handle
@@ -35,17 +29,6 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   if (result.errors) {
     throw result.errors;
   }
-
-  // Create pages for all Products
-  result.data.allShopifyProduct.nodes.forEach((node) => {
-    createPage({
-      path: `/products/${node.handle}`,
-      component: path.resolve(`./src/templates/product.js`),
-      context: {
-        productId: node.id,
-      },
-    });
-  });
 
   // Create pages for all Collections
   result.data.allShopifyCollection.nodes.forEach((node) => {
