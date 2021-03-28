@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import isEqual from 'lodash.isequal';
@@ -233,7 +232,6 @@ export const query = graphql`
       }
       storefrontId
       images {
-        altText
         localFile {
           publicURL
           childImageSharp {
