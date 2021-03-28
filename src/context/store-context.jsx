@@ -1,3 +1,4 @@
+/* eslint-disable promise/always-return */
 import fetch from 'isomorphic-fetch';
 import * as React from 'react';
 import Client from 'shopify-buy';
@@ -34,9 +35,9 @@ export const StoreProvider = ({ children }) => {
   const [checkout, setCheckout] = React.useState(defaultValues.checkout);
   const [loading, setLoading] = React.useState(false);
 
-  const setCheckoutItem = (checkout) => {
+  const setCheckoutItem = (c) => {
     if (isBrowser) {
-      localStorage.setItem(localStorageKey, checkout.id);
+      localStorage.setItem(localStorageKey, c.id);
     }
 
     setCheckout(checkout);

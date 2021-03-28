@@ -1,24 +1,19 @@
-import { Link } from 'gatsby';
-import * as React from 'react';
-import { animated, useTransition } from 'react-spring';
+import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "gatsby";
+import * as React from "react";
 
-import { useGraphQL } from '../hooks';
-import { SearchBar } from './search-bar';
-import { Wave } from './wave';
+import {useCartCount} from '../hooks/use-cart-count'
+import { useGraphQL } from "../hooks/use-graphql";
+import { SearchBar } from "./search-bar";
+import { Wave } from "./wave";
 
 const Header = ({ setMenuOpen }) => {
-  // const count = useCartCount();
+  const count = useCartCount();
   const { sanitySiteSettings } = useGraphQL();
 
   function toggleMenu() {
     setMenuOpen((prevState) => !prevState);
   }
-
-  // const transitions = useTransition(count >= 1, null, {
-  //   from: { opacity: 0, transform: 'translate3d(0, 1rem, 0)' },
-  //   enter: { opacity: 1, transform: 'translate3d(0, 0rem, 0)' },
-  //   leave: { opacity: 0, transform: 'translate3d(0, -1rem, 0)' },
-  // });
 
   return (
     <>
@@ -82,24 +77,33 @@ const Header = ({ setMenuOpen }) => {
                 >
                   <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-                {/* {transitions.map(
-                  ({ item, key, props: style }) =>
-                    item && (
-                      <animated.div
-                        key={key}
-                        style={style}
-                        className="absolute top-0 right-0 pointer-events-none"
+                <AnimatePresence>
+                  {count >= 1 ? (
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                        transform: "translate3d(0, 1rem, 0)",
+                      }}
+                      animate={{
+                        opacity: 1,
+                        transform: "translate3d(0, 0rem, 0)",
+                      }}
+                      exit={{
+                        opacity: 0,
+                        transform: "translate3d(0, -1rem, 0)",
+                      }}
+                      className="absolute top-0 right-0 pointer-events-none"
+                    >
+                      <span
+                        className={`${
+                          count >= 10 ? "px-2" : "w-5"
+                        } flex items-center justify-center h-5 max-w-xs pt-1 font-mono text-xs text-white transform translate-x-1/2 bg-pink-600 rounded-full shadow-lg pointer-events-auto `}
                       >
-                        <span
-                          className={`${
-                            count >= 10 ? 'px-2' : 'w-5'
-                          } flex items-center justify-center h-5 max-w-xs pt-1 font-mono text-xs text-white transform translate-x-1/2 bg-pink-600 rounded-full shadow-lg pointer-events-auto `}
-                        >
-                          {count}
-                        </span>
-                      </animated.div>
-                    )
-                )} */}
+                        {count}
+                      </span>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
               </Link>
             </div>
           </div>
