@@ -40,7 +40,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   result.data.allShopifyProduct.nodes.forEach((node) => {
     createPage({
       path: `/products/${node.handle}`,
-      component: path.resolve(`./src/templates/product.js`),
+      component: path.resolve(`./src/templates/product.jsx`),
       context: {
         productId: node.id,
       },
@@ -51,7 +51,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   result.data.allShopifyCollection.nodes.forEach((node) => {
     createPage({
       path: `/collections/${node.handle}`,
-      component: path.resolve(`./src/templates/collection.js`),
+      component: path.resolve(`./src/templates/collection.jsx`),
       context: {
         handle: node.handle,
       },
@@ -65,7 +65,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     } = page;
     createPage({
       path: slug,
-      component: path.resolve('./src/templates/page.js'),
+      component: path.resolve('./src/templates/page.jsx'),
       context: {
         slug,
       },
@@ -79,7 +79,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     } = page;
     createPage({
       path: slug,
-      component: path.resolve('./src/templates/post.js'),
+      component: path.resolve('./src/templates/post.jsx'),
       context: {
         slug,
       },

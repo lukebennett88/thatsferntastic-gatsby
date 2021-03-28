@@ -1,5 +1,5 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { useInstagram } from '../../hooks';
@@ -29,14 +29,15 @@ function Posts({ postsToShow }) {
   const posts = useInstagram();
   return (
     <div className="grid mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
-      {posts.length
+      {posts.length > 0
         ? posts
             .slice(0, postsToShow)
             .map((post) => <InstagramPost key={post.id} post={post} />)
-        : Array(postsToShow)
+        : new Array(postsToShow)
             .fill('')
             .map((_, index) => (
               <div
+                // eslint-disable-next-line react/no-array-index-key
                 key={index}
                 className="w-full max-w-sm mx-auto overflow-hidden rounded-lg shadow"
               >

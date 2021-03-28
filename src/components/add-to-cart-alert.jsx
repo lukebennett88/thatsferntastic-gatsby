@@ -1,34 +1,28 @@
-import * as React from 'react';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { animated, useTransition } from 'react-spring';
-import { FiX } from 'react-icons/fi';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
+import { DialogContent,DialogOverlay } from '@reach/dialog';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
+import * as React from 'react';
+import { FiX } from 'react-icons/fi';
 
 function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
-  const AnimatedDialogContent = animated(DialogContent);
-
-  const transitions = useTransition(isAlertShown, null, {
-    from: { transform: 'translate3d(50%, 0, 0)' },
-    enter: { transform: 'translate3d(0%, 0, 0)' },
-    leave: { transform: 'translate3d(50%, 0, 0)' },
-  });
-
   const close = () => setIsAlertShown(false);
-
-  return transitions.map(
-    ({ item, key, props: { transform } }) =>
-      item && (
+  return (
+    <AnimatePresence>
+      {isAlertShown ? (
         <DialogOverlay
-          key={key}
           onDismiss={close}
           className="fixed inset-x-0 top-0 z-50 flex items-start justify-center w-full h-full mx-auto"
         >
           <div className="fixed flex justify-center w-full max-w-screen-xl px-4 mx-auto md:justify-end sm:px-6 lg:px-8">
-            <AnimatedDialogContent
+            <DialogContent
+              as={motion.div}
               aria-label="Product added to cart."
-              style={{ transform }}
+              initial={{ x: '50%', opacity: 0 }}
+              animate={{ x: '0%',opacity: 1 }}
+              exit={{ x: '50%', opacity: 0 }}
+              transition={{ type: 'spring', damping: 18, stiffness: 200 }}
               className="w-full mt-20 bg-white rounded-lg shadow-2xl md:max-w-lg"
             >
               <div className="px-4 shadow-sm">
@@ -64,14 +58,14 @@ function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
                   <div className="max-w-sm col-span-4 mx-auto mt-4 font-medium md:mx-0 md:mt-0">
                     <div>{product.title}</div>
                     {variant.selectedOptions[0].name !== 'Title' && (
-                      <dl className="font-normal text-gray-500">
-                        <dt className="inline">
-                          {variant.selectedOptions[0].name}:{' '}
-                        </dt>
-                        <dd className="inline">
-                          {variant.selectedOptions[0].value}
-                        </dd>
-                      </dl>
+                    <dl className="font-normal text-gray-500">
+                      <dt className="inline">
+                        {variant.selectedOptions[0].name}:{' '}
+                      </dt>
+                      <dd className="inline">
+                        {variant.selectedOptions[0].value}
+                      </dd>
+                    </dl>
                     )}
                   </div>
                 </div>
@@ -94,10 +88,11 @@ function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
                   </span>
                 </div>
               </div>
-            </AnimatedDialogContent>
+            </DialogContent>
           </div>
         </DialogOverlay>
-      )
+          ) : null}
+    </AnimatePresence>
   );
 }
 
@@ -105,10 +100,12 @@ AddToCartAlert.propTypes = {
   isAlertShown: PropTypes.bool.isRequired,
   product: PropTypes.shape({
     title: PropTypes.string,
+    // eslint-disable-next-line react/forbid-prop-types
     variants: PropTypes.array.isRequired,
   }),
   setIsAlertShown: PropTypes.func.isRequired,
   variant: PropTypes.shape({
+    // eslint-disable-next-line react/forbid-prop-types
     selectedOptions: PropTypes.array.isRequired,
   }),
 };

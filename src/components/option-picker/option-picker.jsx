@@ -1,5 +1,5 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 
 function OptionPicker({ name, options, onChange }) {
   if (options.length <= 1) return null;
@@ -29,6 +29,7 @@ OptionPicker.propTypes = {};
 OptionPicker.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   options: PropTypes.array.isRequired,
 };
 

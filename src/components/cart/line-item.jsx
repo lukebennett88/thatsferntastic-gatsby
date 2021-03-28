@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { graphql,Link, useStaticQuery } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import {
   useRemoveItemFromCart,
   useUpdateItemQuantity,
 } from 'gatsby-theme-shopify-manager';
-import { HiChevronLeft, HiChevronRight, HiTrash } from 'react-icons/hi';
 import PropTypes from 'prop-types';
+import * as React from 'react';
+import { HiChevronLeft, HiChevronRight, HiTrash } from 'react-icons/hi';
 
 function LineItem({ item }) {
   const {
@@ -176,6 +176,7 @@ function LineItem({ item }) {
 }
 
 LineItem.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   item: PropTypes.object,
 };
 

@@ -8,7 +8,7 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 function useGraphQL() {
-  const data = useStaticQuery(
+  return useStaticQuery(
     graphql`
       {
         sanitySiteSettings {
@@ -95,7 +95,6 @@ function useGraphQL() {
       }
     `
   );
-  return data;
 }
 
 export { useGraphQL };

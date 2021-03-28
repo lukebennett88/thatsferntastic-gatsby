@@ -1,25 +1,37 @@
-import * as React from 'react';
-import { graphql, Link, useStaticQuery } from 'gatsby';
 import { Transition } from '@headlessui/react';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
+import { DialogContent,DialogOverlay } from '@reach/dialog';
 import { useLocation } from '@reach/router';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 
-import { useEventListener, useGraphQL } from '../hooks';
+import { useGraphQL } from '../hooks';
 
 function MobileMenu({ isMenuOpen, setMenuOpen }) {
-  const close = () => setMenuOpen(false);
+  const close = React.useCallback(() => {setMenuOpen(false)}, [setMenuOpen]);
 
-  function handleEscape(e) {
-    if (e.key === 'Escape') {
-      return close();
+  const handleEscape = React.useCallback(
+    (event) => {
+      if (event.key === 'Escape') {
+        close();
+      }
+    },
+    [close]
+  );
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          close();
+        }
+      });
     }
-  }
-  const isBrowser = typeof window !== 'undefined';
-
-  useEventListener('keydown', handleEscape, {
-    target: isBrowser ? document : null,
-  });
+    window.addEventListener('keydown', handleEscape);
+    return () => {
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [close, handleEscape]);
 
   const { sanitySiteSettings } = useGraphQL();
 

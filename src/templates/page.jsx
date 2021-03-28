@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { graphql } from 'gatsby';
 import SanityBlockContent from '@sanity/block-content-to-react';
+import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import { Layout, SEO } from '../components';
 
@@ -43,7 +43,7 @@ SanityPageTemplate.propTypes = {
   }),
 };
 
-const query = graphql`
+export const query = graphql`
   query($slug: String!) {
     sanityPage(slug: { current: { eq: $slug } }) {
       title
@@ -63,4 +63,4 @@ const query = graphql`
   }
 `;
 
-export { SanityPageTemplate as default, query };
+export default SanityPageTemplate;

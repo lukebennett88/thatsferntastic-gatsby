@@ -1,8 +1,8 @@
-import * as React from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 
-import { Layout, SEO, ProductTile } from '../components';
+import { Layout, ProductTile,SEO } from '../components';
 
 function CollectionPageTemplate({ data }) {
   const { products } = data.shopifyCollection;
@@ -27,7 +27,7 @@ CollectionPageTemplate.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-const query = graphql`
+export const query = graphql`
   query($handle: String!) {
     shopifyCollection(handle: { eq: $handle }) {
       id
@@ -57,4 +57,4 @@ const query = graphql`
   }
 `;
 
-export { CollectionPageTemplate as default, query };
+export default CollectionPageTemplate;

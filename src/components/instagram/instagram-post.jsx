@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { HiExternalLink } from 'react-icons/hi';
 import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import PropTypes from 'prop-types';
+import * as React from 'react';
+import { HiExternalLink } from 'react-icons/hi';
 
 import { useLazyLoad } from '../../hooks';
 
 export function InstagramPost({ post }) {
-  const { ref, imgRef, isImgLoaded, handleImgLoaded, Spinner } = useLazyLoad();
+  const { ref, imgRef } = useLazyLoad();
   return (
     <OutboundLink
       ref={ref}
@@ -21,7 +21,6 @@ export function InstagramPost({ post }) {
           <div className="relative h-0 rounded-t-md aspect-w-1 aspect-h-1">
             <img
               ref={imgRef}
-              onLoad={handleImgLoaded}
               data-src={post.src}
               srcSet={post.srcSet}
               alt={post.caption}
@@ -37,7 +36,6 @@ export function InstagramPost({ post }) {
                 Click to open in a new tab
               </div>
             </div>
-            {!isImgLoaded && <Spinner />}
           </div>
           <div className="flex items-center flex-1 px-6 py-3 overflow-hidden">
             <p title={post.caption} className="mt-2 clamp-3">
@@ -54,6 +52,7 @@ InstagramPost.propTypes = {
   post: PropTypes.shape({
     caption: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
+    // eslint-disable-next-line react/forbid-prop-types
     srcSet: PropTypes.array.isRequired,
     url: PropTypes.string.isRequired,
   }),

@@ -1,8 +1,4 @@
-const tailwindcss = require('tailwindcss');
-const autoprefixer = require('autoprefixer');
 const dotenv = require('dotenv');
-
-const tailwindConfig = require('./tailwind.config.js');
 
 dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -29,6 +25,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-image',
     'gatsby-plugin-netlify',
+    'gatsby-plugin-postcss',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-robots-txt',
     'gatsby-plugin-sharp',
@@ -70,12 +67,6 @@ module.exports = {
         start_url: '/',
         display: 'minimal-ui',
         icon: 'src/images/favicon.png', // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-postcss',
-      options: {
-        postCssPlugins: [tailwindcss(tailwindConfig), autoprefixer],
       },
     },
     {
