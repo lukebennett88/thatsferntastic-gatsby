@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { graphql } from 'gatsby';
-import SanityBlockContent from '@sanity/block-content-to-react';
-import PropTypes from 'prop-types';
-
 import { Link } from '@reach/router';
+import SanityBlockContent from '@sanity/block-content-to-react';
+import { graphql } from 'gatsby';
+import PropTypes from 'prop-types';
+import * as React from 'react';
+
 import { Layout, SEO } from '../components';
 
 function BlogPostPage({ data }) {
@@ -95,7 +95,7 @@ Post.propTypes = {
   }),
 };
 
-const query = graphql`
+export const query = graphql`
   {
     allSanityBlogPost(sort: { fields: _updatedAt, order: ASC }) {
       nodes {
@@ -118,4 +118,4 @@ const query = graphql`
   }
 `;
 
-export { BlogPostPage as default, query };
+export default BlogPostPage;

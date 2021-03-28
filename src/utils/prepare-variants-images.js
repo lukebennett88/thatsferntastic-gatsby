@@ -40,12 +40,10 @@ export function prepareVariantsImages(variants, optionKey) {
 
   // prepare an array of image objects that include both the image
   // and the optionkey value.
-  const images = Object.keys(imageDictionary).map((key) => {
+  return Object.keys(imageDictionary).map((key) => {
     return {
       [optionKey]: key,
       src: imageDictionary[key],
     };
   });
-
-  return images;
 }

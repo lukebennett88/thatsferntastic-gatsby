@@ -1,7 +1,7 @@
+import { useLocation } from '@reach/router';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { graphql, Link, useStaticQuery } from 'gatsby';
-import { useLocation } from '@reach/router';
 
 import { useGraphQL } from '../hooks';
 

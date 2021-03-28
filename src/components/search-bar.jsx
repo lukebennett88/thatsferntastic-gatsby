@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { Link } from 'gatsby';
-import { matchSorter } from 'match-sorter';
 import {
   Combobox,
   ComboboxInput,
-  ComboboxPopover,
   ComboboxList,
   ComboboxOption,
+  ComboboxPopover,
 } from '@reach/combobox';
+import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import { matchSorter } from 'match-sorter';
+import * as React from 'react';
 
 import { useGraphQL, useThrottle } from '../hooks';
 

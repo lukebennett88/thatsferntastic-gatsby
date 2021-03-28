@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { Spinner } from '../components/spinner';
@@ -19,10 +19,10 @@ export function useLazyLoad() {
   });
 
   // Create a ref for the product image
-  const imgRef = useRef(null);
+  const imgRef = React.useRef(null);
 
   // Show a spinner while image is loading
-  const [isImgLoaded, setImgLoaded] = useState(false);
+  const [isImgLoaded, setImgLoaded] = React.useState(false);
 
   // Function to set imageLoaded to true so that we can unmount the spinner
   function handleImgLoaded() {
@@ -30,8 +30,9 @@ export function useLazyLoad() {
   }
 
   // When image enters the screen swap out src for the data-src
-  useEffect(() => {
+  React.useEffect(() => {
     if (inView) {
+      // eslint-disable-next-line scanjs-rules/assign_to_src
       imgRef.current.src = imgRef.current.dataset.src;
     }
   }, [inView]);

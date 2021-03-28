@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import { Link } from 'gatsby';
-import { FacebookIcon, InstagramIcon, TwitterIcon } from './icons';
+import { OutboundLink } from 'gatsby-plugin-google-gtag';
+import * as React from 'react';
 
 import { useGraphQL } from '../hooks';
+import { FacebookIcon, InstagramIcon, TwitterIcon } from './icons';
 
 const SOCIAL_ICON = {
   Facebook: FacebookIcon,

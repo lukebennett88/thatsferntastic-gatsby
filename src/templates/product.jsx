@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { GatsbyImage } from 'gatsby-plugin-image';
 import { graphql } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { useAddItemToCart } from 'gatsby-theme-shopify-manager';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import {
-  Layout,
-  SEO,
-  Gallery,
   AddToCartAlert,
+  Gallery,
+  Layout,
   OptionPicker,
+  SEO,
   Spinner,
 } from '../components';
 import { prepareVariantsWithOptions } from '../utils';
@@ -17,7 +17,6 @@ import { prepareVariantsWithOptions } from '../utils';
 function ProductPage({ data: { shopifyProduct: product } }) {
   const addItemToCart = useAddItemToCart();
   const [isAlertShown, setIsAlertShown] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
   const [activeImageIndex, setActiveImageIndex] = React.useState(0);
   const variants = React.useMemo(
     () => prepareVariantsWithOptions(product.variants),
@@ -29,7 +28,7 @@ function ProductPage({ data: { shopifyProduct: product } }) {
     try {
       await addItemToCart(variant.shopifyId, 1);
       setIsAlertShown(true);
-    } catch (e) {
+    } catch (error) {
       setIsAlertShown(false);
     }
   }
@@ -65,7 +64,6 @@ function ProductPage({ data: { shopifyProduct: product } }) {
               <div className="relative bg-white aspect-w-1 aspect-h-1">
                 <div className="absolute inset-0 flex">
                   <GatsbyImage
-                    onLoad={() => setIsLoading(false)}
                     image={
                       product.images[activeImageIndex].localFile.childImageSharp
                         .gatsbyImageData
@@ -75,11 +73,6 @@ function ProductPage({ data: { shopifyProduct: product } }) {
                     className="flex-1 duration-500 ease-in-out transform hover:scale-110"
                   />
                 </div>
-                {isLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 backdrop-blur">
-                    <Spinner />
-                  </div>
-                )}
               </div>
             </div>
             <Gallery
@@ -109,19 +102,18 @@ function ProductPage({ data: { shopifyProduct: product } }) {
                   options={option.values}
                   onChange={(e) =>
                     setVariant(
-                      variants.filter(
+                      variants.find(
                         (v) =>
                           v.selectedOptions[0].name === option.name &&
                           v.selectedOptions[0].value === e.target.value
-                      )[0]
-                    )
-                  }
+                      )
+                    )}
                 />
               ))}
             </div>
 
             {product.availableForSale ? (
-              <span className="relative transition duration-300 ease-in-out transform rounded-full hover:-translate-y-0.5">
+              <span className="relative transition duration-300 ease-in-out transform-gpu rounded-full hover:-translate-y-0.5">
                 <button
                   type="button"
                   onClick={handleAddToCart}

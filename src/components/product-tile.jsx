@@ -1,10 +1,9 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import { useGraphQL } from '../hooks';
-import { Spinner } from './spinner';
 
 function ProductTile({ product }) {
   const { ogImage } = useGraphQL();
@@ -12,8 +11,6 @@ function ProductTile({ product }) {
   const imageSrc = product.images
     ? product.images[0].localFile.childImageSharp?.gatsbyImageData
     : ogImage.childImageSharp.gatsbyImageData;
-
-  const [isLoading, setIsLoading] = React.useState(true);
 
   const soldOut = !product.availableForSale;
 
@@ -38,16 +35,10 @@ function ProductTile({ product }) {
           <div className="relative h-0 rounded-t-md aspect-w-1 aspect-h-1">
             <div className="absolute inset-0 flex">
               <GatsbyImage
-                onLoad={() => setIsLoading(false)}
                 image={imageSrc}
                 alt=""
                 className="flex-1 rounded-t-lg"
               />
-              {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 backdrop-blur">
-                  <Spinner />
-                </div>
-              )}
             </div>
           </div>
           <div className="flex flex-col justify-center flex-1 px-6 py-3 overflow-hidden">
@@ -65,6 +56,7 @@ function ProductTile({ product }) {
 }
 
 ProductTile.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   product: PropTypes.object,
 };
 

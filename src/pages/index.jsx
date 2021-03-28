@@ -1,8 +1,8 @@
-import * as React from 'react';
 import { useLocation } from '@reach/router';
 import queryString from 'query-string';
+import * as React from 'react';
 
-import { Layout, SEO, ProductTile, InstagramWidget } from '../components';
+import { InstagramWidget,Layout, ProductTile, SEO } from '../components';
 import { useGraphQL } from '../hooks';
 
 function IndexPage() {

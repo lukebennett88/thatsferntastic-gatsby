@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
+import { Footer } from './footer';
 import { Header } from './header';
 import { MobileMenu } from './mobile-menu';
 import { Sidebar } from './sidebar';
-import { Footer } from './footer';
 
 export function Layout({ children, hasSidebar = true }) {
   const [isMenuOpen, setMenuOpen] = useState(false);

@@ -1,14 +1,14 @@
-import * as React from 'react';
+import { DialogContent, DialogOverlay } from '@reach/dialog';
 import {
-  useCartItems,
   useCart,
-  useCheckoutUrl,
   useCartCount,
+  useCartItems,
+  useCheckoutUrl,
 } from 'gatsby-theme-shopify-manager';
 import PropTypes from 'prop-types';
-
+import * as React from 'react';
 import { HiX } from 'react-icons/hi';
-import { DialogContent, DialogOverlay } from '@reach/dialog';
+
 import { LineItem } from './line-item';
 
 export function Cart() {
@@ -112,9 +112,7 @@ function Terms({ showDialog, close }) {
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
           aria-hidden
-        >
-          ​
-        </span>
+        />
         {/*
             Modal panel, show/hide based on modal state.
 
