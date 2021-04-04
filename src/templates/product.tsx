@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { useAddItemToCart } from 'gatsby-theme-shopify-manager';
+import { useAddItemToCart } from '../hooks/use-add-item-to-cart';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 
@@ -10,7 +10,6 @@ import {
   Layout,
   OptionPicker,
   SEO,
-  Spinner,
 } from '../components';
 import { prepareVariantsWithOptions } from '../utils';
 

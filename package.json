@@ -32,7 +32,6 @@
     "gatsby-plugin-canonical-urls": "^3.2.0",
     "gatsby-plugin-google-gtag": "^3.2.0",
     "gatsby-plugin-image": "^1.2.0",
-    "gatsby-theme-shopify-manager": "^0.1.8",
     "match-sorter": "^6.3.0",
     "node-fetch": "^2.6.1",
     "path": "^0.12.7",

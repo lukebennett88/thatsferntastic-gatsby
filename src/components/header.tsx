@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'gatsby';
-import { useCartCount } from 'gatsby-theme-shopify-manager';
+import { useCartCount } from '../hooks/use-cart-count';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import {

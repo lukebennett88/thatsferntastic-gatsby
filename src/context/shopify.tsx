@@ -9,7 +9,7 @@ interface ContextShape {
   setCart: React.Dispatch<React.SetStateAction<ShopifyBuy.Cart | null>>;
 }
 
-export const Context = React.createContext<ContextShape>({
+const Context = React.createContext<ContextShape>({
   client: null,
   cart: null,
   setCart: () => {
@@ -23,7 +23,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export function ShopifyProvider({ shopName, accessToken, children }: Props) {
+function ShopifyProvider({ shopName, accessToken, children }: Props) {
   if (shopName == null || accessToken == null) {
     throw new Error(
       'Unable to build shopify-buy client object. Please make sure that your access token and domain are correct.'
@@ -91,3 +91,11 @@ export function ShopifyProvider({ shopName, accessToken, children }: Props) {
     </Context.Provider>
   );
 }
+
+// Create useShopifyContext to make using values from Context easier
+function useShopifyContext() {
+  return React.useContext(Context);
+}
+
+// Export everything
+export { Context, ShopifyProvider, useShopifyContext };

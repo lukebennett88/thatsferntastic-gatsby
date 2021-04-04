@@ -2471,26 +2471,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@^16.9.5":
-  version "16.9.12"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.12.tgz#55cd6b17e73922edb9545e5355a0016c1734e6f4"
-  integrity sha512-i7NPZZpPte3jtVOoW+eLB7G/jsX5OM6GqQnH+lC0nq0rqwlK0x8WcMEvYDgFWqWhWMlTltTimzdMax6wYfZssA==
-  dependencies:
-    "@types/react" "^16"
-
 "@types/react@*":
   version "17.0.3"
   resolved "https://registry.npmjs.org/@types/react/-/react-17.0.3.tgz"
   integrity sha512-wYOUxIgs2HZZ0ACNiIayItyluADNbONl7kt8lkLjVK8IitMH5QMyAh75Fwhmo37r1m7L2JaFj03sIfxBVDvRAg==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@^16", "@types/react@^16.9.20":
-  version "16.14.5"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.5.tgz#2c39b5cadefaf4829818f9219e5e093325979f4d"
-  integrity sha512-YRRv9DNZhaVTVRh9Wmmit7Y0UFhEVqXqCSw3uazRWMxa2x85hWQZ5BN24i7GXZbaclaLXEcodEeIHsjBA8eAMw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2528,11 +2512,6 @@
   version "0.16.1"
   resolved "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.1.tgz"
   integrity sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==
-
-"@types/shopify-buy@^1.4.3":
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/@types/shopify-buy/-/shopify-buy-1.11.1.tgz#a40ef9e4f4859b490f4bafa6f2894166a527e273"
-  integrity sha512-SK+inKi30Gfju3yAysjk7LUvUJYytkQhJcbI5afQPpvGrdBNGLuDat9vcogV9vCh2gpPRymQIzaA/qd7eJG5+g==
 
 "@types/tmp@^0.0.33":
   version "0.0.33"
@@ -3327,11 +3306,6 @@ babel-plugin-polyfill-regenerator@^0.1.2:
   integrity sha512-OUrYG9iKPKz8NxswXbRAdSwF0GhRdIEMTloQATJi4bDuFqrXaXcCUT/VGNrr8pBcjMh1RxZ7Xt9cytVJTJfvMg==
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.1.5"
-
-babel-plugin-remove-graphql-queries@^2.16.1:
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-2.16.1.tgz#bacfcd87eabdfffe025072c11602a9586cd0285a"
-  integrity sha512-PkHJuRodMp4p617a/ZVhV8elBhRoFpOTpdu2DaApXJFIsDJWhjZ8d4BGbbFCT/yKJrhRDTdqg1r5AhWEaEUKkw==
 
 babel-plugin-remove-graphql-queries@^3.2.0:
   version "3.2.0"
@@ -7038,19 +7012,6 @@ gatsby-plugin-sitemap@^3.2.0:
     pify "^3.0.0"
     sitemap "^1.13.0"
 
-gatsby-plugin-typescript@^2.1.27:
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-2.12.1.tgz#cb2f009d5c015a7703578b86608e90d71b55e9ae"
-  integrity sha512-p32qJVDi5Xw1Oo5vLMUXdRBxSDlMrfxTGb7etMAsVfyLRlRhMLb2YsuXJIvN1IfybQ6Z3EbhlH293cpxn5jozg==
-  dependencies:
-    "@babel/core" "^7.12.3"
-    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.12.1"
-    "@babel/plugin-proposal-numeric-separator" "^7.12.5"
-    "@babel/plugin-proposal-optional-chaining" "^7.12.1"
-    "@babel/preset-typescript" "^7.12.1"
-    "@babel/runtime" "^7.12.5"
-    babel-plugin-remove-graphql-queries "^2.16.1"
-
 gatsby-plugin-typescript@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/gatsby-plugin-typescript/-/gatsby-plugin-typescript-3.2.0.tgz"
@@ -7215,18 +7176,6 @@ gatsby-telemetry@^2.2.0:
     lodash "^4.17.21"
     node-fetch "^2.6.1"
     uuid "3.4.0"
-
-gatsby-theme-shopify-manager@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/gatsby-theme-shopify-manager/-/gatsby-theme-shopify-manager-0.1.8.tgz#9ffb6bdb5292464e6f1bee16d3686e970a7ea4aa"
-  integrity sha512-P0lsW0QlOcURaFEhk39TkLmojE2RT1y+jw9w+ctcMIf4hQXBdNtvhr+y0rf+ST3k+SacNe43+lAtbW/xg/L+9Q==
-  dependencies:
-    "@types/react" "^16.9.20"
-    "@types/react-dom" "^16.9.5"
-    "@types/shopify-buy" "^1.4.3"
-    gatsby-plugin-typescript "^2.1.27"
-    shopify-buy "^2.9.0"
-    typescript "^3.7.5"
 
 gatsby-transformer-sharp@^3.2.0:
   version "3.2.0"
@@ -13443,7 +13392,7 @@ shell-quote@1.7.2:
   resolved "https://registry.npmjs.org/shell-quote/-/shell-quote-1.7.2.tgz"
   integrity sha512-mRz/m/JVscCrkMyPqHc/bczi3OQHkLTqXHEFu0zDhK/qfv3UcOA4SVmRCLmos4bhjr9ekVQubj/R7waKapmiQg==
 
-shopify-buy@^2.11.0, shopify-buy@^2.9.0:
+shopify-buy@^2.11.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/shopify-buy/-/shopify-buy-2.11.0.tgz#0f7cb52741395e4ae778c336f32ddf3fe67c2f35"
   integrity sha512-bGjS1b/VCPvCjazSstlKwgLtK1WBotWom06/12loja8yfo/cWkLuJsakBbQe1uEIDiOLhKaR0M0CAXZFheYDug==
@@ -15035,11 +14984,6 @@ typeface-montserrat@^1.1.13:
   version "1.1.13"
   resolved "https://registry.npmjs.org/typeface-montserrat/-/typeface-montserrat-1.1.13.tgz"
   integrity sha512-Pklkyj0e+K+6I/t0M6JBDBphpfJkF1k+3qd8qDnp9aVtCC7oGBQWTAcL6+5eArfGe7h73uPwyal73hEkf9YCUA==
-
-typescript@^3.7.5:
-  version "3.9.9"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.9.tgz#e69905c54bc0681d0518bd4d587cc6f2d0b1a674"
-  integrity sha512-kdMjTiekY+z/ubJCATUPlRDl39vXYiMV9iyeMuEuXZh2we6zz80uovNN2WlAxmmdE/Z/YQe+EbOEXB5RHEED3w==
 
 typescript@^4.2.3:
   version "4.2.3"

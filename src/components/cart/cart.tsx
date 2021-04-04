@@ -1,10 +1,8 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog';
-import {
-  useCart,
-  useCartCount,
-  useCartItems,
-  useCheckoutUrl,
-} from 'gatsby-theme-shopify-manager';
+import { useCart } from '../../hooks/use-cart';
+import { useCartCount } from '../../hooks/use-cart-count';
+import { useCartItems } from '../../hooks/use-cart-items';
+import { useCheckoutUrl } from '../../hooks/use-checkout-url';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { HiX } from 'react-icons/hi';
@@ -25,6 +23,7 @@ export function Cart() {
         <div className="relative grid flex-1 pb-20 mx-auto gap-y-10 gap-x-12 lg:col-span-3">
           {count
             ? lineItems.map(
+                // @ts-ignore
                 (item) => item.variant && <LineItem key={item.id} item={item} />
               )
             : 'Nothing to see here, your cart is empty!'}
@@ -55,6 +54,7 @@ function CartSummary({ open }) {
             </div>
             <div className="flex justify-between">
               <dt>Subtotal:</dt>
+              {/* @ts-ignore */}
               <dd>${Number(cart?.totalPrice || 0).toFixed(2)}</dd>
             </div>
             <div className="flex justify-between">
@@ -175,7 +175,7 @@ function Terms({ showDialog, close }) {
             </label>
 
             <a
-              href={isChecked ? checkout : null}
+              href={isChecked ? (checkout as string) : undefined}
               className={`inline-flex items-center justify-center px-12 py-3 font-mono text-base font-medium text-center border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 ${
                 isChecked
                   ? 'text-pink-700 bg-pink-100 hover:bg-pink-200'

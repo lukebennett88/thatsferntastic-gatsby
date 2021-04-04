@@ -1,9 +1,7 @@
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import {
-  useRemoveItemFromCart,
-  useUpdateItemQuantity,
-} from 'gatsby-theme-shopify-manager';
+import { useRemoveItemFromCart } from '../../hooks/use-remove-item-from-cart';
+import { useUpdateItemQuantity } from '../../hooks/use-update-item-quantity';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { HiChevronLeft, HiChevronRight, HiTrash } from 'react-icons/hi';
@@ -49,13 +47,17 @@ function LineItem({ item }) {
   });
 
   function getHandleForVariant(variantId) {
-    const selectedProduct = betterProductHandles.find((product) => product.variants.includes(variantId));
+    const selectedProduct = betterProductHandles.find((product) =>
+      product.variants.includes(variantId)
+    );
 
     return selectedProduct ? selectedProduct.handle : null;
   }
 
   function getImageFluidForVariant(variantId) {
-    const selectedVariant = variants.find((variant) => variant.shopifyId === variantId);
+    const selectedVariant = variants.find(
+      (variant) => variant.shopifyId === variantId
+    );
 
     if (selectedVariant) {
       return selectedVariant.image.localFile.childImageSharp.gatsbyImageData;
