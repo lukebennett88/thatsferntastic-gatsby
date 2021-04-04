@@ -15,12 +15,9 @@ module.exports = {
     siteUrl,
   },
   flags: {
-    DEV_SSR: true,
     FAST_DEV: true,
-    FAST_REFRESH: true,
-    PARALLEL_SOURCING: false,
-    PRESERVE_FILE_DOWNLOAD_CACHE: true,
-    PRESERVE_WEBPACK_CACHE: true,
+    DEV_SSR: true,
+    PARALLEL_SOURCING: true,
   },
   plugins: [
     'gatsby-plugin-image',
@@ -30,6 +27,7 @@ module.exports = {
     'gatsby-plugin-robots-txt',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-typescript',
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-canonical-urls',
