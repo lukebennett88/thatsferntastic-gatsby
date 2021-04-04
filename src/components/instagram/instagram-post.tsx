@@ -1,26 +1,26 @@
 import { OutboundLink } from 'gatsby-plugin-google-gtag';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { HiExternalLink } from 'react-icons/hi';
+import { useLazyLoad } from '../../hooks/use-lazyload';
 
-import { useLazyLoad } from '../../hooks';
-
-export function InstagramPost({ post }) {
-  const { ref, imgRef } = useLazyLoad();
+function InstagramPost({ post }) {
+  const { containerRef, srcRef } = useLazyLoad();
   return (
     <OutboundLink
-      ref={ref}
       aria-label="View post on Instagram"
       href={post.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-full max-w-sm mx-auto transition duration-500 ease-in-out transform rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg group"
+      className="w-full max-w-sm mx-auto transition duration-500 ease-in-out rounded-lg transform-gpu hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg group"
     >
-      <div className="relative w-full h-0 aspect-w-2 aspect-h-3">
+      <div
+        ref={containerRef}
+        className="relative w-full h-0 aspect-w-2 aspect-h-3"
+      >
         <article className="absolute inset-0 flex flex-col pb-3 bg-white rounded-lg shadow">
           <div className="relative h-0 rounded-t-md aspect-w-1 aspect-h-1">
             <img
-              ref={imgRef}
+              ref={srcRef}
               data-src={post.src}
               srcSet={post.srcSet}
               alt={post.caption}
@@ -48,12 +48,4 @@ export function InstagramPost({ post }) {
   );
 }
 
-InstagramPost.propTypes = {
-  post: PropTypes.shape({
-    caption: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired,
-    // eslint-disable-next-line react/forbid-prop-types
-    srcSet: PropTypes.array.isRequired,
-    url: PropTypes.string.isRequired,
-  }),
-};
+export { InstagramPost };

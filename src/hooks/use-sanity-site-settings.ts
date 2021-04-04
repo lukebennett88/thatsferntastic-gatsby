@@ -1,16 +1,33 @@
-/**
- * Custom hook that queries for data with
- * Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import { graphql, useStaticQuery } from 'gatsby';
 
-function useSanitySiteSettings() {
-  return useStaticQuery(
+type ShareImage = {
+  asset: {
+    url: string;
+  };
+};
+
+type SocialLink = {
+  _key: string;
+  socialNetwork: string;
+  link: string;
+};
+
+type SanitySiteSettings = {
+  title: string;
+  description: string;
+  siteUrl: string;
+  shareImage: ShareImage;
+  socialLinks: Array<SocialLink>;
+};
+
+type SanitySiteSettingsReturnType = {
+  sanitySiteSettings: SanitySiteSettings;
+};
+
+function useSanitySiteSettings(): SanitySiteSettings {
+  const { sanitySiteSettings } = useStaticQuery<SanitySiteSettingsReturnType>(
     graphql`
-      {
+      query SanitySiteSettingsQuery {
         sanitySiteSettings {
           title
           description
@@ -29,6 +46,13 @@ function useSanitySiteSettings() {
       }
     `
   );
+  return sanitySiteSettings;
 }
 
-export { useSanitySiteSettings };
+export {
+  useSanitySiteSettings,
+  ShareImage,
+  SocialLink,
+  SanitySiteSettings,
+  SanitySiteSettingsReturnType,
+};

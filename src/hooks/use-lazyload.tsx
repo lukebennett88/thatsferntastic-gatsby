@@ -11,31 +11,36 @@ function LoadingSpinner() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useLazyLoad() {
   // Add a ref to image wrapper so that we can detect when it enters the viewport using IntersectionObserver
-  const [ref, inView] = useInView({
+  const [containerRef, inView] = useInView({
     threshold: 0,
     triggerOnce: true,
   });
 
   // Create a ref for the product image
-  const imgRef = React.useRef(null);
+  const srcRef = React.useRef(null);
 
   // Show a spinner while image is loading
-  const [isImgLoaded, setImgLoaded] = React.useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
   // Function to set imageLoaded to true so that we can unmount the spinner
-  function handleImgLoaded() {
-    setImgLoaded(true);
-  }
+  const handleIsLoaded = (): void => setIsLoaded(true);
 
   // When image enters the screen swap out src for the data-src
   React.useEffect(() => {
-    if (inView) {
-      // eslint-disable-next-line scanjs-rules/assign_to_src
-      imgRef.current.src = imgRef.current.dataset.src;
+    if (inView && srcRef?.current) {
+      // @ts-ignore
+      srcRef.current.src = srcRef.current.dataset.src;
     }
   }, [inView]);
 
-  return { ref, imgRef, isImgLoaded, handleImgLoaded, Spinner: LoadingSpinner };
+  return {
+    containerRef,
+    srcRef,
+    isLoaded,
+    handleIsLoaded,
+    Spinner: LoadingSpinner,
+  };
 }

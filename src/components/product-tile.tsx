@@ -1,12 +1,13 @@
 import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import PropTypes from 'prop-types';
 import * as React from 'react';
+import { useOGImage } from '../hooks/use-og-image';
 
-import { useGraphQL } from '../hooks';
+import {} from '../utils/';
+import { formatMoney } from '../utils/format-money';
 
-function ProductTile({ product }) {
-  const { ogImage } = useGraphQL();
+function ProductTile({ product }): React.ReactElement {
+  const ogImage = useOGImage();
 
   const imageSrc = product.images
     ? product.images[0].localFile.childImageSharp?.gatsbyImageData
@@ -14,13 +15,13 @@ function ProductTile({ product }) {
 
   const soldOut = !product.availableForSale;
 
-  const maxPrice = Number(product.priceRange.maxVariantPrice.amount).toFixed(2);
-  const minPrice = Number(product.priceRange.minVariantPrice?.amount).toFixed(
-    2
-  );
+  const maxPrice = Number(product.priceRange.maxVariantPrice.amount);
+  const minPrice = Number(product.priceRange.minVariantPrice?.amount);
 
   const price =
-    maxPrice - minPrice === 0 ? `$${minPrice}` : `from $${minPrice}`;
+    maxPrice - minPrice === 0
+      ? `${formatMoney(minPrice)}`
+      : `from $${formatMoney(minPrice)}`;
 
   return (
     <Link
@@ -54,10 +55,5 @@ function ProductTile({ product }) {
     </Link>
   );
 }
-
-ProductTile.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  product: PropTypes.object,
-};
 
 export { ProductTile };

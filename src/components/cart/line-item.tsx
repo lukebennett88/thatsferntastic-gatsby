@@ -49,17 +49,13 @@ function LineItem({ item }) {
   });
 
   function getHandleForVariant(variantId) {
-    const selectedProduct = betterProductHandles.find((product) => {
-      return product.variants.includes(variantId);
-    });
+    const selectedProduct = betterProductHandles.find((product) => product.variants.includes(variantId));
 
     return selectedProduct ? selectedProduct.handle : null;
   }
 
   function getImageFluidForVariant(variantId) {
-    const selectedVariant = variants.find((variant) => {
-      return variant.shopifyId === variantId;
-    });
+    const selectedVariant = variants.find((variant) => variant.shopifyId === variantId);
 
     if (selectedVariant) {
       return selectedVariant.image.localFile.childImageSharp.gatsbyImageData;

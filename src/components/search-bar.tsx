@@ -9,10 +9,13 @@ import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { matchSorter } from 'match-sorter';
 import * as React from 'react';
+import { useAllShopifyProducts } from '../hooks/use-all-shopify-products';
+import { useThrottle } from '../hooks/use-throttle';
 
-import { useGraphQL, useThrottle } from '../hooks';
-
-function useProductMatch(products, term) {
+function useProductMatch(
+  products: Array<Record<string, unknown>>,
+  term: string
+) {
   const throttledTerm = useThrottle(term, 100);
   return React.useMemo(
     () =>
@@ -27,23 +30,14 @@ function useProductMatch(products, term) {
 }
 
 function SearchBar() {
-  const {
-    allShopifyProduct: { nodes: products },
-  } = useGraphQL();
-
+  const { nodes: products } = useAllShopifyProducts();
   const [term, setTerm] = React.useState('');
-
   const results = useProductMatch(products, term);
-
   const inputRef = React.useRef(null);
 
-  function handleChange(event) {
-    setTerm(event.target.value);
-  }
+  const handleChange = (event) => setTerm(event.target.value);
 
-  function handleSelect(value) {
-    setTerm(value);
-  }
+  const handleSelect = (value) => setTerm(value);
 
   return (
     <Combobox
@@ -83,7 +77,7 @@ function SearchBar() {
                 Products
               </h3>
               <ComboboxList className="bg-white">
-                {results.slice(0, 10).map((result) => (
+                {results.slice(0, 10).map((result: any) => (
                   <ComboboxOption
                     key={result.handle}
                     value={result.title}
@@ -99,8 +93,6 @@ function SearchBar() {
                             .gatsbyImageData
                         }
                         alt=""
-                        width={44}
-                        height={44}
                         className="object-contain bg-white rounded h-11 w-11"
                       />
                       <span className="ml-2">{result.title}</span>

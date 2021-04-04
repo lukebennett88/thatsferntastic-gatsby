@@ -3,14 +3,17 @@ import { Link } from 'gatsby';
 import { useCartCount } from 'gatsby-theme-shopify-manager';
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import {
+  useSanitySiteSettings,
+  SanitySiteSettings,
+} from '../hooks/use-sanity-site-settings';
 
-import { useGraphQL } from '../hooks';
 import { SearchBar } from './search-bar';
 import { Wave } from './wave';
 
 const Header = ({ setMenuOpen }) => {
   const count = useCartCount();
-  const { sanitySiteSettings } = useGraphQL();
+  const sanitySiteSettings: SanitySiteSettings = useSanitySiteSettings();
   const toggleMenu = () => setMenuOpen((prevState) => !prevState);
   return (
     <>

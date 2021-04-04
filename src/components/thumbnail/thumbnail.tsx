@@ -2,8 +2,7 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 
-export const Thumbnail = ({ src, onClick }) => {
-  return (
+export const Thumbnail = ({ src, onClick }) => (
     <div className="flex-shrink-0 w-2/5 p-1 pr-4">
       <div className="relative h-0 aspect-w-1 aspect-h-1">
         <button
@@ -20,7 +19,6 @@ export const Thumbnail = ({ src, onClick }) => {
       </div>
     </div>
   );
-};
 
 Thumbnail.propTypes = {
   onClick: PropTypes.func,

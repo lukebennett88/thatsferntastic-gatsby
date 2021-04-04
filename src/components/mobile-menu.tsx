@@ -2,18 +2,28 @@ import { Transition } from '@headlessui/react';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
 import { useLocation } from '@reach/router';
 import { graphql, Link, useStaticQuery } from 'gatsby';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
-import { useGraphQL } from '../hooks';
+import {
+  SanitySiteSettings,
+  useSanitySiteSettings,
+} from '../hooks/use-sanity-site-settings';
 
-function MobileMenu({ isMenuOpen, setMenuOpen }) {
+type MobileMenuProps = {
+  isMenuOpen: boolean;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function MobileMenu({
+  isMenuOpen,
+  setMenuOpen,
+}: MobileMenuProps): React.ReactElement {
   const close = React.useCallback(() => {
     setMenuOpen(false);
   }, [setMenuOpen]);
 
   const handleEscape = React.useCallback(
-    (event) => {
+    (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         close();
       }
@@ -35,9 +45,17 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
     };
   }, [close, handleEscape]);
 
-  const { sanitySiteSettings } = useGraphQL();
+  const sanitySiteSettings: SanitySiteSettings = useSanitySiteSettings();
 
-  const { allShopifyProduct } = useStaticQuery(graphql`
+  type ShopifyProductType = {
+    productType: string;
+  };
+
+  type ShopifyProductTypes = { nodes: Array<ShopifyProductType> };
+
+  const {
+    allShopifyProduct,
+  }: { allShopifyProduct: ShopifyProductTypes } = useStaticQuery(graphql`
     {
       allShopifyProduct {
         nodes {
@@ -169,10 +187,5 @@ function MobileMenu({ isMenuOpen, setMenuOpen }) {
     </Transition>
   );
 }
-
-MobileMenu.propTypes = {
-  isMenuOpen: PropTypes.bool,
-  setMenuOpen: PropTypes.func,
-};
 
 export { MobileMenu };

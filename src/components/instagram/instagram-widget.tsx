@@ -1,12 +1,17 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useInstagram } from '../../hooks/use-instagram';
 
-import { useInstagram } from '../../hooks';
 import { Spinner } from '../spinner';
 import { InstagramPost } from './instagram-post';
 
-function InstagramWidget({ postsToShow = 6 }) {
+const POSTS_TO_SHOW = 6;
+
+type PostProps = { postsToShow?: number };
+
+function InstagramWidget({
+  postsToShow = POSTS_TO_SHOW,
+}: PostProps): React.ReactElement {
   const [ref, inView] = useInView({
     rootMargin: '200px',
     triggerOnce: true,
@@ -21,11 +26,7 @@ function InstagramWidget({ postsToShow = 6 }) {
   );
 }
 
-InstagramWidget.propTypes = {
-  postsToShow: PropTypes.number,
-};
-
-function Posts({ postsToShow }) {
+function Posts({ postsToShow = POSTS_TO_SHOW }: PostProps): React.ReactElement {
   const posts = useInstagram();
   return (
     <div className="grid mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
@@ -49,9 +50,5 @@ function Posts({ postsToShow }) {
     </div>
   );
 }
-
-Posts.propTypes = {
-  postsToShow: PropTypes.number.isRequired,
-};
 
 export { InstagramWidget };

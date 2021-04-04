@@ -6,11 +6,20 @@
  */
 
 import { useLocation } from '@reach/router';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-import { useGraphQL } from '../hooks';
+import { useSanitySiteSettings } from '../hooks/use-sanity-site-settings';
+
+type SEOProps = {
+  description?: string;
+  image?: string;
+  type?: string;
+  lang?: string;
+  meta?: [];
+  title: string;
+};
 
 function SEO({
   description = '',
@@ -19,11 +28,9 @@ function SEO({
   lang = 'en-AU',
   meta = [],
   title,
-}) {
-  const { sanitySiteSettings } = useGraphQL();
-
+}: SEOProps) {
+  const sanitySiteSettings = useSanitySiteSettings();
   const { pathname } = useLocation();
-
   const metaDescription = description || sanitySiteSettings.description;
   const metaType = type || 'website';
   const metaUrl = `${sanitySiteSettings.siteUrl}${pathname}`;
@@ -76,10 +83,6 @@ function SEO({
         {
           name: 'twitter:card',
           content: 'summary',
-        },
-        {
-          name: 'twitter:creator',
-          content: sanitySiteSettings.author,
         },
         {
           name: 'twitter:title',

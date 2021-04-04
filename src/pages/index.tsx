@@ -3,7 +3,8 @@ import queryString from 'query-string';
 import * as React from 'react';
 
 import { InstagramWidget, Layout, ProductTile, SEO } from '../components';
-import { useGraphQL } from '../hooks';
+import { useAllShopifyProducts } from '../hooks/use-all-shopify-products';
+import { useSanitySiteSettings } from '../hooks/use-sanity-site-settings';
 
 function IndexPage() {
   return (
@@ -16,7 +17,8 @@ function IndexPage() {
 }
 
 function LatestProducts() {
-  const { allShopifyProduct, sanitySiteSettings } = useGraphQL();
+  const allShopifyProduct = useAllShopifyProducts();
+  const sanitySiteSettings = useSanitySiteSettings();
 
   const { search } = useLocation();
 

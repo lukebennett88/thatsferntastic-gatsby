@@ -1,9 +1,8 @@
 import { useLocation } from '@reach/router';
-import { graphql, Link, useStaticQuery } from 'gatsby';
-import PropTypes from 'prop-types';
+import { Link } from 'gatsby';
 import * as React from 'react';
-
-import { useGraphQL } from '../hooks';
+import { useAllShopifyCollections } from '../hooks/use-all-shopify-collections';
+import { useAllShopifyProductTypes } from '../hooks/use-all-shopify-product-types';
 
 const colours = [
   'bg-pink-200 group-hover:bg-pink-300 group-focus:bg-pink-400',
@@ -24,16 +23,8 @@ const linksMenu = [
 ];
 
 function Sidebar() {
-  const { allShopifyProduct } = useStaticQuery(graphql`
-    {
-      allShopifyProduct {
-        nodes {
-          productType
-        }
-      }
-    }
-  `);
-  const { allShopifyCollection } = useGraphQL();
+  const allShopifyProduct = useAllShopifyProductTypes();
+  const allShopifyCollection = useAllShopifyCollections();
   const types = [
     ...new Set(
       allShopifyProduct.nodes
@@ -104,7 +95,14 @@ function Sidebar() {
   );
 }
 
-function NavLink({ to, label, active, Icon, index }) {
+type NavLinkProps = {
+  to: string;
+  label: string;
+  active: boolean;
+  index: number;
+};
+
+function NavLink({ to, label, active, index }: NavLinkProps) {
   return (
     <li>
       <Link
@@ -115,30 +113,16 @@ function NavLink({ to, label, active, Icon, index }) {
             : ''
         }`}
       >
-        {Icon ? (
-          <Icon />
-        ) : (
-          <span
-            aria-hidden
-            className={`flex-shrink-0 inline-block transition duration-150 ease-in-out rounded-full w-5 h-5 mr-3 group-focus:text-gray-600 ${
-              colours[
-                index + 1 > colours.length ? index - colours.length : index
-              ]
-            }`}
-          />
-        )}
+        <span
+          aria-hidden
+          className={`flex-shrink-0 inline-block transition duration-150 ease-in-out rounded-full w-5 h-5 mr-3 group-focus:text-gray-600 ${
+            colours[index + 1 > colours.length ? index - colours.length : index]
+          }`}
+        />
         {label}
       </Link>
     </li>
   );
 }
-
-NavLink.propTypes = {
-  active: PropTypes.bool,
-  Icon: PropTypes.func,
-  index: PropTypes.number.isRequired,
-  label: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
-};
 
 export { Sidebar };
