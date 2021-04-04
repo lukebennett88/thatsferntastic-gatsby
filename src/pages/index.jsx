@@ -8,7 +8,7 @@ import { useGraphQL } from '../hooks';
 function IndexPage() {
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Handmade Pencil Cases, Pouches, Stationery, Accessories and More" />
       <LatestProducts />
       <InstagramWidget />
     </Layout>
