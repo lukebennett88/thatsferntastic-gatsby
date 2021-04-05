@@ -28,7 +28,7 @@ function useSanitySiteSettings(): SanitySiteSettings {
   const { sanitySiteSettings } = useStaticQuery<SanitySiteSettingsReturnType>(
     graphql`
       query SanitySiteSettingsQuery {
-        sanitySiteSettings {
+        sanitySiteSettings(_id: { eq: "siteSettings" }) {
           title
           description
           siteUrl
