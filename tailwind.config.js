@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 const forms = require('@tailwindcss/forms');
@@ -7,6 +8,7 @@ const lineClamp = require('tailwindcss-line-clamp');
 const tailwindFilters = require('tailwindcss-filters');
 
 module.exports = {
+  mode: 'jit',
   purge: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
