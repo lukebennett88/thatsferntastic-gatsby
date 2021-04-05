@@ -21,7 +21,7 @@ function Header({ setMenuOpen }: HeaderProps): React.ReactElement {
   const toggleMenu = (): void => setMenuOpen((prevState) => !prevState);
   return (
     <>
-      <div className="sticky top-0 z-10 bg-teal-200">
+      <nav className="sticky top-0 z-10 bg-teal-200">
         <div className="flex flex-shrink-0 w-full h-16 max-w-screen-xl mx-auto bg-white shadow md:h-auto md:bg-transparent md:shadow-none">
           <button
             type="button"
@@ -104,7 +104,7 @@ function Header({ setMenuOpen }: HeaderProps): React.ReactElement {
             </div>
           </div>
         </div>
-      </div>
+      </nav>
       <header className="relative">
         <div className="relative bg-teal-200">
           <div className="px-4 py-8 mx-auto max-w-7xl md:px-6 lg:px-8">
