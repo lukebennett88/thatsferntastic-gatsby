@@ -114,8 +114,8 @@ function Header({ setMenuOpen }: HeaderProps): React.ReactElement {
                   {sanitySiteSettings.title}
                 </Link>
               </p>
-              <div className="mx-auto prose md:prose-lg">
-                <p className="mt-1 leading-tight md:text-lg">
+              <div className="mx-auto mt-2 prose md:prose-lg">
+                <p className="leading-tight md:text-lg">
                   {sanitySiteSettings.description}
                 </p>
               </div>
