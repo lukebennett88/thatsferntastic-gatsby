@@ -5711,6 +5711,11 @@ eslint-config-auto@^0.7.0:
     read-pkg-up "^7.0.1"
     rimraf "^3.0.2"
 
+eslint-config-prettier@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.1.0.tgz#4ef1eaf97afe5176e6a75ddfb57c335121abc5a6"
+  integrity sha512-oKMhGv3ihGbCIimCAjqkdzx2Q+jthoqnXSP+d86M9tptwugycmTFdVR4IpLgq2c4SHifbwO90z2fQ8/Aio73yw==
+
 eslint-config-react-app@^6.0.0:
   version "6.0.0"
   resolved "https://registry.npmjs.org/eslint-config-react-app/-/eslint-config-react-app-6.0.0.tgz"
@@ -6665,7 +6670,7 @@ fragment-cache@^0.2.1:
 
 framer-motion@^4.1.2:
   version "4.1.2"
-  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-4.1.2.tgz"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-4.1.2.tgz#2fffb7700ca1c3405e697294d155b1aae51c1031"
   integrity sha512-nVieffLWWmK5gog46PsoecgJCsFV+n6A5GOqoGXkWtvB9jWcscRVIdGzAaPKo2uiJHkGSyXUHU8+lt6YOQVRqw==
   dependencies:
     framesync "5.3.0"
