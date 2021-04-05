@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const axios = require('axios');
 
 exports.handler = async (event) => {

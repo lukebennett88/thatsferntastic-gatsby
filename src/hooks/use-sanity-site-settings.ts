@@ -50,9 +50,9 @@ function useSanitySiteSettings(): SanitySiteSettings {
 }
 
 export {
-  useSanitySiteSettings,
-  ShareImage,
-  SocialLink,
   SanitySiteSettings,
   SanitySiteSettingsReturnType,
+  ShareImage,
+  SocialLink,
+  useSanitySiteSettings,
 };

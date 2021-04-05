@@ -23,7 +23,12 @@ interface Props {
   children: React.ReactNode;
 }
 
-function ShopifyProvider({ shopName, accessToken, children }: Props) {
+// eslint-disable-next-line sonarjs/cognitive-complexity
+function ShopifyProvider({
+  shopName,
+  accessToken,
+  children,
+}: Props): React.ReactElement {
   if (shopName == null || accessToken == null) {
     throw new Error(
       'Unable to build shopify-buy client object. Please make sure that your access token and domain are correct.'
@@ -41,12 +46,14 @@ function ShopifyProvider({ shopName, accessToken, children }: Props) {
   });
 
   React.useEffect(() => {
-    async function getNewCart() {
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, unicorn/consistent-function-scoping
+    const getNewCart = async () => {
       const newCart = await client.checkout.create();
       setCart(newCart);
-    }
+    };
 
-    async function refreshExistingCart(cartId: string) {
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, consistent-return
+    const refreshExistingCart = async (cartId: string) => {
       try {
         const refreshedCart = await client.checkout.fetch(cartId);
 
@@ -54,8 +61,6 @@ function ShopifyProvider({ shopName, accessToken, children }: Props) {
           return await getNewCart();
         }
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
         const cartHasBeenPurchased = refreshedCart.completedAt != null;
 
         if (cartHasBeenPurchased) {
@@ -64,15 +69,17 @@ function ShopifyProvider({ shopName, accessToken, children }: Props) {
           setCart(refreshedCart);
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error(error);
       }
-    }
+    };
 
     if (cart == null) {
       getNewCart();
     } else {
       refreshExistingCart(String(cart.id));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -93,7 +100,7 @@ function ShopifyProvider({ shopName, accessToken, children }: Props) {
 }
 
 // Create useShopifyContext to make using values from Context easier
-function useShopifyContext() {
+function useShopifyContext(): ContextShape {
   return React.useContext(Context);
 }
 

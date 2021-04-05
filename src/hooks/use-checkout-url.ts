@@ -6,6 +6,6 @@ export function useCheckoutUrl(): string | null {
     return null;
   }
 
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return cart.webUrl;
 }

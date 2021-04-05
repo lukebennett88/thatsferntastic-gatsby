@@ -1,20 +1,24 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'gatsby';
-import { useCartCount } from '../hooks/use-cart-count';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import {
-  useSanitySiteSettings,
-  SanitySiteSettings,
-} from '../hooks/use-sanity-site-settings';
 
+import { useCartCount } from '../hooks/use-cart-count';
+import {
+  SanitySiteSettings,
+  useSanitySiteSettings,
+} from '../hooks/use-sanity-site-settings';
 import { SearchBar } from './search-bar';
 import { Wave } from './wave';
 
-const Header = ({ setMenuOpen }) => {
+type HeaderProps = {
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function Header({ setMenuOpen }: HeaderProps): React.ReactElement {
   const count = useCartCount();
   const sanitySiteSettings: SanitySiteSettings = useSanitySiteSettings();
-  const toggleMenu = () => setMenuOpen((prevState) => !prevState);
+  const toggleMenu = (): void => setMenuOpen((prevState) => !prevState);
   return (
     <>
       <div className="sticky top-0 z-10 bg-teal-200">
@@ -103,26 +107,26 @@ const Header = ({ setMenuOpen }) => {
       </div>
       <header className="relative">
         <div className="relative bg-teal-200">
-          <div className="px-4 pt-12 pb-8 mx-auto max-w-7xl md:px-6 lg:px-8">
+          <div className="px-4 py-8 mx-auto max-w-7xl md:px-6 lg:px-8">
             <div className="text-center text-teal-900">
-              <p className="font-mono text-2xl leading-none md:text-6xl">
+              <p className="font-mono text-2xl leading-none md:text-5xl">
                 <Link to="/" className="focus:underline focus:ring-0">
                   {sanitySiteSettings.title}
                 </Link>
               </p>
-              <p className="mt-1 leading-tight lowercase md:text-xl">
+              <p className="mt-1 leading-tight lowercase md:text-lg">
                 {sanitySiteSettings.description}
               </p>
             </div>
           </div>
         </div>
         <div className="overflow-hidden">
-          <Wave className="-mx-1 -mt-px text-teal-200" />
+          <Wave className="w-full max-h-[3rem] -mx-1 -mt-px text-teal-200" />
         </div>
       </header>
     </>
   );
-};
+}
 
 Header.propTypes = {
   setMenuOpen: PropTypes.func,

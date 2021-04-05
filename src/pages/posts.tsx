@@ -1,12 +1,15 @@
 import { Link } from '@reach/router';
 import SanityBlockContent from '@sanity/block-content-to-react';
 import { graphql } from 'gatsby';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
 import { Layout, SEO } from '../components';
 
-function BlogPostPage({ data }) {
+type BlogPostPageProps = {
+  data: AllSanityBlogPosts;
+};
+
+function BlogPostPage({ data }: BlogPostPageProps): React.ReactElement {
   const { nodes: posts } = data.allSanityBlogPost;
   return (
     <Layout hasSidebar={false}>
@@ -23,15 +26,11 @@ function BlogPostPage({ data }) {
   );
 }
 
-BlogPostPage.propTypes = {
-  data: PropTypes.shape({
-    allSanityBlogPost: PropTypes.shape({
-      nodes: PropTypes.array.isRequired,
-    }),
-  }),
+type PostProps = {
+  post: SanityBlogPost;
 };
 
-function Post({ post }) {
+function Post({ post }: PostProps): React.ReactElement {
   return (
     <Link
       aria-label={post.title}
@@ -77,22 +76,28 @@ function Post({ post }) {
   );
 }
 
-Post.propTypes = {
-  post: PropTypes.shape({
-    content: PropTypes.shape({
-      _rawBlockContent: PropTypes.array.isRequired,
-    }),
-    description: PropTypes.string,
-    shareImage: PropTypes.shape({
-      asset: PropTypes.shape({
-        url: PropTypes.string,
-      }),
-    }),
-    slug: PropTypes.shape({
-      current: PropTypes.string.isRequired,
-    }),
-    title: PropTypes.string.isRequired,
-  }),
+type SanityBlogPost = {
+  _id: string;
+  content: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    _rawBlockContent: any[];
+  };
+  description: string | null;
+  shareImage: {
+    asset: {
+      url: string;
+    };
+  };
+  slug: {
+    current: string;
+  };
+  title: string;
+};
+
+type AllSanityBlogPosts = {
+  allSanityBlogPost: {
+    nodes: Array<SanityBlogPost>;
+  };
 };
 
 export const query = graphql`

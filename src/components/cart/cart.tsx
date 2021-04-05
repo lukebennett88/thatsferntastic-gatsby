@@ -1,20 +1,20 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog';
-import { useCart } from '../../hooks/use-cart';
-import { useCartCount } from '../../hooks/use-cart-count';
-import { useCartItems } from '../../hooks/use-cart-items';
-import { useCheckoutUrl } from '../../hooks/use-checkout-url';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { HiX } from 'react-icons/hi';
 
+import { useCart } from '../../hooks/use-cart';
+import { useCartCount } from '../../hooks/use-cart-count';
+import { LineItemsType, useCartItems } from '../../hooks/use-cart-items';
+import { useCheckoutUrl } from '../../hooks/use-checkout-url';
+import { formatMoney } from '../../utils/format-money';
 import { LineItem } from './line-item';
 
-export function Cart() {
+export function Cart(): React.ReactElement {
   const lineItems = useCartItems();
   const count = useCartCount();
   const [showDialog, setShowDialog] = React.useState(false);
-  const open = () => setShowDialog(true);
-  const close = () => setShowDialog(false);
+  const open = (): void => setShowDialog(true);
+  const close = (): void => setShowDialog(false);
 
   return (
     <div className="relative pb-20">
@@ -23,8 +23,8 @@ export function Cart() {
         <div className="relative grid flex-1 pb-20 mx-auto gap-y-10 gap-x-12 lg:col-span-3">
           {count
             ? lineItems.map(
-                // @ts-ignore
-                (item) => item.variant && <LineItem key={item.id} item={item} />
+                (item: LineItemsType) =>
+                  item.variant && <LineItem key={item.id} item={item} />
               )
             : 'Nothing to see here, your cart is empty!'}
         </div>
@@ -35,7 +35,11 @@ export function Cart() {
   );
 }
 
-function CartSummary({ open }) {
+type CartSummaryProps = {
+  open: () => void;
+};
+
+function CartSummary({ open }: CartSummaryProps): React.ReactElement {
   const cart = useCart();
   const count = useCartCount();
 
@@ -54,8 +58,7 @@ function CartSummary({ open }) {
             </div>
             <div className="flex justify-between">
               <dt>Subtotal:</dt>
-              {/* @ts-ignore */}
-              <dd>${Number(cart?.totalPrice || 0).toFixed(2)}</dd>
+              <dd>{formatMoney(cart?.totalPrice || 0)}</dd>
             </div>
             <div className="flex justify-between">
               <dt>Shipping:</dt>
@@ -80,11 +83,12 @@ function CartSummary({ open }) {
   );
 }
 
-CartSummary.propTypes = {
-  open: PropTypes.func.isRequired,
+type TermsProps = {
+  close: () => void;
+  showDialog: boolean;
 };
 
-function Terms({ showDialog, close }) {
+function Terms({ showDialog, close }: TermsProps): React.ReactElement {
   const overlayRef = React.useRef(null);
   const contentRef = React.useRef(null);
   const [isChecked, setIsChecked] = React.useState(false);
@@ -98,31 +102,10 @@ function Terms({ showDialog, close }) {
       className="fixed inset-0 z-10 overflow-y-auto bg-black bg-opacity-25"
     >
       <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-        {/*
-            Background overlay, show/hide based on modal state.
-
-            Entering: "ease-out duration-300"
-              From: "opacity-0"
-              To: "opacity-100"
-            Leaving: "ease-in duration-200"
-              From: "opacity-100"
-              To: "opacity-0"
-                */}
-        {/* This element is to trick the browser into centering the modal contents. */}
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
           aria-hidden
         />
-        {/*
-            Modal panel, show/hide based on modal state.
-
-            Entering: "ease-out duration-300"
-              From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              To: "opacity-100 translate-y-0 sm:scale-100"
-            Leaving: "ease-in duration-200"
-              From: "opacity-100 translate-y-0 sm:scale-100"
-              To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            */}
         <DialogContent
           aria-label="Terms and Conditions"
           ref={contentRef}
@@ -190,8 +173,3 @@ function Terms({ showDialog, close }) {
     </DialogOverlay>
   );
 }
-
-Terms.propTypes = {
-  close: PropTypes.func.isRequired,
-  showDialog: PropTypes.bool.isRequired,
-};

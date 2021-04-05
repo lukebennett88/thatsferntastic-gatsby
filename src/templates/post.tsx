@@ -1,18 +1,23 @@
 import SanityBlockContent from '@sanity/block-content-to-react';
 import { graphql } from 'gatsby';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
 import { Layout, SEO } from '../components';
 
-function SanityBlogPostTemplate({ data }) {
+type SanityBlogPostTemplateProps = {
+  data: SanityBlogPost;
+};
+
+function SanityBlogPostTemplate({
+  data,
+}: SanityBlogPostTemplateProps): React.ReactElement {
   const { title, description, shareImage, content } = data.sanityBlogPost;
   return (
     <Layout hasSidebar={false}>
       <SEO
         title={title}
-        description={description}
-        image={shareImage?.asset.url}
+        description={description || undefined}
+        image={shareImage?.asset.url || undefined}
       />
       <article className="mx-auto max-w-prose">
         <h1 className="heading-1">Blog post</h1>
@@ -28,10 +33,22 @@ function SanityBlogPostTemplate({ data }) {
   );
 }
 
-SanityBlogPostTemplate.propTypes = {
-  data: PropTypes.shape({
-    sanityBlogPost: PropTypes.object.isRequired,
-  }),
+type ShareImage = {
+  asset: {
+    url: string;
+  };
+};
+
+type SanityBlogPost = {
+  sanityBlogPost: {
+    title: string;
+    description: string | null;
+    shareImage: ShareImage | null;
+    content: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      _rawBlockContent: any[];
+    };
+  };
 };
 
 export const query = graphql`

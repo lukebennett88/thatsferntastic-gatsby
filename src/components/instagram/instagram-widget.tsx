@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useInstagram } from '../../hooks/use-instagram';
 
+import { useInstagram } from '../../hooks/use-instagram';
 import { Spinner } from '../spinner';
 import { InstagramPost } from './instagram-post';
 

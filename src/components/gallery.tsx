@@ -1,9 +1,17 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
+import { ShopifyImage } from '../types/shopify-product';
 import { Thumbnail } from './thumbnail';
 
-function Gallery({ images, setActiveImage }) {
+type GalleryProps = {
+  images: Array<ShopifyImage>;
+  setActiveImage: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function Gallery({
+  images,
+  setActiveImage,
+}: GalleryProps): React.ReactElement | null {
   if (images.length > 1)
     return (
       <div className="overflow-hidden">
@@ -21,11 +29,5 @@ function Gallery({ images, setActiveImage }) {
     );
   return null;
 }
-
-Gallery.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  images: PropTypes.array.isRequired,
-  setActiveImage: PropTypes.func.isRequired,
-};
 
 export { Gallery };

@@ -28,6 +28,6 @@ function useAllShopifyProductTypes(): AllShopifyProductTypeNodes {
 export { useAllShopifyProductTypes };
 export type {
   AllShopifyProductsQuery,
-  ShopifyProductType,
   AllShopifyProductTypeNodes,
+  ShopifyProductType,
 };

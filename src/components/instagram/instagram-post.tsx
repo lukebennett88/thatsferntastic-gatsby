@@ -1,9 +1,15 @@
 import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
 import { HiExternalLink } from 'react-icons/hi';
+
+import { InstagramPostType } from '../../hooks/use-instagram';
 import { useLazyLoad } from '../../hooks/use-lazyload';
 
-function InstagramPost({ post }) {
+type InstagramPostProps = {
+  post: InstagramPostType;
+};
+
+function InstagramPost({ post }: InstagramPostProps): React.ReactElement {
   const { containerRef, srcRef } = useLazyLoad();
   return (
     <OutboundLink
@@ -22,6 +28,7 @@ function InstagramPost({ post }) {
             <img
               ref={srcRef}
               data-src={post.src}
+              // @ts-ignore
               srcSet={post.srcSet}
               alt={post.caption}
               className="absolute inset-0 object-contain w-full h-full overflow-hidden rounded-t-lg"

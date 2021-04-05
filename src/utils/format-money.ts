@@ -3,6 +3,6 @@ const formatter = Intl.NumberFormat('en-AU', {
   currency: 'AUD',
 });
 
-export function formatMoney(cents: number) {
-  return formatter.format(cents / 100);
+export function formatMoney(dollars: number): string {
+  return formatter.format(dollars);
 }

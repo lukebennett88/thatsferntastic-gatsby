@@ -14,12 +14,14 @@ interface IUseHandleAddToCart {
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
 export function useAddToCart({
   variantId,
   quantity = 1,
   setShowDialog,
 }: IUseHandleAddToCart) {
   const addItemToCart = useAddItemToCart();
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function addToCart() {
     try {
       await addItemToCart(variantId, quantity);

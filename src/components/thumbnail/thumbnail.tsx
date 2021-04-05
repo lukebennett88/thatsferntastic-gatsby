@@ -1,8 +1,15 @@
 import { GatsbyImage } from 'gatsby-plugin-image';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
-export const Thumbnail = ({ src, onClick }) => (
+import { ShopifyImage } from '../../types/shopify-product';
+
+type ThumbnailProps = {
+  src: ShopifyImage;
+  onClick: () => void;
+};
+
+function Thumbnail({ src, onClick }: ThumbnailProps): React.ReactElement {
+  return (
     <div className="flex-shrink-0 w-2/5 p-1 pr-4">
       <div className="relative h-0 aspect-w-1 aspect-h-1">
         <button
@@ -19,9 +26,6 @@ export const Thumbnail = ({ src, onClick }) => (
       </div>
     </div>
   );
+}
 
-Thumbnail.propTypes = {
-  onClick: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  src: PropTypes.object,
-};
+export { Thumbnail };

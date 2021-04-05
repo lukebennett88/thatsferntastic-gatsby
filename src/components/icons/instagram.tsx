@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-function InstagramIcon(props) {
+function InstagramIcon(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+): React.ReactElement {
   return (
     <svg
       className="w-6 h-6"

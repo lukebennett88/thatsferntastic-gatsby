@@ -1,5 +1,6 @@
 import ShopifyBuy from 'shopify-buy';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 export function isCart(potentialCart: any): potentialCart is ShopifyBuy.Cart {
   return (
     potentialCart != null &&
@@ -20,6 +21,7 @@ export const LocalStorageKeys = {
   CHECKOUT_ID,
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
 function set(key: string, value: string) {
   const isBrowser = typeof window !== 'undefined';
   if (isBrowser) {
@@ -27,6 +29,7 @@ function set(key: string, value: string) {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
 function get(key: string) {
   const isBrowser = typeof window !== 'undefined';
   if (!isBrowser) {
@@ -52,7 +55,8 @@ function getInitialCart(): ShopifyBuy.Cart | null {
       return null;
     }
 
-    return existingCart ;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return existingCart;
   } catch {
     return null;
   }

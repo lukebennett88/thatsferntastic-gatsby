@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useShopifyContext } from '../context/shopify';
-
 import { useGetLineItem } from './use-get-line-item';
 
-export function useUpdateItemQuantity() {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+function useUpdateItemQuantity() {
   const { client, cart, setCart } = useShopifyContext();
   const getLineItem = useGetLineItem();
 
@@ -23,7 +24,6 @@ export function useUpdateItemQuantity() {
       throw new Error(`Item with variantId ${variantId} not in cart`);
     }
 
-    // @ts-ignore
     const newCart = await client.checkout.updateLineItems(cart.id, [
       { id: lineItem.id, quantity },
     ]);
@@ -32,3 +32,5 @@ export function useUpdateItemQuantity() {
 
   return updateItemQuantity;
 }
+
+export { useUpdateItemQuantity };

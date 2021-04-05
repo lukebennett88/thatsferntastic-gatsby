@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { Spinner } from '../components/spinner';
 
-function LoadingSpinner() {
+function LoadingSpinner(): React.ReactElement {
   return (
     <div className="absolute inset-0 flex items-center justify-center w-full h-full bg-white">
       <Spinner />
@@ -11,7 +11,7 @@ function LoadingSpinner() {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
 export function useLazyLoad() {
   // Add a ref to image wrapper so that we can detect when it enters the viewport using IntersectionObserver
   const [containerRef, inView] = useInView({

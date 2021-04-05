@@ -12,9 +12,11 @@ interface LineItemPatch {
   customAttributes?: AttributeInput[];
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
 function useAddItemsToCart() {
   const { client, cart, setCart } = useShopifyContext();
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function addItemsToCart(items: LineItemPatch[]) {
     if (cart == null || client == null) {
       throw new Error('Called addItemsToCart too soon');

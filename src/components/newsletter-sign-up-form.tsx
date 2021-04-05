@@ -7,7 +7,7 @@ type Inputs = {
 
 const klaviyoListID = 'X8sZUP';
 
-function NewsletterSignUpForm() {
+function NewsletterSignUpForm(): React.ReactElement {
   const [submitting, setSubmitting] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
   const {
@@ -16,8 +16,12 @@ function NewsletterSignUpForm() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit = (data, e) => {
-    e.preventDefault();
+  const onSubmit = (
+    data: Inputs,
+    event?: React.BaseSyntheticEvent
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): any | Promise<any> => {
+    event?.preventDefault();
 
     setSubmitting(true);
 
@@ -33,15 +37,13 @@ function NewsletterSignUpForm() {
       .then((res) => res.json())
       // eslint-disable-next-line promise/always-return
       .then(() => {
-        console.log('Success');
         setSubmitting(false);
         setSuccess(true);
       })
       .catch((error_) => {
-        console.log('Error');
         setSubmitting(false);
         // eslint-disable-next-line no-console
-        console.log(error_);
+        console.error(error_);
       });
   };
 

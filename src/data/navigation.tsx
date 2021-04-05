@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
-function Icon({ className }) {
+function Icon(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+): React.ReactElement {
   return (
     <svg
       fill="none"
@@ -10,16 +11,12 @@ function Icon({ className }) {
       strokeWidth="2"
       stroke="currentColor"
       viewBox="0 0 24 24"
-      className={className}
+      {...props}
     >
       <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   );
 }
-
-Icon.propTypes = {
-  className: PropTypes.string,
-};
 
 export const navigation = [
   { title: 'Mini pouches', slug: '/mini-pouches/', icon: Icon },

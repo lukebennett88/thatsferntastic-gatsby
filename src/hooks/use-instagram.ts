@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-type Post = {
+type InstagramPostType = {
   src: string;
   srcSet: Array<string>;
   url: string;
@@ -8,11 +8,10 @@ type Post = {
   id: string;
 };
 
-type Posts = Array<Post>;
+type InstagramPostsType = Array<InstagramPostType>;
 
-export function useInstagram(): Posts | [] {
+function useInstagram(): InstagramPostsType | [] {
   const [posts, setPosts] = useState([]);
-  console.log(posts);
   useEffect(() => {
     fetch('/.netlify/functions/instagram')
       .then((res) => res.json())
@@ -22,3 +21,6 @@ export function useInstagram(): Posts | [] {
   }, []);
   return posts;
 }
+
+export { useInstagram };
+export type { InstagramPostsType, InstagramPostType };

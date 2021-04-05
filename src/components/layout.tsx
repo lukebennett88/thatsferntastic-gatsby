@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import { Footer } from './footer';
@@ -7,7 +6,15 @@ import { MobileMenu } from './mobile-menu';
 import { SEO } from './seo';
 import { Sidebar } from './sidebar';
 
-export function Layout({ children, hasSidebar = true }) {
+type LayoutProps = {
+  children: React.ReactNode;
+  hasSidebar?: boolean;
+};
+
+function Layout({
+  children,
+  hasSidebar = true,
+}: LayoutProps): React.ReactElement {
   const [isMenuOpen, setMenuOpen] = useState(false);
   return (
     <>
@@ -27,7 +34,4 @@ export function Layout({ children, hasSidebar = true }) {
   );
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  hasSidebar: PropTypes.bool,
-};
+export { Layout };

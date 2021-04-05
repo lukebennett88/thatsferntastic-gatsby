@@ -1,19 +1,25 @@
 import { graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { useAddItemToCart } from '../hooks/use-add-item-to-cart';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
-import {
-  AddToCartAlert,
-  Gallery,
-  Layout,
-  OptionPicker,
-  SEO,
-} from '../components';
+import { AddToCartAlert } from '../components/add-to-cart-alert';
+import { Gallery } from '../components/gallery';
+import { Layout } from '../components/layout';
+import { OptionPicker } from '../components/option-picker';
+import { SEO } from '../components/seo';
+import { useAddItemToCart } from '../hooks/use-add-item-to-cart';
+import { ShopifyProduct, ShopifyVariant } from '../types/shopify-product';
 import { prepareVariantsWithOptions } from '../utils';
 
-function ProductPage({ data: { shopifyProduct: product } }) {
+type ProductPageProps = {
+  data: {
+    shopifyProduct: ShopifyProduct;
+  };
+};
+
+function ProductPage({
+  data: { shopifyProduct: product },
+}: ProductPageProps): React.ReactElement {
   const addItemToCart = useAddItemToCart();
   const [isAlertShown, setIsAlertShown] = React.useState(false);
   const [activeImageIndex, setActiveImageIndex] = React.useState(0);
@@ -21,16 +27,19 @@ function ProductPage({ data: { shopifyProduct: product } }) {
     () => prepareVariantsWithOptions(product.variants),
     [product.variants]
   );
-  const [variant, setVariant] = React.useState(() => variants[0]);
+  const [variant, setVariant] = React.useState(
+    () => variants[0] as ShopifyVariant
+  );
 
-  async function handleAddToCart() {
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const handleAddToCart = async () => {
     try {
       await addItemToCart(variant.shopifyId, 1);
       setIsAlertShown(true);
     } catch (error) {
       setIsAlertShown(false);
     }
-  }
+  };
 
   return (
     <Layout hasSidebar={false}>
@@ -39,8 +48,8 @@ function ProductPage({ data: { shopifyProduct: product } }) {
         description={product.description}
         type="product"
         image={
-          product.images[0]?.localFile.childImageSharp.gatsbyImageData.images
-            .fallback.src
+          product?.images[0]?.localFile?.childImageSharp?.gatsbyImageData
+            ?.images?.fallback?.src
         }
       />
       <div className="relative">
@@ -96,11 +105,13 @@ function ProductPage({ data: { shopifyProduct: product } }) {
             <div className="space-y-4">
               {product.options.map((option, index) => (
                 <OptionPicker
+                  // eslint-disable-next-line react/no-array-index-key
                   key={index}
                   name={option.name}
                   options={option.values}
                   onChange={(e) =>
                     setVariant(
+                      // @ts-ignore
                       variants.find(
                         (v) =>
                           v.selectedOptions[0].name === option.name &&
@@ -131,6 +142,7 @@ function ProductPage({ data: { shopifyProduct: product } }) {
             )}
 
             <div
+              // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{
                 __html: product.descriptionHtml,
               }}
@@ -148,10 +160,6 @@ function ProductPage({ data: { shopifyProduct: product } }) {
     </Layout>
   );
 }
-
-ProductPage.propTypes = {
-  data: PropTypes.object.isRequired,
-};
 
 export const ProductPageQuery = graphql`
   query productPage($productId: String!) {

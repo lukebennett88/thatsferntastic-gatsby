@@ -9,13 +9,17 @@ import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { matchSorter } from 'match-sorter';
 import * as React from 'react';
-import { useAllShopifyProducts } from '../hooks/use-all-shopify-products';
+
+import {
+  ShopifyProduct,
+  useAllShopifyProducts,
+} from '../hooks/use-all-shopify-products';
 import { useThrottle } from '../hooks/use-throttle';
 
 function useProductMatch(
-  products: Array<Record<string, unknown>>,
+  products: Array<ShopifyProduct>,
   term: string
-) {
+): Array<ShopifyProduct> | null {
   const throttledTerm = useThrottle(term, 100);
   return React.useMemo(
     () =>
@@ -29,16 +33,13 @@ function useProductMatch(
   );
 }
 
-function SearchBar() {
+function SearchBar(): React.ReactElement {
   const { nodes: products } = useAllShopifyProducts();
   const [term, setTerm] = React.useState('');
   const results = useProductMatch(products, term);
   const inputRef = React.useRef(null);
-
-  const handleChange = (event) => setTerm(event.target.value);
-
-  const handleSelect = (value) => setTerm(value);
-
+  const handleChange = (event): void => setTerm(event.target.value);
+  const handleSelect = (value): void => setTerm(value);
   return (
     <Combobox
       openOnFocus
@@ -77,7 +78,7 @@ function SearchBar() {
                 Products
               </h3>
               <ComboboxList className="bg-white">
-                {results.slice(0, 10).map((result: any) => (
+                {results.slice(0, 10).map((result) => (
                   <ComboboxOption
                     key={result.handle}
                     value={result.title}

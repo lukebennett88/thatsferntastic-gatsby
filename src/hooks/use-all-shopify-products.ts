@@ -86,7 +86,7 @@ function useAllShopifyProducts(): AllShopifyProducts {
 
 export { useAllShopifyProducts };
 export type {
-  ShopifyProduct,
   AllShopifyProducts,
   AllShopifyProductsQueryReturn,
+  ShopifyProduct,
 };

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Layout, SEO } from '../components';
 import { Cart } from '../components/cart';
 
-export default function CartPage() {
+function CartPage(): React.ReactElement {
   return (
     <Layout hasSidebar={false}>
       <SEO title="Cart" />
@@ -11,3 +11,5 @@ export default function CartPage() {
     </Layout>
   );
 }
+
+export default CartPage;

@@ -27,6 +27,7 @@
   },
 */
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
 export function prepareVariantsImages(variants, optionKey) {
   // Go through the variants and reduce them into non-redundant
   // images by optionKey. Output looks like this:
@@ -34,14 +35,16 @@ export function prepareVariantsImages(variants, optionKey) {
   //   [optionKey]: image
   // }
   const imageDictionary = variants.reduce((dictImages, variant) => {
+    // eslint-disable-next-line no-param-reassign
     dictImages[variant[optionKey]] = variant.image;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return dictImages;
   }, {});
 
   // prepare an array of image objects that include both the image
   // and the optionkey value.
   return Object.keys(imageDictionary).map((key) => ({
-      [optionKey]: key,
-      src: imageDictionary[key],
-    }));
+    [optionKey]: key,
+    src: imageDictionary[key],
+  }));
 }

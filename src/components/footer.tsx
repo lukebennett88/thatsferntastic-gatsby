@@ -1,10 +1,10 @@
 import { Link } from 'gatsby';
 import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
+
 import { useAllSanityPage } from '../hooks/use-all-sanity-pages';
 import { useAllShopifyCollections } from '../hooks/use-all-shopify-collections';
 import { useAllShopifyProductTypes } from '../hooks/use-all-shopify-product-types';
-
 import { useSanitySiteSettings } from '../hooks/use-sanity-site-settings';
 import { FacebookIcon, InstagramIcon, TwitterIcon } from './icons';
 import { NewsletterSignUpForm } from './newsletter-sign-up-form';

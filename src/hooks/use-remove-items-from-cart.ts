@@ -1,10 +1,12 @@
 import { useShopifyContext } from '../context/shopify';
 import { useGetLineItem } from './use-get-line-item';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
 export function useRemoveItemsFromCart() {
   const { client, cart, setCart } = useShopifyContext();
   const getLineItem = useGetLineItem();
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function removeItemsFromCart(variantIds: string[]) {
     if (cart == null || client == null) {
       throw new Error('Called removeItemsFromCart too soon');

@@ -1,19 +1,24 @@
 import SanityBlockContent from '@sanity/block-content-to-react';
 import { graphql } from 'gatsby';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
 import { Layout, SEO } from '../components';
 
-function SanityPageTemplate({ data }) {
+type SanityPageTemplateProps = {
+  data: SanityPage;
+};
+
+function SanityPageTemplate({
+  data,
+}: SanityPageTemplateProps): React.ReactElement {
   const { title, description, shareImage, content } = data.sanityPage;
 
   return (
     <Layout hasSidebar={false}>
       <SEO
         title={title}
-        description={description}
-        image={shareImage?.asset.url}
+        description={description || undefined}
+        image={shareImage?.asset.url || undefined}
       />
       <article className="mx-auto max-w-prose">
         <h1 className="heading-1">{title}</h1>
@@ -21,6 +26,7 @@ function SanityPageTemplate({ data }) {
           if (c._type === 'richText')
             return (
               <SanityBlockContent
+                // eslint-disable-next-line react/no-array-index-key
                 key={index}
                 blocks={c._rawBlockContent}
                 imageOptions={{ w: 600, fit: 'max' }}
@@ -37,10 +43,23 @@ function SanityPageTemplate({ data }) {
   );
 }
 
-SanityPageTemplate.propTypes = {
-  data: PropTypes.shape({
-    sanityPage: PropTypes.object.isRequired,
-  }),
+type ShareImage = {
+  asset: {
+    url: string;
+  };
+};
+
+type SanityPage = {
+  sanityPage: {
+    title: string;
+    description: string | null;
+    shareImage: ShareImage | null;
+    content: Array<{
+      _type: string;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      _rawBlockContent: any[];
+    }>;
+  };
 };
 
 export const query = graphql`

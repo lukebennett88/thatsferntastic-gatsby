@@ -3,8 +3,15 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 
 import { Layout, ProductTile, SEO } from '../components';
+import { ShopifyImage } from '../types/shopify-product';
 
-function CollectionPageTemplate({ data }) {
+type CollectionPageTemplateProps = {
+  data: ShopifyCollection;
+};
+
+function CollectionPageTemplate({
+  data,
+}: CollectionPageTemplateProps): React.ReactElement {
   const { products, title, description } = data.shopifyCollection;
 
   return (
@@ -25,6 +32,31 @@ CollectionPageTemplate.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
+type ShopifyProduct = {
+  id: string;
+  availableForSale: true;
+  title: string;
+  handle: string;
+  priceRange: {
+    minVariantPrice: {
+      amount: string;
+    };
+    maxVariantPrice: {
+      amount: string;
+    };
+  };
+  images: Array<ShopifyImage>;
+};
+
+type ShopifyCollection = {
+  shopifyCollection: {
+    id: string;
+    title: string;
+    description: string;
+    products: Array<ShopifyProduct>;
+  };
+};
+
 export const query = graphql`
   query($handle: String!) {
     shopifyCollection(handle: { eq: $handle }) {
@@ -32,6 +64,7 @@ export const query = graphql`
       title
       description
       products {
+        id
         availableForSale
         title
         handle

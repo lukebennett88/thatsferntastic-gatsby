@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
-function useThrottle(value, limit) {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
+function useThrottle(value: string, limit: number) {
   const [throttledValue, setThrottledValue] = useState(value);
   const lastRan = useRef(Date.now());
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const handler = window.setTimeout(() => {
@@ -17,6 +19,7 @@ function useThrottle(value, limit) {
     }
   }, [value, limit]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return throttledValue;
 }
 

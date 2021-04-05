@@ -2,12 +2,25 @@ import { DialogContent, DialogOverlay } from '@reach/dialog';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { FiX } from 'react-icons/fi';
 
-function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
-  const close = () => setIsAlertShown(false);
+import { ShopifyProduct, ShopifyVariant } from '../types/shopify-product';
+
+type AddToCartAlertProps = {
+  product: ShopifyProduct;
+  variant: ShopifyVariant;
+  isAlertShown: boolean;
+  setIsAlertShown: (value: React.SetStateAction<boolean>) => void;
+};
+
+function AddToCartAlert({
+  product,
+  variant,
+  isAlertShown,
+  setIsAlertShown,
+}: AddToCartAlertProps): React.ReactElement {
+  const close = (): void => setIsAlertShown(false);
   return (
     <AnimatePresence>
       {isAlertShown ? (
@@ -95,19 +108,5 @@ function AddToCartAlert({ product, variant, isAlertShown, setIsAlertShown }) {
     </AnimatePresence>
   );
 }
-
-AddToCartAlert.propTypes = {
-  isAlertShown: PropTypes.bool.isRequired,
-  product: PropTypes.shape({
-    title: PropTypes.string,
-    // eslint-disable-next-line react/forbid-prop-types
-    variants: PropTypes.array.isRequired,
-  }),
-  setIsAlertShown: PropTypes.func.isRequired,
-  variant: PropTypes.shape({
-    // eslint-disable-next-line react/forbid-prop-types
-    selectedOptions: PropTypes.array.isRequired,
-  }),
-};
 
 export { AddToCartAlert };

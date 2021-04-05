@@ -1,7 +1,17 @@
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
-function OptionPicker({ name, options, onChange }) {
+type OptionPickerProps = {
+  name: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onChange: (e: any) => void;
+  options: Array<string>;
+};
+
+function OptionPicker({
+  name,
+  options,
+  onChange,
+}: OptionPickerProps): React.ReactElement | null {
   if (options.length <= 1) return null;
 
   return (
@@ -23,14 +33,5 @@ function OptionPicker({ name, options, onChange }) {
     </div>
   );
 }
-
-OptionPicker.propTypes = {};
-
-OptionPicker.propTypes = {
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  options: PropTypes.array.isRequired,
-};
 
 export { OptionPicker };

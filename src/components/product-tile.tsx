@@ -1,12 +1,17 @@
 import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import * as React from 'react';
-import { useOGImage } from '../hooks/use-og-image';
 
-import {} from '../utils/';
+import { ShopifyProduct } from '../hooks/use-all-shopify-products';
+import { useOGImage } from '../hooks/use-og-image';
+import {} from '../utils';
 import { formatMoney } from '../utils/format-money';
 
-function ProductTile({ product }): React.ReactElement {
+type ProductTileProps = {
+  product: ShopifyProduct;
+};
+
+function ProductTile({ product }: ProductTileProps): React.ReactElement {
   const ogImage = useOGImage();
 
   const imageSrc = product.images
@@ -21,7 +26,7 @@ function ProductTile({ product }): React.ReactElement {
   const price =
     maxPrice - minPrice === 0
       ? `${formatMoney(minPrice)}`
-      : `from $${formatMoney(minPrice)}`;
+      : `from ${formatMoney(minPrice)}`;
 
   return (
     <Link

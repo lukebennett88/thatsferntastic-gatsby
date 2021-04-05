@@ -6,7 +6,6 @@
  */
 
 import { useLocation } from '@reach/router';
-import PropTypes, { string } from 'prop-types';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
@@ -18,7 +17,7 @@ type SEOProps = {
   type?: string;
   lang?: string;
   meta?: [];
-  title: string;
+  title?: string;
 };
 
 function SEO({
@@ -28,7 +27,7 @@ function SEO({
   lang = 'en-AU',
   meta = [],
   title,
-}: SEOProps) {
+}: SEOProps): React.ReactElement {
   const sanitySiteSettings = useSanitySiteSettings();
   const { pathname } = useLocation();
   const metaDescription = description || sanitySiteSettings.description;
@@ -96,14 +95,5 @@ function SEO({
     />
   );
 }
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  image: PropTypes.string,
-  type: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string,
-};
 
 export { SEO };

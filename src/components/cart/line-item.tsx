@@ -1,16 +1,47 @@
 import { graphql, Link, useStaticQuery } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { useRemoveItemFromCart } from '../../hooks/use-remove-item-from-cart';
-import { useUpdateItemQuantity } from '../../hooks/use-update-item-quantity';
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { HiChevronLeft, HiChevronRight, HiTrash } from 'react-icons/hi';
 
-function LineItem({ item }) {
+import { LineItemsType } from '../../hooks/use-cart-items';
+import { useRemoveItemFromCart } from '../../hooks/use-remove-item-from-cart';
+import { useUpdateItemQuantity } from '../../hooks/use-update-item-quantity';
+import { ShopifyImage } from '../../types/shopify-product';
+import { formatMoney } from '../../utils/format-money';
+
+type LineItemProps = {
+  item: LineItemsType;
+};
+
+type ShopifyProductVariant = {
+  shopifyId: string;
+  image: ShopifyImage;
+};
+
+type AllShopifyProductVariant = {
+  nodes: Array<ShopifyProductVariant>;
+};
+
+type AllShopifyProduct = {
+  nodes: Array<{
+    handle: string;
+    variants: Array<{
+      shopifyId: string;
+    }>;
+  }>;
+};
+
+type QueryReturnType = {
+  allShopifyProductVariant: AllShopifyProductVariant;
+  allShopifyProduct: AllShopifyProduct;
+};
+
+function LineItem({ item }: LineItemProps): React.ReactElement {
   const {
     allShopifyProductVariant: { nodes: variants },
     allShopifyProduct: { nodes: products },
-  } = useStaticQuery(graphql`
+  } = useStaticQuery<QueryReturnType>(graphql`
     {
       allShopifyProductVariant {
         nodes {
@@ -46,15 +77,17 @@ function LineItem({ item }) {
     };
   });
 
-  function getHandleForVariant(variantId) {
+  const getHandleForVariant = (variantId: string): string => {
     const selectedProduct = betterProductHandles.find((product) =>
       product.variants.includes(variantId)
     );
 
-    return selectedProduct ? selectedProduct.handle : null;
-  }
+    return selectedProduct?.handle ? `/products/${selectedProduct.handle}` : '';
+  };
 
-  function getImageFluidForVariant(variantId) {
+  const getImageFluidForVariant = (
+    variantId: string
+  ): IGatsbyImageData | null => {
     const selectedVariant = variants.find(
       (variant) => variant.shopifyId === variantId
     );
@@ -63,19 +96,21 @@ function LineItem({ item }) {
       return selectedVariant.image.localFile.childImageSharp.gatsbyImageData;
     }
     return null;
-  }
+  };
+
+  const variantImage = getImageFluidForVariant(item.variant.id);
 
   const [quantity, setQuantity] = React.useState(item.quantity);
 
-  function handleDecreaseQuantity() {
+  const handleDecreaseQuantity = (): void => {
     if (quantity > 0) {
       setQuantity((prev) => prev - 1);
     }
-  }
+  };
 
-  function handleIncreaseQuantity() {
+  const handleIncreaseQuantity = (): void => {
     setQuantity((prev) => prev + 1);
-  }
+  };
 
   React.useEffect(() => {
     if (quantity <= 0) {
@@ -92,17 +127,19 @@ function LineItem({ item }) {
         <div className="w-full sm:w-36 lg:w-48">
           <div className="relative h-0 aspect-w-1 aspect-h-1">
             <div className="absolute inset-0 flex bg-white">
-              <GatsbyImage
-                image={getImageFluidForVariant(item.variant.id)}
-                alt=""
-                className="flex-1 rounded-lg"
-              />
+              {variantImage ? (
+                <GatsbyImage
+                  image={variantImage}
+                  alt=""
+                  className="flex-1 rounded-lg"
+                />
+              ) : null}
             </div>
           </div>
         </div>
         <div className="flex flex-col flex-1">
           <Link
-            to={`/products/${getHandleForVariant(item.variant.id)}`}
+            to={getHandleForVariant(item.variant.id)}
             className="text-lg font-medium transition duration-150 ease-in-out hover:text-gray-600"
           >
             {item.title}
@@ -163,7 +200,7 @@ function LineItem({ item }) {
                 Remove from cart
               </button>
               <div className="font-mono text-3xl text-pink-500 lg:ml-4">
-                ${Number(item.variant.priceV2.amount * quantity).toFixed(2)}
+                {formatMoney(Number(item.variant.priceV2.amount) * quantity)}
               </div>
             </div>
           </div>

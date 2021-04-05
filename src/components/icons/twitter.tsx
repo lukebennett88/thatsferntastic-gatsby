@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-function TwitterIcon(props) {
+function TwitterIcon(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+): React.ReactElement {
   return (
     <svg
       className="w-6 h-6"

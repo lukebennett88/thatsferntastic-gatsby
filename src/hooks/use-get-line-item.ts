@@ -2,6 +2,7 @@ import ShopifyBuy from 'shopify-buy';
 
 import { useCartItems } from './use-cart-items';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/explicit-function-return-type
 export function useGetLineItem() {
   const cartItems = useCartItems();
 
@@ -11,7 +12,6 @@ export function useGetLineItem() {
     }
 
     const item = cartItems.find(
-      // @ts-ignore
       (cartItem) => cartItem.variant.id === variantId
     );
 

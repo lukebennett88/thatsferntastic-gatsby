@@ -1,10 +1,10 @@
 import { useId } from '@reach/auto-id';
 import * as React from 'react';
 
-function Spinner() {
+function Spinner(): React.ReactElement {
   const id = useId();
-  const title = `title-${id}`;
-  const desc = `desc-${id}`;
+  const title = `title-${id as string}`;
+  const desc = `desc-${id as string}`;
   return (
     <svg
       height="1em"

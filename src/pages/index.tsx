@@ -6,7 +6,7 @@ import { InstagramWidget, Layout, ProductTile, SEO } from '../components';
 import { useAllShopifyProducts } from '../hooks/use-all-shopify-products';
 import { useSanitySiteSettings } from '../hooks/use-sanity-site-settings';
 
-function IndexPage() {
+function IndexPage(): React.ReactElement {
   return (
     <Layout>
       <SEO title="Handmade Pencil Cases, Pouches, Stationery, Accessories and More" />
@@ -16,7 +16,7 @@ function IndexPage() {
   );
 }
 
-function LatestProducts() {
+function LatestProducts(): React.ReactElement {
   const allShopifyProduct = useAllShopifyProducts();
   const sanitySiteSettings = useSanitySiteSettings();
 
