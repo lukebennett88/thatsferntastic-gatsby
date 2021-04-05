@@ -40,9 +40,11 @@ function Footer(): React.ReactElement {
             <h2 className="font-mono text-xl text-gray-500">
               {sanitySiteSettings.title}
             </h2>
-            <p className="text-base text-gray-500">
-              {sanitySiteSettings.description}
-            </p>
+            <div className="prose">
+              <p className="text-base text-gray-500">
+                {sanitySiteSettings.description}
+              </p>
+            </div>
             <div className="flex space-x-6">
               {sanitySiteSettings.socialLinks.map(
                 ({ _key, link, socialNetwork }) => {
