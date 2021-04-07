@@ -1,8 +1,10 @@
 import 'typeface-courier-prime';
 import 'typeface-montserrat';
 import './src/css/tailwind.css';
+
 import * as React from 'react';
-import { ShopifyProvider } from './src/context/shopify';
+
+import { ShopifyProvider } from './src/context/shopify.tsx';
 
 export function wrapRootElement({ element }) {
   return (

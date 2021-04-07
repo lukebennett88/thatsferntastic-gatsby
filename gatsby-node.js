@@ -60,28 +60,24 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   // Create pages from Sanity
   result.data.allSanityPage.nodes.forEach((page) => {
-    const {
-      slug: { current: slug },
-    } = page;
+    const { slug } = page;
     createPage({
-      path: slug,
+      path: slug?.current,
       component: path.resolve('./src/templates/page.tsx'),
       context: {
-        slug,
+        slug: slug?.current,
       },
     });
   });
 
   // Create blog posts from Sanity
   result.data.allSanityBlogPost.nodes.forEach((page) => {
-    const {
-      slug: { current: slug },
-    } = page;
+    const { slug } = page;
     createPage({
-      path: slug,
+      path: slug?.current,
       component: path.resolve('./src/templates/post.tsx'),
       context: {
-        slug,
+        slug: slug?.current,
       },
     });
   });
