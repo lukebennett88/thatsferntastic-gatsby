@@ -109,16 +109,19 @@ function Footer(): React.ReactElement {
                   Legal
                 </h3>
                 <ul className="mt-4 space-y-4">
-                  {allSanityPage.nodes.map(({ _id, slug, title }) => (
-                    <li key={_id}>
-                      <Link
-                        to={`/${slug.current}/`}
-                        className="text-base text-gray-500 hover:text-gray-900"
-                      >
-                        {title}
-                      </Link>
-                    </li>
-                  ))}
+                  {allSanityPage.nodes.map(
+                    ({ _id, slug, title }) =>
+                      slug?.current && (
+                        <li key={_id}>
+                          <Link
+                            to={`/${slug.current}/`}
+                            className="text-base text-gray-500 hover:text-gray-900"
+                          >
+                            {title}
+                          </Link>
+                        </li>
+                      )
+                  )}
                 </ul>
               </div>
             </div>
