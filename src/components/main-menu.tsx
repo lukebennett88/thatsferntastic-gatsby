@@ -10,6 +10,7 @@ const colours = [
   'bg-teal-200 group-hover:bg-teal-300 group-focus:bg-teal-400',
   'bg-yellow-200 group-hover:bg-yellow-300 group-focus:bg-yellow-400',
   'bg-cyan-200 group-hover:bg-cyan-300 group-focus:bg-cyan-400',
+  'bg-indigo-200 group-hover:bg-indigo-300 group-focus:bg-indigo-400',
 ];
 
 const linksMenu = [
