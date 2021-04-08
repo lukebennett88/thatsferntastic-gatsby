@@ -15,18 +15,18 @@ function ProductTile({ product }: ProductTileProps): React.ReactElement {
   const ogImage = useOGImage();
 
   const imageSrc = product.images
-    ? product.images[0].localFile.childImageSharp?.gatsbyImageData
+    ? product.images?.[0]?.localFile?.childImageSharp?.gatsbyImageData
     : ogImage.childImageSharp.gatsbyImageData;
 
   const soldOut = !product.availableForSale;
 
   const maxPrice = Number(product.priceRange.maxVariantPrice.amount);
   const minPrice = Number(product.priceRange.minVariantPrice?.amount);
-
+  const formattedMinPrice = formatMoney(minPrice);
   const price =
     maxPrice - minPrice === 0
-      ? `${formatMoney(minPrice)}`
-      : `from ${formatMoney(minPrice)}`;
+      ? `${formattedMinPrice}`
+      : `from ${formattedMinPrice}`;
 
   return (
     <Link
