@@ -54,7 +54,8 @@ function NewsletterSignUpForm(): React.ReactElement {
           Subscribe to our newsletter
         </h3>
         <p className="mt-2 text-base text-gray-500">
-          The latest news, articles, and resources, sent to your inbox weekly.
+          Intermittent updates, when I remember to send them, about new
+          releases, sales and good news!
         </p>
       </div>
       <form
