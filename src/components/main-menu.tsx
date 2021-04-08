@@ -18,8 +18,8 @@ const linksMenu = [
     label: 'Shipping and Processing Times',
   },
   {
-    to: '/stockists/',
-    label: 'Stockists',
+    to: '/about/',
+    label: 'About',
   },
 ];
 
