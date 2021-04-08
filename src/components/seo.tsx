@@ -6,7 +6,7 @@
  */
 
 import { useLocation } from '@reach/router';
-import React from 'react';
+import * as React from 'react';
 import { Helmet } from 'react-helmet';
 
 import { useSanitySiteSettings } from '../hooks/use-sanity-site-settings';
