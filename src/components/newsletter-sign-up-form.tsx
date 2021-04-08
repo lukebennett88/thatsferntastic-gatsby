@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
 type Inputs = {
-  email_address: string;
+  newsletter_email_address: string;
 };
 
 const klaviyoListID = 'X8sZUP';
@@ -63,11 +63,11 @@ function NewsletterSignUpForm(): React.ReactElement {
         className="mt-4 sm:flex sm:max-w-md lg:mt-0"
       >
         <div className="relative flex flex-wrap items-center">
-          <label htmlFor="email_address" className="flex w-full">
+          <label htmlFor="newsletter_email_address" className="flex w-full">
             <span className="sr-only">Email address</span>
             <input
-              id="email_address"
-              {...register('email_address', {
+              id="newsletter_email_address"
+              {...register('newsletter_email_address', {
                 required: 'This field is required.',
                 pattern: {
                   value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,4}$/i,
@@ -78,17 +78,17 @@ function NewsletterSignUpForm(): React.ReactElement {
               inputMode="email"
               autoComplete="email"
               required
-              aria-invalid={!!errors.email_address}
+              aria-invalid={!!errors.newsletter_email_address}
               className="w-full min-w-0 px-4 py-2 text-base text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-full appearance-none focus:outline-none focus:ring-pink-500 focus:border-pink-500 focus:placeholder-gray-400 sm:max-w-xs"
               placeholder="Enter your email"
             />
           </label>
-          {errors.email_address && (
+          {errors.newsletter_email_address && (
             <span
               role="alert"
               className="block w-full px-4 mt-1 text-sm tracking-wider text-pink-700"
             >
-              {errors.email_address.message}
+              {errors.newsletter_email_address.message}
             </span>
           )}
           {success && (

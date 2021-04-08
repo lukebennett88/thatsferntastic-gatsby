@@ -32,8 +32,8 @@ function ProductTile({ product }: ProductTileProps): React.ReactElement {
     <Link
       aria-label={product.title}
       to={`/products/${product.handle}/`}
-      className={`flex w-full max-w-sm mx-auto transition duration-500 ease-in-out transform-gpu rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg ${
-        soldOut ? 'opacity-50' : ''
+      className={`flex w-full max-w-sm mx-auto transition duration-500 ease-in-out transform-gpu rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg${
+        soldOut ? ' opacity-50' : ''
       }`}
     >
       <div className="relative flex flex-1 w-full">
