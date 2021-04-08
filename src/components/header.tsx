@@ -107,18 +107,13 @@ function Header({ setMenuOpen }: HeaderProps): React.ReactElement {
       </nav>
       <header className="relative">
         <div className="relative bg-teal-200">
-          <div className="px-4 py-8 mx-auto max-w-7xl md:px-6 lg:px-8">
+          <div className="px-4 pt-8 pb-12 mx-auto max-w-7xl md:px-6 lg:px-8">
             <div className="text-center text-teal-900">
               <p className="font-mono text-2xl leading-none md:text-5xl">
                 <Link to="/" className="focus:underline focus:ring-0">
                   {sanitySiteSettings.title}
                 </Link>
               </p>
-              <div className="mx-auto mt-2 prose md:prose-lg">
-                <p className="leading-tight md:text-lg">
-                  {sanitySiteSettings.description}
-                </p>
-              </div>
             </div>
           </div>
         </div>
