@@ -14,14 +14,14 @@ type ProductTileProps = {
 function ProductTile({ product }: ProductTileProps): React.ReactElement {
   const ogImage = useOGImage();
 
-  const imageSrc = product.images
-    ? product.images?.[0]?.localFile?.childImageSharp?.gatsbyImageData
-    : ogImage.childImageSharp.gatsbyImageData;
+  const imageSrc =
+    product.featuredImage?.gatsbyImageData ||
+    ogImage.childImageSharp.gatsbyImageData;
 
-  const soldOut = !product.availableForSale;
+  const availableForSale = product.variants.some((v) => v.availableForSale);
 
-  const maxPrice = Number(product.priceRange.maxVariantPrice.amount);
-  const minPrice = Number(product.priceRange.minVariantPrice?.amount);
+  const maxPrice = Number(product.priceRangeV2.maxVariantPrice.amount);
+  const minPrice = Number(product.priceRangeV2.minVariantPrice?.amount);
   const formattedMinPrice = formatMoney(minPrice);
   const price =
     maxPrice - minPrice === 0
@@ -33,7 +33,7 @@ function ProductTile({ product }: ProductTileProps): React.ReactElement {
       aria-label={product.title}
       to={`/products/${product.handle}/`}
       className={`flex w-full max-w-sm mx-auto transition duration-500 ease-in-out transform-gpu rounded-lg hover:-translate-y-1 focus:-translate-y-1 hover:shadow-lg${
-        soldOut ? ' opacity-50' : ''
+        availableForSale ? '' : ' opacity-50'
       }`}
     >
       <div className="relative flex flex-1 w-full">
@@ -52,7 +52,7 @@ function ProductTile({ product }: ProductTileProps): React.ReactElement {
               {product.title}
             </h3>
             <p className="pt-3 mt-auto font-mono text-3xl leading-none text-pink-500">
-              {soldOut ? 'Sold out!' : price}
+              {availableForSale ? price : 'Sold out!'}
             </p>
           </div>
         </article>

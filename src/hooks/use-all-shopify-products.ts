@@ -1,19 +1,21 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import { IGatsbyImageData } from 'gatsby-plugin-image';
 
+type ShopifyImage = {
+  gatsbyImageData: IGatsbyImageData;
+};
+
+type ShopifyVariant = {
+  availableForSale: true;
+  shopifyId: string;
+};
+
 type ShopifyProduct = {
   id: string;
-  availableForSale: boolean;
   description: string;
   handle: string;
-  images: Array<{
-    localFile: {
-      childImageSharp: {
-        gatsbyImageData: IGatsbyImageData;
-      };
-    };
-  }>;
-  priceRange: {
+  featuredImage: ShopifyImage;
+  priceRangeV2: {
     minVariantPrice: {
       amount: string;
     };
@@ -25,9 +27,7 @@ type ShopifyProduct = {
   tags: Array<string>;
   title: string;
   updatedAt: string;
-  variants: Array<{
-    shopifyId: string;
-  }>;
+  variants: Array<ShopifyVariant>;
 };
 
 type AllShopifyProducts = {
@@ -45,24 +45,16 @@ function useAllShopifyProducts(): AllShopifyProducts {
     query AllShopifyProductQuery {
       allShopifyProduct(
         sort: { fields: updatedAt, order: DESC }
-        filter: {
-          availableForSale: { eq: true }
-          variants: { elemMatch: { availableForSale: { eq: true } } }
-        }
+        filter: { variants: { elemMatch: { availableForSale: { eq: true } } } }
       ) {
         nodes {
           id
-          availableForSale
           description
           handle
-          images {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(width: 600, layout: CONSTRAINED)
-              }
-            }
+          featuredImage {
+            gatsbyImageData(width: 400, height: 400)
           }
-          priceRange {
+          priceRangeV2 {
             minVariantPrice {
               amount
             }
@@ -75,6 +67,7 @@ function useAllShopifyProducts(): AllShopifyProducts {
           title
           updatedAt
           variants {
+            availableForSale
             shopifyId
           }
         }
@@ -88,5 +81,7 @@ export { useAllShopifyProducts };
 export type {
   AllShopifyProducts,
   AllShopifyProductsQueryReturn,
+  ShopifyImage,
   ShopifyProduct,
+  ShopifyVariant,
 };

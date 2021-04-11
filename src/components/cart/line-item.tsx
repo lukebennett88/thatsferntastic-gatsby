@@ -42,22 +42,18 @@ function LineItem({ item }: LineItemProps): React.ReactElement {
     allShopifyProductVariant: { nodes: variants },
     allShopifyProduct: { nodes: products },
   } = useStaticQuery<QueryReturnType>(graphql`
-    {
-      allShopifyProductVariant {
+    query LineItemQuery {
+      allShopifyProductVariant(limit: 1) {
         nodes {
           shopifyId
-          image {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(width: 630, layout: CONSTRAINED)
-              }
-            }
-          }
         }
       }
-      allShopifyProduct {
+      allShopifyProduct(limit: 1) {
         nodes {
           handle
+          featuredImage {
+            gatsbyImageData(width: 400, height: 400)
+          }
           variants {
             shopifyId
           }

@@ -3,11 +3,11 @@ import ShopifyBuy from 'shopify-buy';
 
 import { LocalStorage, LocalStorageKeys } from '../utils/local-storage';
 
-interface ContextShape {
+type ContextShape = {
   client: ShopifyBuy.Client | null;
   cart: ShopifyBuy.Cart | null;
   setCart: React.Dispatch<React.SetStateAction<ShopifyBuy.Cart | null>>;
-}
+};
 
 const Context = React.createContext<ContextShape>({
   client: null,
@@ -17,18 +17,18 @@ const Context = React.createContext<ContextShape>({
   },
 });
 
-interface Props {
+type ShopifyProviderProps = {
   shopName: string;
   accessToken: string;
   children: React.ReactNode;
-}
+};
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 function ShopifyProvider({
   shopName,
   accessToken,
   children,
-}: Props): React.ReactElement {
+}: ShopifyProviderProps): React.ReactElement {
   if (shopName == null || accessToken == null) {
     throw new Error(
       'Unable to build shopify-buy client object. Please make sure that your access token and domain are correct.'

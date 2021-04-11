@@ -15,7 +15,6 @@ export function Cart(): React.ReactElement {
   const [showDialog, setShowDialog] = React.useState(false);
   const open = (): void => setShowDialog(true);
   const close = (): void => setShowDialog(false);
-
   return (
     <div className="relative pb-20">
       <h1 className="text-center heading-1 sm:text-left">Cart</h1>
@@ -58,7 +57,7 @@ function CartSummary({ open }: CartSummaryProps): React.ReactElement {
             </div>
             <div className="flex justify-between">
               <dt>Subtotal:</dt>
-              <dd>{formatMoney(cart?.totalPrice || 0)}</dd>
+              <dd>{formatMoney(Number(cart?.subtotalPrice || '0'))}</dd>
             </div>
             <div className="flex justify-between">
               <dt>Shipping:</dt>
