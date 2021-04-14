@@ -71,15 +71,18 @@ function ProductPage({
             <div className="overflow-hidden rounded-lg">
               <div className="relative bg-white aspect-w-1 aspect-h-1">
                 <div className="absolute inset-0 flex">
-                  <GatsbyImage
-                    image={
-                      product.images[activeImageIndex].localFile.childImageSharp
-                        .gatsbyImageData
-                    }
-                    alt=""
-                    imgStyle={{ objectFit: 'contain' }}
-                    className="flex-1 duration-500 ease-in-out transform hover:scale-110"
-                  />
+                  {product.images?.[activeImageIndex]?.localFile
+                    ?.childImageSharp ? (
+                    <GatsbyImage
+                      image={
+                        product.images[activeImageIndex].localFile
+                          .childImageSharp.gatsbyImageData
+                      }
+                      alt=""
+                      imgStyle={{ objectFit: 'contain' }}
+                      className="flex-1 duration-500 ease-in-out transform hover:scale-110"
+                    />
+                  ) : null}
                 </div>
               </div>
             </div>
