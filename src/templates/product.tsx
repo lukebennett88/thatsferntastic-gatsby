@@ -131,7 +131,7 @@ function ProductPage({
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg"
+                  className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 transition duration-300 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg"
                 >
                   <span className="leading-none">Add to Cart</span>
                 </button>
