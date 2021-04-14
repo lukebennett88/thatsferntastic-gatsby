@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { useInstagram } from '../../hooks/use-instagram';
+import { useFetchInstagramPosts } from '../../hooks/use-instagram';
 import { Spinner } from '../spinner';
 import { InstagramPost } from './instagram-post';
 
@@ -27,7 +27,7 @@ function InstagramWidget({
 }
 
 function Posts({ postsToShow = POSTS_TO_SHOW }: PostProps): React.ReactElement {
-  const posts = useInstagram();
+  const posts = useFetchInstagramPosts(6, '873517535');
   return (
     <div className="grid mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
       {posts.length > 0

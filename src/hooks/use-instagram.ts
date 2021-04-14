@@ -1,26 +1,47 @@
 import { useEffect, useState } from 'react';
 
-type InstagramPostType = {
-  src: string;
-  srcSet: Array<string>;
-  url: string;
-  caption: string;
+type Post = {
   id: string;
+  caption: string;
+  src: string;
+  width: number;
+  height: number;
+  url: string;
+  comments: number | undefined;
+  likes: number;
 };
 
-type InstagramPostsType = Array<InstagramPostType>;
+type Posts = Array<Post>;
 
-function useInstagram(): InstagramPostsType | [] {
+function useFetchInstagramPosts(
+  photoCount: number,
+  instagramId: string
+): Posts {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    fetch('/.netlify/functions/instagram')
-      .then((res) => res.json())
-      .then((data) => setPosts(data))
-      // eslint-disable-next-line no-console
-      .catch((error) => console.error(error));
-  }, []);
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    async function fetchInstagramPosts() {
+      try {
+        const res = await fetch('/.netlify/functions/instagram', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ photoCount, instagramId }),
+        });
+        const data = await res.json();
+
+        setPosts(await data);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+        setPosts([]);
+      }
+    }
+    fetchInstagramPosts();
+  }, [instagramId, photoCount]);
   return posts;
 }
 
-export { useInstagram };
-export type { InstagramPostsType, InstagramPostType };
+export { useFetchInstagramPosts };
+export type { Post, Posts };

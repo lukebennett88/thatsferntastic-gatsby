@@ -2,11 +2,11 @@ import { OutboundLink } from 'gatsby-plugin-google-gtag';
 import * as React from 'react';
 import { HiExternalLink } from 'react-icons/hi';
 
-import { InstagramPostType } from '../../hooks/use-instagram';
+import { Post } from '../../hooks/use-instagram';
 import { useLazyLoad } from '../../hooks/use-lazyload';
 
 type InstagramPostProps = {
-  post: InstagramPostType;
+  post: Post;
 };
 
 function InstagramPost({ post }: InstagramPostProps): React.ReactElement {
@@ -28,6 +28,7 @@ function InstagramPost({ post }: InstagramPostProps): React.ReactElement {
             <img
               ref={srcRef}
               data-src={post.src}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               srcSet={post.srcSet}
               alt={post.caption}
