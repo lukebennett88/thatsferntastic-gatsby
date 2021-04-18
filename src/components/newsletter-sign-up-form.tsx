@@ -101,13 +101,11 @@ function NewsletterSignUpForm(): React.ReactElement {
           )}
         </div>
         <div className="mt-3 rounded-full sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-          <button
-            type="submit"
-            disabled={submitting}
-            className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg"
-          >
-            {submitting ? 'Submitting' : 'Subscribe'}
-          </button>
+          <span className="button-wrapper">
+            <button type="submit" disabled={submitting} className="button">
+              {submitting ? 'Submitting' : 'Subscribe'}
+            </button>
+          </span>
         </div>
       </form>
     </div>

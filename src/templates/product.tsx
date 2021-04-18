@@ -126,23 +126,22 @@ function ProductPage({
               ))}
             </div>
 
-            {product.availableForSale ? (
-              <span className="relative transition duration-300 ease-in-out transform-gpu rounded-full hover:-translate-y-0.5">
-                <button
-                  type="button"
-                  onClick={handleAddToCart}
-                  className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 transition duration-300 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg"
-                >
-                  <span className="leading-none">Add to Cart</span>
-                </button>
-              </span>
-            ) : (
-              <div>
-                <span className="inline-flex items-center px-6 py-3 font-mono text-base font-medium text-pink-700 bg-pink-100 border border-transparent rounded-full">
-                  <span className="leading-none">Sold out</span>
-                </span>
-              </div>
-            )}
+            <span
+              className={`${!product.availableForSale ? 'button-wrapper' : ''}`}
+            >
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                disabled={!product.availableForSale}
+                className={`button ${
+                  product.availableForSale
+                    ? ''
+                    : '!text-gray-700 !bg-gray-100 cursor-not-allowed opacity-75 !shadow-none'
+                }`}
+              >
+                {product.availableForSale ? 'Add to Cart' : 'Sold out'}
+              </button>
+            </span>
 
             <div
               // eslint-disable-next-line react/no-danger

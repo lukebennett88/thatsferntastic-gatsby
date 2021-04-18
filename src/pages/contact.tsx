@@ -99,12 +99,11 @@ function ContactForm(): React.ReactElement {
                 />
               </div>
               <div className="sm:col-span-2 sm:flex sm:justify-end">
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center px-6 py-3 font-mono text-base font-medium text-pink-700 bg-pink-100 border border-transparent rounded-full shadow-sm hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg sm:w-auto"
-                >
-                  Submit
-                </button>
+                <span className="button-wrapper">
+                  <button type="submit" className="button">
+                    Submit
+                  </button>
+                </span>
               </div>
             </NetlifyForm>
           </div>
