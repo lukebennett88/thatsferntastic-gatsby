@@ -72,9 +72,9 @@ module.exports = {
               color: theme('colors.pink.500'),
               fontWeight: theme('fontWeight.medium'),
             },
-            'img': {
+            img: {
               width: theme('width.full'),
-            }
+            },
           },
         },
       }),
