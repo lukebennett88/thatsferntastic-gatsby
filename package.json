@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.0.0",
+    "@heroicons/react": "^1.0.1",
     "@reach/auto-id": "^0.15.0",
     "@reach/combobox": "^0.15.0",
     "@reach/dialog": "^0.15.0",

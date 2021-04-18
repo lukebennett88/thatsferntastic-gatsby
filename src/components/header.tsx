@@ -1,3 +1,4 @@
+import { MenuAlt2Icon } from '@heroicons/react/outline';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'gatsby';
 import * as React from 'react';
@@ -7,40 +8,29 @@ import {
   SanitySiteSettings,
   useSanitySiteSettings,
 } from '../hooks/use-sanity-site-settings';
+import { MobileMenu } from './mobile-menu';
 import { SearchBar } from './search-bar';
 import { Wave } from './wave';
 
-type HeaderProps = {
-  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-function Header({ setMenuOpen }: HeaderProps): React.ReactElement {
+function Header(): React.ReactElement {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   const count = useCartCount();
   const sanitySiteSettings: SanitySiteSettings = useSanitySiteSettings();
-  const toggleMenu = (): void => setMenuOpen((prevState) => !prevState);
   return (
     <>
       <nav className="sticky top-0 z-10 bg-teal-200">
+        <MobileMenu
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
         <div className="flex flex-shrink-0 w-full h-16 max-w-screen-xl mx-auto bg-white shadow md:h-auto md:bg-transparent md:shadow-none">
           <button
             type="button"
-            onClick={toggleMenu}
-            aria-label="Open sidebar"
+            onClick={() => setIsSidebarOpen(true)}
             className="px-4 text-gray-500 border-r border-gray-200 focus:bg-gray-100 focus:text-gray-600 md:hidden"
           >
-            <svg
-              className="w-6 h-6"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
+            <span className="sr-only">Open sidebar</span>
+            <MenuAlt2Icon aria-hidden className="w-6 h-6" />
           </button>
           <div className="flex justify-between flex-1 px-4 space-x-4 md:space-x-6 md:py-4">
             <div className="relative hidden md:flex md:items-center">

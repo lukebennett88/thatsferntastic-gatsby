@@ -1,5 +1,5 @@
-import { Transition } from '@headlessui/react';
-import { DialogContent, DialogOverlay } from '@reach/dialog';
+import { Dialog, Transition } from '@headlessui/react';
+import { XIcon } from '@heroicons/react/outline';
 import { Link } from 'gatsby';
 import * as React from 'react';
 
@@ -10,106 +10,86 @@ import {
 import { MainMenu } from './main-menu';
 
 type MobileMenuProps = {
-  isMenuOpen: boolean;
-  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function MobileMenu({
-  isMenuOpen,
-  setMenuOpen,
+  isSidebarOpen,
+  setIsSidebarOpen,
 }: MobileMenuProps): React.ReactElement {
-  const close = React.useCallback(() => {
-    setMenuOpen(false);
-  }, [setMenuOpen]);
-
-  const handleEscape = React.useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        close();
-      }
-    },
-    [close]
-  );
-
-  React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          close();
-        }
-      });
-    }
-    window.addEventListener('keydown', handleEscape);
-    return () => {
-      window.removeEventListener('keydown', handleEscape);
-    };
-  }, [close, handleEscape]);
-
   const sanitySiteSettings: SanitySiteSettings = useSanitySiteSettings();
 
   return (
-    <Transition show={isMenuOpen} className="md:hidden">
-      <DialogOverlay onDismiss={close} className="fixed inset-0 z-40 flex">
+    <Transition.Root show={isSidebarOpen} as={React.Fragment}>
+      <Dialog
+        as="div"
+        static
+        className="fixed inset-0 z-40 flex md:hidden"
+        open={isSidebarOpen}
+        onClose={setIsSidebarOpen}
+      >
         <Transition.Child
+          as={React.Fragment}
           enter="transition-opacity ease-linear duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
           leave="transition-opacity ease-linear duration-300"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
-          className="fixed inset-0 pointer-events-none"
         >
-          <div className="absolute inset-0 bg-black opacity-50" />
+          <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
         </Transition.Child>
         <Transition.Child
-          as={DialogContent}
-          aria-label="Sidebar menu"
-          enter="transition ease-in-out duration-500 transform"
+          as={React.Fragment}
+          enter="transition ease-in-out duration-300 transform"
           enterFrom="-translate-x-full"
           enterTo="translate-x-0"
-          leave="transition ease-in-out duration-500 transform"
+          leave="transition ease-in-out duration-300 transform"
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
-          className="relative flex flex-col flex-1 w-full max-w-xs pb-4 bg-white outline-none"
         >
-          <div className="absolute top-0 right-0 p-1 -mr-14">
-            <button
-              type="button"
-              onClick={close}
-              aria-label="Close sidebar"
-              className="flex items-center justify-center w-12 h-12 transition duration-150 ease-in-out bg-black bg-opacity-25 rounded-full focus:bg-black focus:bg-opacity-50"
+          <div className="relative flex flex-col flex-1 w-full max-w-xs pt-5 pb-4 bg-white">
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-in-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in-out duration-300"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
             >
-              <svg
-                className="w-6 h-6 text-white"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <div className="flex-1 h-0 overflow-y-auto">
-            <nav className="px-2 mt-5 space-y-5">
+              <div className="absolute top-0 right-0 pt-2 -mr-12">
+                <button
+                  type="button"
+                  className="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  <span className="sr-only">Close sidebar</span>
+                  <XIcon className="w-6 h-6 text-white" aria-hidden />
+                </button>
+              </div>
+            </Transition.Child>
+            <div className="flex items-center flex-shrink-0 px-2">
               <Link
                 to="/"
-                className="flex items-center px-2 py-2 mt-2 font-mono text-xl font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
-                // className="flex items-center px-4 py-2 mt-1 text-sm font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-md group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
+                className="flex items-center w-full px-2 py-2 mt-2 font-mono text-xl font-medium leading-5 text-gray-600 transition duration-150 ease-in-out rounded-lg group first:mt-0 hover:text-gray-900 hover:bg-gray-50 focus:bg-gray-100"
               >
                 {sanitySiteSettings.title}
               </Link>
-              <MainMenu onClick={close} />
-            </nav>
+            </div>
+            <div className="flex-1 h-0 mt-5 overflow-y-auto">
+              <nav className="px-2 space-y-1">
+                <MainMenu onClick={() => setIsSidebarOpen(false)} />
+              </nav>
+            </div>
           </div>
         </Transition.Child>
-        <div className="flex-shrink-0 w-14" />
-      </DialogOverlay>
-    </Transition>
+        <div className="flex-shrink-0 w-14" aria-hidden>
+          {/* Dummy element to force sidebar to shrink to fit close icon */}
+        </div>
+      </Dialog>
+    </Transition.Root>
   );
 }
 
