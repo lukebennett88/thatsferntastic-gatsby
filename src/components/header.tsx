@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'gatsby';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
 import { useCartCount } from '../hooks/use-cart-count';
@@ -124,9 +123,5 @@ function Header({ setMenuOpen }: HeaderProps): React.ReactElement {
     </>
   );
 }
-
-Header.propTypes = {
-  setMenuOpen: PropTypes.func,
-};
 
 export { Header };

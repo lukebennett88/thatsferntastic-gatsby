@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 
 import { Layout, ProductTile, SEO } from '../components';
@@ -26,11 +25,6 @@ function CollectionPageTemplate({
     </Layout>
   );
 }
-
-CollectionPageTemplate.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  data: PropTypes.object.isRequired,
-};
 
 type ShopifyProduct = {
   id: string;

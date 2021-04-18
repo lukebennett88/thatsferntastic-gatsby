@@ -1,6 +1,5 @@
 import { graphql, Link, useStaticQuery } from 'gatsby';
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image';
-import PropTypes from 'prop-types';
 import * as React from 'react';
 import { HiChevronLeft, HiChevronRight, HiTrash } from 'react-icons/hi';
 
@@ -209,10 +208,5 @@ function LineItem({ item }: LineItemProps): React.ReactElement {
     </div>
   );
 }
-
-LineItem.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  item: PropTypes.object,
-};
 
 export { LineItem };
