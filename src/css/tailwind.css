@@ -48,6 +48,13 @@
     @apply font-mono text-2xl leading-none text-pink-500 sm:text-4xl;
   }
 
+  .button-wrapper {
+    @apply relative inline-flex transition duration-300 ease-in-out transform-gpu rounded-full hover:-translate-y-0.5;
+  }
+  .button {
+    @apply inline-flex items-center justify-center px-6 py-3 font-mono text-base font-medium leading-none text-pink-700 transition duration-300 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg;
+  }
+
   /* Turn off animations for people who have the prefers-reduced-motion query enabled */
   @media (prefers-reduced-motion: reduce) {
     * {
