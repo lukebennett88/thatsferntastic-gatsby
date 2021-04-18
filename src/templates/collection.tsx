@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import * as React from 'react';
 
 import { Layout, ProductTile, SEO } from '../components';
-import { ShopifyImage } from '../types/shopify-product';
+import { ShopifyProduct } from '../hooks/use-all-shopify-products';
 
 type CollectionPageTemplateProps = {
   data: ShopifyCollection;
@@ -25,22 +25,6 @@ function CollectionPageTemplate({
     </Layout>
   );
 }
-
-type ShopifyProduct = {
-  id: string;
-  availableForSale: true;
-  title: string;
-  handle: string;
-  priceRange: {
-    minVariantPrice: {
-      amount: string;
-    };
-    maxVariantPrice: {
-      amount: string;
-    };
-  };
-  images: Array<ShopifyImage>;
-};
 
 type ShopifyCollection = {
   shopifyCollection: {
