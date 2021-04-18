@@ -2,7 +2,7 @@ import { useLocation } from '@reach/router';
 import queryString from 'query-string';
 import * as React from 'react';
 
-import { InstagramWidget, Layout, ProductTile, SEO } from '../components';
+import { Layout, ProductTile, SEO } from '../components';
 import { useAllShopifyProducts } from '../hooks/use-all-shopify-products';
 import { useSanitySiteSettings } from '../hooks/use-sanity-site-settings';
 
@@ -11,7 +11,6 @@ function IndexPage(): React.ReactElement {
     <Layout>
       <SEO title="Handmade Pencil Cases, Pouches, Stationery, Accessories and More" />
       <LatestProducts />
-      <InstagramWidget />
     </Layout>
   );
 }

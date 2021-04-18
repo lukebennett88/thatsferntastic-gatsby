@@ -1,13 +1,7 @@
 import * as React from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import {
-  InstagramWidget,
-  Layout,
-  ProductTile,
-  SEO,
-  Spinner,
-} from '../components';
+import { Layout, ProductTile, SEO, Spinner } from '../components';
 import { useAllShopifyProducts } from '../hooks/use-all-shopify-products';
 import { useSanitySiteSettings } from '../hooks/use-sanity-site-settings';
 
@@ -16,7 +10,6 @@ function ProductsPage(): React.ReactElement {
     <Layout>
       <SEO title="Handmade Pencil Cases, Pouches, Stationery, Accessories and More" />
       <AllProducts />
-      <InstagramWidget />
     </Layout>
   );
 }

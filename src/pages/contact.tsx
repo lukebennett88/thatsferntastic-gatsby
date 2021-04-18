@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { InstagramWidget, Layout, SEO } from '../components';
+import { Layout, SEO } from '../components';
 import { Input } from '../components/form-elements/input';
 import { NetlifyForm } from '../components/form-elements/netlify-form';
 import { Textarea } from '../components/form-elements/textarea';
@@ -11,7 +11,6 @@ function ContactPage(): React.ReactElement {
     <Layout>
       <SEO title="Handmade Pencil Cases, Pouches, Stationery, Accessories and More" />
       <ContactForm />
-      <InstagramWidget />
     </Layout>
   );
 }
