@@ -22,6 +22,10 @@ const linksMenu = [
     to: '/about/',
     label: 'About',
   },
+  {
+    to: '/contact/',
+    label: 'Contact',
+  },
 ];
 
 type MainMenuProps = {
