@@ -10,6 +10,34 @@ const siteUrl = 'https://www.thatsferntastic.com.au';
 // Check what node environment is running for Sanity plugin
 const isProd = process.env.NODE_ENV === 'production';
 
+const GET_ALL_PRODUCTS = `
+  query GetAllProductsQuery {
+    allShopifyProduct {
+      nodes {
+        objectID: shopifyId
+        availableForSale
+        createdAt
+        description
+        images {
+          originalSrc
+        }
+        productType
+        tags
+        title
+        vendor
+      }
+    }
+  }
+`;
+
+const queries = [
+  {
+    query: GET_ALL_PRODUCTS,
+    transformer: ({ data }) => data.allShopifyProduct.nodes,
+    settings: {},
+  },
+];
+
 module.exports = {
   siteMetadata: {
     siteUrl,
@@ -132,6 +160,19 @@ module.exports = {
         // If the Sanity GraphQL API was deployed using `--tag <name>`,
         // use `graphqlTag` to specify the tag name. Defaults to `default`.
         graphqlTag: 'default',
+      },
+    },
+    {
+      // This plugin must be placed last in your list of plugins to ensure that it can query all the GraphQL data
+      resolve: 'gatsby-plugin-algolia',
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_API_KEY,
+        indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME, // for all queries
+        queries,
+        chunkSize: 10000, // default: 1000
+        settings: {},
+        enablePartialUpdates: true,
       },
     },
   ],
