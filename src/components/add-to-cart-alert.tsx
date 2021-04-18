@@ -1,9 +1,9 @@
+import { XIcon } from '@heroicons/react/outline';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import * as React from 'react';
-import { FiX } from 'react-icons/fi';
 
 import { ShopifyProduct, ShopifyVariant } from '../types/shopify-product';
 
@@ -50,7 +50,7 @@ function AddToCartAlert({
                         onClick={close}
                         className="inline-flex text-gray-400 rounded-full focus:bg-gray-100 p-1.5 hover:bg-grey-100 focus:text-gray-500 hover:text-gray-500 focus:bg-grey-100 transition ease-in-out duration-150"
                       >
-                        <FiX className="w-5 h-5" />
+                        <XIcon className="w-5 h-5" />
                       </button>
                     </div>
                   </div>

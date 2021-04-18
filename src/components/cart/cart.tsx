@@ -1,6 +1,6 @@
+import { XIcon } from '@heroicons/react/outline';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
 import * as React from 'react';
-import { HiX } from 'react-icons/hi';
 
 import { useCart } from '../../hooks/use-cart';
 import { useCartCount } from '../../hooks/use-cart-count';
@@ -119,7 +119,7 @@ function Terms({ showDialog, close }: TermsProps): React.ReactElement {
               className="text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 focus:ring-opacity-50"
             >
               <span className="sr-only">Close</span>
-              <HiX aria-hidden className="w-6 h-6" />
+              <XIcon aria-hidden className="w-6 h-6" />
             </button>
           </div>
           <div className="sm:flex sm:items-start">
