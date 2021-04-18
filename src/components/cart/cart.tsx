@@ -1,5 +1,5 @@
+import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
-import { DialogContent, DialogOverlay } from '@reach/dialog';
 import * as React from 'react';
 
 import { useCart } from '../../hooks/use-cart';
@@ -13,8 +13,6 @@ export function Cart(): React.ReactElement {
   const lineItems = useCartItems();
   const count = useCartCount();
   const [showDialog, setShowDialog] = React.useState(false);
-  const open = (): void => setShowDialog(true);
-  const close = (): void => setShowDialog(false);
 
   return (
     <div className="relative pb-20">
@@ -28,18 +26,18 @@ export function Cart(): React.ReactElement {
               )
             : 'Nothing to see here, your cart is empty!'}
         </div>
-        <CartSummary open={open} />
-        <Terms showDialog={showDialog} close={close} />
+        <CartSummary setShowDialog={setShowDialog} />
+        <Terms showDialog={showDialog} setShowDialog={setShowDialog} />
       </div>
     </div>
   );
 }
 
 type CartSummaryProps = {
-  open: () => void;
+  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function CartSummary({ open }: CartSummaryProps): React.ReactElement {
+function CartSummary({ setShowDialog }: CartSummaryProps): React.ReactElement {
   const cart = useCart();
   const count = useCartCount();
 
@@ -66,16 +64,18 @@ function CartSummary({ open }: CartSummaryProps): React.ReactElement {
             </div>
           </dl>
           <div className="mt-6">
-            <button
-              type="button"
-              onClick={open}
-              disabled={!count}
-              className={`inline-flex items-center justify-center w-full px-6 py-3 font-mono text-base font-medium text-center text-pink-700 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg ${
-                !count ? 'cursor-not-allowed opacity-75' : ''
-              }`}
-            >
-              Checkout
-            </button>
+            <span className="button-wrapper">
+              <button
+                type="button"
+                onClick={() => setShowDialog(true)}
+                disabled={!count}
+                className={`button w-full ${
+                  !count ? 'cursor-not-allowed opacity-75' : ''
+                }`}
+              >
+                Checkout
+              </button>
+            </span>
           </div>
         </div>
       </nav>
@@ -84,18 +84,115 @@ function CartSummary({ open }: CartSummaryProps): React.ReactElement {
 }
 
 type TermsProps = {
-  close: () => void;
   showDialog: boolean;
+  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Terms({ showDialog, close }: TermsProps): React.ReactElement {
-  const overlayRef = React.useRef(null);
-  const contentRef = React.useRef(null);
+function Terms({ showDialog, setShowDialog }: TermsProps): React.ReactElement {
   const [isChecked, setIsChecked] = React.useState(false);
   const checkout = useCheckoutUrl();
 
   return (
-    <DialogOverlay
+    <>
+      <Transition.Root show={showDialog} as={React.Fragment}>
+        <Dialog
+          as="div"
+          aria-label="Terms and Conditions"
+          static
+          className="fixed inset-0 z-10 overflow-y-auto"
+          open={showDialog}
+          onClose={setShowDialog}
+        >
+          <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-25" />
+            </Transition.Child>
+
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className="hidden sm:inline-block sm:align-middle sm:h-screen"
+              aria-hidden
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={React.Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              enterTo="opacity-100 translate-y-0 sm:scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            >
+              <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+                <div className="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
+                  <button
+                    type="button"
+                    className="inline-flex text-gray-400 rounded-full focus:bg-gray-100 p-1.5 hover:bg-grey-100 focus:text-gray-500 hover:text-gray-500 focus:bg-grey-100 transition ease-in-out duration-150"
+                    onClick={() => setShowDialog(false)}
+                  >
+                    <span className="sr-only">Close</span>
+                    <XIcon className="w-6 h-6" aria-hidden />
+                  </button>
+                </div>
+                <div className="text-center sm:text-left">
+                  <h3 className="font-mono text-2xl leading-none text-pink-500">
+                    Please note...
+                  </h3>
+                  <div className="mt-2 prose-sm prose text-gray-500">
+                    <p>
+                      Whilst we endeavour to get your order out as quickly as
+                      possible, please be aware, we are a small business
+                      creating handmade items, and as such the processing time
+                      for orders <em>can</em> take up to 10 days.
+                    </p>
+                    <p>
+                      By checking the box below, you indicate that you are aware
+                      of this condition and agree to these terms.
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-5 space-y-4 sm:mt-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-between">
+                  <label
+                    htmlFor="agree_to_terms"
+                    className="flex items-center text-sm text-gray-900"
+                  >
+                    <input
+                      id="agree_to_terms"
+                      name="agree_to_terms"
+                      type="checkbox"
+                      checked={isChecked}
+                      onChange={() => setIsChecked((prev) => !prev)}
+                      className="w-4 h-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500"
+                    />
+                    <span className="ml-2">Agree to terms</span>
+                  </label>
+
+                  <a
+                    href={isChecked ? (checkout as string) : undefined}
+                    className={`button ${
+                      isChecked
+                        ? ''
+                        : '!text-gray-700 !bg-gray-100 cursor-not-allowed opacity-75'
+                    }`}
+                  >
+                    Checkout
+                  </a>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition.Root>
+      {/* <DialogOverlay
       ref={overlayRef}
       isOpen={showDialog}
       onDismiss={close}
@@ -104,10 +201,7 @@ function Terms({ showDialog, close }: TermsProps): React.ReactElement {
       <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden
-        />
-        <DialogContent
-          aria-label="Terms and Conditions"
+          aria-hidden          aria-label="Terms and Conditions"
           ref={contentRef}
           className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6"
           aria-modal
@@ -119,7 +213,7 @@ function Terms({ showDialog, close }: TermsProps): React.ReactElement {
               className="text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 focus:ring-opacity-50"
             >
               <span className="sr-only">Close</span>
-              <XIcon aria-hidden className="w-6 h-6" />
+              <XIcon aria-hidden-6 h-6" />
             </button>
           </div>
           <div className="sm:flex sm:items-start">
@@ -170,6 +264,7 @@ function Terms({ showDialog, close }: TermsProps): React.ReactElement {
           </div>
         </DialogContent>
       </div>
-    </DialogOverlay>
+    </DialogOverlay> */}
+    </>
   );
 }
