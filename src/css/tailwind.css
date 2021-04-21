@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+@layer base {
   :root {
     --reach-combobox: 1;
     --reach-dialog: 1;
@@ -35,6 +35,18 @@
     scroll-behavior: smooth;
   }
 
+  /* Turn off animations for people who have the prefers-reduced-motion query enabled */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
   .gallery {
     grid-auto-columns: calc(100% / 3 - theme('spacing.4'));
     scroll-snap-type: x mandatory;
@@ -55,15 +67,11 @@
     @apply inline-flex items-center justify-center px-6 py-3 font-mono text-base font-medium leading-none text-pink-700 transition duration-300 bg-pink-100 border border-transparent rounded-full hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-lg;
   }
 
-  /* Turn off animations for people who have the prefers-reduced-motion query enabled */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+  /* purgecss start ignore */
+  [data-reach-combobox-option][aria-selected='true'] > a {
+    @apply bg-pink-100 z-10;
   }
+  /* purgecss end ignore */
 }
 
 @layer utilities {
