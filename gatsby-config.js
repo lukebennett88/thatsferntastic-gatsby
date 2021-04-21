@@ -34,18 +34,19 @@ const GET_ALL_PRODUCTS = `
 const queries = [
   {
     query: GET_ALL_PRODUCTS,
-    transformer: ({ data }) => data.allShopifyProduct.nodes.map((node) => ({
-      objectID: node.objectID,
-      availableForSale: node.availableForSale,
-      createdAt: node.createdAt,
-      description: node.description,
-      handle: node.handle,
-      image: node.images?.[0],
-      productType: node.productType,
-      tags: node.tags,
-      title: node.title,
-      vendor: node.vendor,
-    })),
+    transformer: ({ data }) =>
+      data.allShopifyProduct.nodes.map((node) => ({
+        objectID: node.objectID,
+        availableForSale: node.availableForSale,
+        createdAt: node.createdAt,
+        description: node.description,
+        handle: node.handle,
+        image: node.images?.[0],
+        productType: node.productType,
+        tags: node.tags,
+        title: node.title,
+        vendor: node.vendor,
+      })),
     settings: {},
   },
 ];
