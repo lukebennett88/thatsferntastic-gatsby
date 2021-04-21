@@ -18,6 +18,7 @@ const GET_ALL_PRODUCTS = `
         availableForSale
         createdAt
         description
+        handle
         images {
           originalSrc
         }
@@ -33,7 +34,18 @@ const GET_ALL_PRODUCTS = `
 const queries = [
   {
     query: GET_ALL_PRODUCTS,
-    transformer: ({ data }) => data.allShopifyProduct.nodes,
+    transformer: ({ data }) => data.allShopifyProduct.nodes.map((node) => ({
+      objectID: node.objectID,
+      availableForSale: node.availableForSale,
+      createdAt: node.createdAt,
+      description: node.description,
+      handle: node.handle,
+      image: node.images?.[0],
+      productType: node.productType,
+      tags: node.tags,
+      title: node.title,
+      vendor: node.vendor,
+    })),
     settings: {},
   },
 ];
@@ -172,7 +184,7 @@ module.exports = {
         queries,
         chunkSize: 10000, // default: 1000
         settings: {},
-        enablePartialUpdates: true,
+        enablePartialUpdates: false,
       },
     },
   ],
