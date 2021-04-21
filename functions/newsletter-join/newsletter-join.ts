@@ -1,10 +1,14 @@
-/* eslint-disable camelcase */
-const axios = require('axios');
+import { Handler } from '@netlify/functions';
+import axios from 'axios';
 
-exports.handler = async (event) => {
-  const { listID, email_address } = JSON.parse(event.body);
+type EventBody = { listID: string; newsletter_email_address: string };
 
-  if (!email_address || !listID) {
+const handler: Handler = async (event) => {
+  const { listID, newsletter_email_address }: EventBody = JSON.parse(
+    event.body
+  );
+
+  if (!newsletter_email_address || !listID) {
     // eslint-disable-next-line no-console
     console.log('no email or list ID provided');
     return {
@@ -18,17 +22,19 @@ exports.handler = async (event) => {
     profiles: [
       {
         $consent: 'web',
-        email: email_address,
+        email: newsletter_email_address,
       },
     ],
   };
 
   const newsletterData = await axios
     .post(`https://a.klaviyo.com/api/v2/list/${listID}/subscribe`, payload)
-    .then((res) => res.data);
+    .then((res) => res.data as []);
 
   return {
     statusCode: 200,
     body: JSON.stringify(newsletterData),
   };
 };
+
+export { handler };
