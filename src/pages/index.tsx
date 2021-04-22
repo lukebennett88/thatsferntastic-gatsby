@@ -20,12 +20,14 @@ function LatestProducts(): React.ReactElement {
   const sanitySiteSettings = useSanitySiteSettings();
 
   const { search } = useLocation();
+  const filteredProducts = allShopifyProduct.nodes.filter(
+    (product) => product.productType === queryString.parse(search).q
+  );
 
-  const products = search
-    ? allShopifyProduct.nodes.filter(
-        (product) => product.productType === queryString.parse(search).q
-      )
-    : allShopifyProduct.nodes;
+  let products = allShopifyProduct.nodes;
+  if (filteredProducts.length > 0) {
+    products = filteredProducts;
+  }
 
   return (
     <article>
