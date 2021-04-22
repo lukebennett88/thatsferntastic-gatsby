@@ -22,6 +22,12 @@ export default {
       type: 'string',
     },
     {
+      title: 'Banner Text',
+      name: 'bannerText',
+      type: 'array',
+      of: [{ type: 'string' }],
+    },
+    {
       title: 'Share image',
       name: 'shareImage',
       type: 'imageWithAltText',

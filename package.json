@@ -168,7 +168,6 @@
     "url": "https://github.com/lukebennett88/thatsferntastic.com.au/issues"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.--write": "prettier --write"
+    "*.--ignore-unknown": "prettier --write"
   }
 }

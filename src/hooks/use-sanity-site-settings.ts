@@ -13,11 +13,12 @@ type SocialLink = {
 };
 
 type SanitySiteSettings = {
-  title: string;
+  bannerText: Array<string>;
   description: string;
-  siteUrl: string;
   shareImage: ShareImage;
+  siteUrl: string;
   socialLinks: Array<SocialLink>;
+  title: string;
 };
 
 type SanitySiteSettingsReturnType = {
@@ -29,7 +30,7 @@ function useSanitySiteSettings(): SanitySiteSettings {
     graphql`
       query SanitySiteSettingsQuery {
         sanitySiteSettings(_id: { eq: "siteSettings" }) {
-          title
+          bannerText
           description
           siteUrl
           shareImage {
@@ -42,6 +43,7 @@ function useSanitySiteSettings(): SanitySiteSettings {
             socialNetwork
             link
           }
+          title
         }
       }
     `
