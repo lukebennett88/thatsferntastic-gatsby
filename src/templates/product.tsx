@@ -54,19 +54,6 @@ function ProductPage({
       />
       <div className="relative">
         <article className="rounded-lg lg:grid lg:grid-cols-2 lg:gap-8">
-          <h1 className="text-xl font-medium text-center lg:hidden">
-            {product.title}
-          </h1>
-
-          {product.availableForSale && Number(variant?.priceV2?.amount) > 0 && (
-            <dl className="mt-4 text-center lg:hidden">
-              <dt className="sr-only">Price:</dt>
-              <dd className="heading-1">
-                ${Number(variant.priceV2.amount).toFixed(2)}{' '}
-              </dd>
-            </dl>
-          )}
-
           <div className="flex flex-col w-full mx-auto mt-6 space-y-4 lg:mt-0 max-w-prose">
             <div className="overflow-hidden rounded-lg">
               <div className="relative bg-white aspect-w-1 aspect-h-1">
@@ -92,19 +79,17 @@ function ProductPage({
             />
           </div>
           <div className="flex flex-col space-y-4">
-            <h1 className="hidden text-xl font-medium lg:block">
+            <h1 className="mt-12 text-xl font-medium lg:mt-0">
               {product.title}
             </h1>
-
             {product.availableForSale && Number(variant?.priceV2?.amount) > 0 && (
-              <dl className="hidden mt-4 lg:block">
+              <dl className="mt-4">
                 <dt className="sr-only">Price:</dt>
                 <dd className="heading-1">
                   ${Number(variant.priceV2.amount).toFixed(2)}{' '}
                 </dd>
               </dl>
             )}
-
             <div className="space-y-4">
               {product.options.map((option, index) => (
                 <OptionPicker
@@ -125,7 +110,6 @@ function ProductPage({
                 />
               ))}
             </div>
-
             <span
               className={`${!product.availableForSale ? 'button-wrapper' : ''}`}
             >
@@ -142,7 +126,6 @@ function ProductPage({
                 {product.availableForSale ? 'Add to Cart' : 'Sold out'}
               </button>
             </span>
-
             <div
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{
