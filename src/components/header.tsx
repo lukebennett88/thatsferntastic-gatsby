@@ -13,7 +13,7 @@ import {
   useSanitySiteSettings,
 } from '../hooks/use-sanity-site-settings';
 import { MobileMenu } from './mobile-menu';
-import { SearchBar } from './search-bar';
+import { SearchBar } from './search/search-bar';
 import { Wave } from './wave';
 
 function Header(): React.ReactElement {

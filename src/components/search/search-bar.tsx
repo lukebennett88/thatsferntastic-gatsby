@@ -22,8 +22,8 @@ import {
   InstantSearch,
 } from 'react-instantsearch-dom';
 
-import { algoliaClient } from '../utils/algolia-client';
-import { resizeShopifyImage } from '../utils/resize-shopify-image';
+import { algoliaClient } from '../../utils/algolia-client';
+import { resizeShopifyImage } from '../../utils/resize-shopify-image';
 
 function SearchBar(): React.ReactElement {
   return (
@@ -285,6 +285,7 @@ const Results = connectStateResults(
           </h3>
           <ComboboxList>
             {searchResults.hits.map((hit) => (
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               <Options key={hit.id} hit={hit} refine={refine} />
             ))}

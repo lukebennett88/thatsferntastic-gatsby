@@ -66,7 +66,7 @@ function Post({ post }: PostProps): React.ReactElement {
                 renderContainerOnSingleChild
                 projectId={process.env.GATSBY_SANITY_PROJECT_ID}
                 dataset={process.env.GATSBY_SANITY_DATASET}
-                className="mt-2 prose clamp-3"
+                className="mt-2 prose line-clamp-3"
               />
             )}
           </div>

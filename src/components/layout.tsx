@@ -24,7 +24,7 @@ function Layout({
         <div className="flex-1 w-full max-w-2xl px-6 mx-auto lg:max-w-screen-xl">
           <div className="flex flex-wrap py-12 lg:space-x-16">
             {hasSidebar && <Sidebar />}
-            <main className="flex-1">{children}</main>
+            <main className="flex flex-col flex-1">{children}</main>
           </div>
         </div>
         <Footer />

@@ -1,11 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable global-require, import/no-extraneous-dependencies */
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
-const forms = require('@tailwindcss/forms');
-const typography = require('@tailwindcss/typography');
-const aspectRatio = require('@tailwindcss/aspect-ratio');
-const lineClamp = require('tailwindcss-line-clamp');
-const tailwindFilters = require('tailwindcss-filters');
 
 module.exports = {
   mode: 'jit',
@@ -14,11 +9,6 @@ module.exports = {
   theme: {
     backdropFilter: {
       blur: `blur(${defaultTheme.spacing[2]})`,
-    },
-    lineClamp: {
-      1: 1,
-      2: 2,
-      3: 3,
     },
     extend: {
       colors: {
@@ -87,5 +77,10 @@ module.exports = {
       opacity: ['group-hover'],
     },
   },
-  plugins: [aspectRatio, forms, lineClamp, typography, tailwindFilters],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/line-clamp'),
+  ],
 };

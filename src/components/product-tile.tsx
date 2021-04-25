@@ -48,7 +48,7 @@ function ProductTile({ product }: ProductTileProps): React.ReactElement {
             </div>
           </div>
           <div className="flex flex-col justify-center flex-1 px-6 py-3 overflow-hidden">
-            <h3 title={product.title} className="mt-2 clamp-2">
+            <h3 title={product.title} className="mt-2 line-clamp-2">
               {product.title}
             </h3>
             <p className="pt-3 mt-auto font-mono text-3xl leading-none text-pink-500">

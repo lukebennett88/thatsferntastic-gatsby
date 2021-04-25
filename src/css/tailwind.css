@@ -35,6 +35,10 @@
     scroll-behavior: smooth;
   }
 
+  mark {
+    @apply bg-yellow-100;
+  }
+
   /* Turn off animations for people who have the prefers-reduced-motion query enabled */
   @media (prefers-reduced-motion: reduce) {
     * {
