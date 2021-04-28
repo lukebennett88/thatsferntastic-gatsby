@@ -36,9 +36,11 @@ function LatestProducts(): React.ReactElement {
         {queryString.parse(search).q || 'Latest Products'}
       </h2>
       <div className="relative grid pb-20 mx-auto mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
-        {products.slice(0, 18).map((product) => (
-          <ProductTile key={product.id} product={product} />
-        ))}
+        {products
+          .slice(0, filteredProducts.length ? products.length : 18)
+          .map((product) => (
+            <ProductTile key={product.id} product={product} />
+          ))}
       </div>
     </article>
   );
