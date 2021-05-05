@@ -258,6 +258,7 @@ interface ComboboxContextValue {
 }
 
 const Results = connectStateResults(
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   ({ searchState, searchResults, refine }) => {
     if (!searchResults) {
@@ -284,8 +285,7 @@ const Results = connectStateResults(
             Products
           </h3>
           <ComboboxList>
-            {searchResults.hits.map((hit) => (
-              // @ts-ignore
+            {searchResults.hits.map((hit: any) => (
               <Options key={hit.id} hit={hit} refine={refine} />
             ))}
           </ComboboxList>
@@ -323,7 +323,7 @@ function Options({ hit, refine }: OptionsProps): React.ReactElement {
         onClick={(e) => {
           e.preventDefault();
           navigate(`/products/${hit.handle}`);
-          refine('');
+          refine?.('');
         }}
         className="flex items-center px-8 py-2 -mx-4 focus:outline-none focus:bg-gray-200 hover:bg-gray-100"
       >
