@@ -20,9 +20,8 @@ export function Cart(): React.ReactElement {
       <div className="flex flex-wrap py-12 lg:space-x-16">
         <div className="relative grid flex-1 pb-20 mx-auto gap-y-10 gap-x-12 lg:col-span-3">
           {count
-            ? lineItems.map(
-                (item: LineItemsType) =>
-                  item.variant && <LineItem key={item.id} item={item} />
+            ? lineItems.map((item: LineItemsType) =>
+                item.variant ? <LineItem key={item.id} item={item} /> : null
               )
             : 'Nothing to see here, your cart is empty!'}
         </div>

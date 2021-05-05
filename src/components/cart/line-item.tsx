@@ -162,7 +162,7 @@ function LineItem({ item }: LineItemProps): React.ReactElement {
                 )
             )}
           </dl>
-          <div className="flex items-end justify-between w-full pt-2 mt-auto">
+          <div className="flex flex-wrap items-end justify-between w-full pt-2 mt-auto">
             <div>
               <div className="font-medium text-gray-500">Quantity:</div>
               <div className="relative z-0 inline-flex mt-1 -space-x-px shadow-sm">
@@ -194,11 +194,11 @@ function LineItem({ item }: LineItemProps): React.ReactElement {
                 </button>
               </div>
             </div>
-            <div className="hidden lg:items-baseline lg:flex">
+            <div className="flex items-baseline space-x-4">
               <button
                 onClick={() => removeFromCart(item.variant.id)}
                 type="button"
-                className="text-gray-800 underline transition duration-150 ease-in-out hover:text-gray-600"
+                className="hidden text-gray-800 underline transition duration-150 ease-in-out md:block hover:text-gray-600"
               >
                 Remove from cart
               </button>
