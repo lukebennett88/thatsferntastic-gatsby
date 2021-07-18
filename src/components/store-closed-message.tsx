@@ -60,8 +60,7 @@ export function StoreClosedMessage(): JSX.Element {
                   <div className="mt-2 space-y-2 text-sm text-gray-500">
                     <p>
                       @thatsferntastic is currently closed. You can still browse
-                      the site and add items to your cart, but you will not be
-                      able to check them out.
+                      the site, but you will not be able to purchase anything.
                     </p>
                     <p>
                       Keep an eye on{' '}
