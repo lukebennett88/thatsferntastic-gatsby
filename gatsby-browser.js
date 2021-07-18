@@ -4,7 +4,9 @@ import './src/css/tailwind.css';
 
 import * as React from 'react';
 
+import { StoreClosedMessage } from './src/components/store-closed-message.tsx';
 import { ShopifyProvider } from './src/context/shopify.tsx';
+
 
 export function wrapRootElement({ element }) {
   return (
@@ -13,6 +15,7 @@ export function wrapRootElement({ element }) {
       accessToken={process.env.GATSBY_SHOPIFY_ACCESS_TOKEN}
     >
       {element}
+      <StoreClosedMessage />
     </ShopifyProvider>
   );
 }
