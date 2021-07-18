@@ -44,7 +44,7 @@ export function StoreClosedMessage(): JSX.Element {
           >
             <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
               <div>
-                <div className="flex items-center justify-center w-12 h-12 mx-auto bg-green-100 rounded-full">
+                <div className="flex items-center justify-center w-12 h-12 mx-auto bg-yellow-100 rounded-full">
                   <ExclamationIcon
                     className="w-6 h-6 text-yellow-600"
                     aria-hidden="true"
