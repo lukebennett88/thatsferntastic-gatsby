@@ -63,7 +63,9 @@ function CartSummary({ setShowDialog }: CartSummaryProps): React.ReactElement {
             </div>
           </dl>
           <div className="mt-6">
-            <span className="button-wrapper">
+            Sorry, @thatsferntastic is closed right now. You will be able to
+            check out once we reopen.
+            {/* <span className="button-wrapper">
               <button
                 type="button"
                 onClick={() => setShowDialog(true)}
@@ -74,7 +76,7 @@ function CartSummary({ setShowDialog }: CartSummaryProps): React.ReactElement {
               >
                 Checkout
               </button>
-            </span>
+            </span> */}
           </div>
         </div>
       </nav>
