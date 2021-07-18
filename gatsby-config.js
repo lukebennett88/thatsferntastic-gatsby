@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 
 dotenv.config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: '.env',
 });
 
 // Declare variables so these values can be reused
