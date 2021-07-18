@@ -55,24 +55,37 @@ export function StoreClosedMessage(): JSX.Element {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Payment successful
+                    Store temporarly closed
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Consequatur amet labore.
+                  <div className="mt-2 space-y-2 text-sm text-gray-500">
+                    <p>
+                      @thatsferntastic is currently closed. You can still browse
+                      the site and add items to your cart, but you will not be
+                      able to check them out.
+                    </p>
+                    <p>
+                      Keep an eye on{' '}
+                      <a
+                        href="https://www.instagram.com/thatsferntastic/"
+                        className="font-semibold text-pink-500 underline"
+                      >
+                        my Instagram
+                      </a>{' '}
+                      for updates.
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="mt-5 sm:mt-6">
-                <button
-                  type="button"
-                  className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-                  onClick={() => setOpen(false)}
-                >
-                  Go back to dashboard
-                </button>
+              <div className="mt-5 text-center sm:mt-6">
+                <div className="button-wrapper">
+                  <button
+                    type="button"
+                    className="button"
+                    onClick={() => setOpen(false)}
+                  >
+                    I understand
+                  </button>
+                </div>
               </div>
             </div>
           </Transition.Child>
