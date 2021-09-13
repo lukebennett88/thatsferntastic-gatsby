@@ -37,7 +37,7 @@ function LatestProducts(): React.ReactElement {
       </h2>
       <div className="relative grid pb-20 mx-auto mt-6 gap-y-10 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
         {products
-          .slice(0, filteredProducts.length ? products.length : 18)
+          .slice(0, filteredProducts.length > 0 ? products.length : 18)
           .map((product) => (
             <ProductTile key={product.id} product={product} />
           ))}
