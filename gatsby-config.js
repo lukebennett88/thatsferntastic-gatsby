@@ -77,7 +77,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-gtag`,
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
         // You can add multiple tracking ids and a pageview event will be fired for all of them.
         trackingIds: [
@@ -106,6 +106,39 @@ module.exports = {
         start_url: '/',
         display: 'minimal-ui',
         icon: 'src/images/favicon.png', // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-feed',
+      options: {
+        feeds: [
+          {
+            query: `
+            {
+              allShopifyProduct(sort: { fields: handle, order: ASC }) {
+                nodes {
+                  availableForSale
+                  description
+                  handle
+                  updatedAt
+                }
+              }
+            }
+            `,
+            serialize: ({ query: { allShopifyProduct } }) => {
+              return allShopifyProduct.nodes.filter((node) => node.availableForSale).map((node) => {
+                return {
+                  description: node.description,
+                  date: node.updatedAt,
+                  url: `https://www.thatsferntastic.com.au/products/${node.handle}/`,
+                  guid: node.handle,
+                }
+              })
+            },
+            output: '/rss.xml',
+            title: '@thatsferntastic products',
+          },
+        ],
       },
     },
     {
@@ -183,7 +216,7 @@ module.exports = {
         apiKey: process.env.ALGOLIA_ADMIN_API_KEY,
         indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME, // for all queries
         queries,
-        chunkSize: 10000, // default: 1000
+        chunkSize: 10_000, // default: 1000
         settings: {},
         enablePartialUpdates: false,
       },
