@@ -22,7 +22,9 @@ function ProductPage({
 }: ProductPageProps): React.ReactElement {
   const addItemToCart = useAddItemToCart();
   const [isAlertShown, setIsAlertShown] = React.useState(false);
-  const [activeImageIndex, setActiveImageIndex] = React.useState(0);
+  const [activeImage, setActiveImage] = React.useState(
+    product.images?.[0].localFile.childImageSharp.gatsbyImageData
+  );
   const variants = React.useMemo(
     () => prepareVariantsWithOptions(product.variants),
     [product.variants]
@@ -30,6 +32,10 @@ function ProductPage({
   const [variant, setVariant] = React.useState(
     () => variants[0] as ShopifyVariant
   );
+
+  React.useEffect(() => {
+    setActiveImage(variant.image.localFile.childImageSharp.gatsbyImageData);
+  }, [variant]);
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleAddToCart = async () => {
@@ -48,8 +54,8 @@ function ProductPage({
         description={product.description}
         type="product"
         image={
-          product?.images[0]?.localFile?.childImageSharp?.gatsbyImageData
-            ?.images?.fallback?.src
+          product?.images[0]?.localFile.childImageSharp.gatsbyImageData.images
+            ?.fallback?.src
         }
       />
       <div className="relative">
@@ -58,13 +64,9 @@ function ProductPage({
             <div className="overflow-hidden rounded-lg">
               <div className="relative bg-white aspect-w-1 aspect-h-1">
                 <div className="absolute inset-0 flex">
-                  {product.images?.[activeImageIndex]?.localFile
-                    ?.childImageSharp ? (
+                  {product.images?.[0].localFile?.childImageSharp ? (
                     <GatsbyImage
-                      image={
-                        product.images[activeImageIndex].localFile
-                          .childImageSharp.gatsbyImageData
-                      }
+                      image={activeImage}
                       alt=""
                       imgStyle={{ objectFit: 'contain' }}
                       className="flex-1 duration-500 ease-in-out transform hover:scale-110"
@@ -73,10 +75,7 @@ function ProductPage({
                 </div>
               </div>
             </div>
-            <Gallery
-              images={product.images}
-              setActiveImage={setActiveImageIndex}
-            />
+            <Gallery images={product.images} setActiveImage={setActiveImage} />
           </div>
           <div className="flex flex-col space-y-4">
             <h1 className="mt-12 text-xl font-medium lg:mt-0">
@@ -97,7 +96,7 @@ function ProductPage({
                   key={index}
                   name={option.name}
                   options={option.values}
-                  onChange={(e) =>
+                  onChange={(e) => {
                     setVariant(
                       // @ts-ignore
                       variants.find(
@@ -105,8 +104,8 @@ function ProductPage({
                           v.selectedOptions[0].name === option.name &&
                           v.selectedOptions[0].value === e.target.value
                       )
-                    )
-                  }
+                    );
+                  }}
                 />
               ))}
             </div>

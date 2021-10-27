@@ -1,3 +1,4 @@
+import type { IGatsbyImageData } from 'gatsby-plugin-image';
 import * as React from 'react';
 
 import { ShopifyImage } from '../types/shopify-product';
@@ -5,7 +6,7 @@ import { Thumbnail } from './thumbnail';
 
 type GalleryProps = {
   images: Array<ShopifyImage>;
-  setActiveImage: React.Dispatch<React.SetStateAction<number>>;
+  setActiveImage: React.Dispatch<React.SetStateAction<IGatsbyImageData>>;
 };
 
 function Gallery({
@@ -21,7 +22,11 @@ function Gallery({
               // eslint-disable-next-line react/no-array-index-key
               key={index}
               src={src}
-              onClick={() => setActiveImage(index)}
+              onClick={() =>
+                setActiveImage(
+                  images?.[index]?.localFile?.childImageSharp?.gatsbyImageData
+                )
+              }
             />
           ))}
         </div>
