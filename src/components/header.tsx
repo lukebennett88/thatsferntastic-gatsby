@@ -12,6 +12,7 @@ import {
   SanitySiteSettings,
   useSanitySiteSettings,
 } from '../hooks/use-sanity-site-settings';
+import { classNames } from '../utils/classnames';
 import { MobileMenu } from './mobile-menu';
 import { SearchBar } from './search-bar';
 import { Wave } from './wave';
@@ -63,13 +64,16 @@ function Header(): React.ReactElement {
                       exit={{ opacity: 0, y: '-1rem' }}
                       className="absolute top-0 right-0 pointer-events-none"
                     >
-                      <span
-                        className={`${
-                          count >= 10 ? 'px-2' : 'w-5'
-                        } flex items-center justify-center h-5 max-w-xs pt-1 font-mono text-xs text-white transform translate-x-1/2 bg-pink-600 rounded-full shadow-lg pointer-events-auto `}
+                      <div
+                        className={classNames(
+                          count >= 10 ? 'px-2' : 'w-5',
+                          'bg-pink-600 flex font-mono h-5 items-center justify-center pointer-events-auto relative rounded-full shadow-lg text-white text-xs transform translate-x-1/2'
+                        )}
                       >
-                        {count}
-                      </span>
+                        <span className="absolute inset-0 flex items-center justify-center">
+                          {count}
+                        </span>
+                      </div>
                     </motion.div>
                   ) : null}
                 </AnimatePresence>
