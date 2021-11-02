@@ -3,7 +3,6 @@ import { GatsbyImage } from 'gatsby-plugin-image';
 import * as React from 'react';
 
 import { AddToCartAlert } from '../components/add-to-cart-alert';
-import { Gallery } from '../components/gallery';
 import { Layout } from '../components/layout';
 import { OptionPicker } from '../components/option-picker';
 import { SEO } from '../components/seo';
@@ -47,6 +46,12 @@ function ProductPage({
     }
   };
 
+  const handleActiveImage = (index: number): void => {
+    setActiveImage(
+      product.images?.[index]?.localFile?.childImageSharp?.gatsbyImageData
+    );
+  };
+
   return (
     <Layout hasSidebar={false}>
       <SEO
@@ -60,22 +65,51 @@ function ProductPage({
       />
       <div className="relative">
         <article className="rounded-lg lg:grid lg:grid-cols-2 lg:gap-8">
-          <div className="flex flex-col w-full mx-auto mt-6 space-y-4 lg:mt-0 max-w-prose">
-            <div className="overflow-hidden rounded-lg">
-              <div className="relative bg-white aspect-w-1 aspect-h-1">
-                <div className="absolute inset-0 flex">
-                  {product.images?.[0].localFile?.childImageSharp ? (
-                    <GatsbyImage
-                      image={activeImage}
-                      alt=""
-                      imgStyle={{ objectFit: 'contain' }}
-                      className="flex-1 duration-500 ease-in-out transform hover:scale-110"
-                    />
-                  ) : null}
-                </div>
+          <div className="w-full px-4 mx-auto sm:px-6 lg:px-8 max-w-prose">
+            <div className="flex flex-col-reverse">
+              <div className="relative w-full max-w-2xl mx-auto mt-6 lg:max-w-none">
+                <ul className="flex p-2 -m-2 space-x-6 overflow-x-auto">
+                  {product.images?.map((image, index) => (
+                    <li
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={index}
+                      className="relative flex items-center justify-center flex-shrink-0 w-2/5"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => handleActiveImage(index)}
+                        className="block w-full bg-white rounded-md cursor-pointer aspect-w-1 aspect-h-1 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50 focus:z-10 hover:bg-gray-50"
+                      >
+                        <span className="absolute inset-0 flex overflow-hidden rounded-md">
+                          <GatsbyImage
+                            image={
+                              image.localFile.childImageSharp.gatsbyImageData
+                            }
+                            alt=""
+                            className="object-cover object-center w-full h-full sm:rounded-lg"
+                          />
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                <div
+                  aria-hidden
+                  className="absolute inset-y-0 left-0 w-2 -ml-2 bg-white"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-y-0 right-0 w-2 -mr-2 bg-white"
+                />
+              </div>
+              <div className="w-full aspect-w-1 aspect-h-1">
+                <GatsbyImage
+                  image={activeImage}
+                  className="object-cover object-center w-full h-full sm:rounded-lg"
+                  alt=""
+                />
               </div>
             </div>
-            <Gallery images={product.images} setActiveImage={setActiveImage} />
           </div>
           <div className="flex flex-col space-y-4">
             <h1 className="mt-12 text-xl font-medium lg:mt-0">
