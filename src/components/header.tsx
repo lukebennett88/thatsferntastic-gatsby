@@ -23,7 +23,7 @@ function Header(): React.ReactElement {
   const sanitySiteSettings: SanitySiteSettings = useSanitySiteSettings();
   return (
     <>
-      <nav className="sticky top-0 z-10 bg-teal-200">
+      <nav className="sticky top-0 z-20 bg-teal-200">
         <MobileMenu
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
