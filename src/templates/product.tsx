@@ -23,7 +23,7 @@ function ProductPage({
   const addItemToCart = useAddItemToCart();
   const [isAlertShown, setIsAlertShown] = React.useState(false);
   const [activeImage, setActiveImage] = React.useState(
-    product.images?.[0].localFile.childImageSharp.gatsbyImageData
+    product.images?.[0]?.localFile.childImageSharp.gatsbyImageData
   );
   const variants = React.useMemo(
     () => prepareVariantsWithOptions(product.variants),
