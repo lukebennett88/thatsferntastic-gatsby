@@ -66,7 +66,16 @@ function ProductPage({
       <div className="relative">
         <article className="rounded-lg lg:grid lg:grid-cols-2 lg:gap-8">
           <div className="w-full px-4 mx-auto sm:px-6 lg:px-8 max-w-prose">
-            <div className="flex flex-col-reverse">
+            <div className="flex flex-col">
+              <div className="w-full aspect-w-1 aspect-h-1">
+                <div className="flex overflow-hidden rounded-lg">
+                  <GatsbyImage
+                    image={activeImage}
+                    className="flex-1 object-cover object-center"
+                    alt=""
+                  />
+                </div>
+              </div>
               <div className="relative w-full max-w-2xl mx-auto mt-6 lg:max-w-none">
                 <ul className="flex p-2 -m-2 space-x-6 overflow-x-auto">
                   {product.images?.map((image, index) => (
@@ -95,18 +104,11 @@ function ProductPage({
                 </ul>
                 <div
                   aria-hidden
-                  className="absolute inset-y-0 left-0 w-2 -ml-2 bg-white"
+                  className="absolute inset-y-0 left-0 w-3 transform -translate-x-2 bg-gray-50"
                 />
                 <div
                   aria-hidden
-                  className="absolute inset-y-0 right-0 w-2 -mr-2 bg-white"
-                />
-              </div>
-              <div className="w-full aspect-w-1 aspect-h-1">
-                <GatsbyImage
-                  image={activeImage}
-                  className="object-cover object-center w-full h-full sm:rounded-lg"
-                  alt=""
+                  className="absolute inset-y-0 right-0 w-3 transform translate-x-2 bg-gray-50"
                 />
               </div>
             </div>
