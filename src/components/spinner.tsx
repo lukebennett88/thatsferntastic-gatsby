@@ -1,7 +1,9 @@
 import { useId } from '@reach/auto-id';
 import * as React from 'react';
 
-function Spinner(): React.ReactElement {
+function Spinner(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+): React.ReactElement {
   const id = useId();
   const title = `title-${id as string}`;
   const desc = `desc-${id as string}`;
@@ -13,6 +15,7 @@ function Spinner(): React.ReactElement {
       role="img"
       aria-labelledby={`${title} ${desc}`}
       viewBox="0 0 32 32"
+      {...props}
     >
       <title id={title}>Circle loading spinner</title>
       <desc id={desc}>Image of a partial circle indicating "loading."</desc>
