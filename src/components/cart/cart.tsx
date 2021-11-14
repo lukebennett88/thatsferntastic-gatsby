@@ -1,20 +1,22 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import * as React from 'react';
+import { useForm } from 'react-hook-form';
 
-import { useCart } from '../../hooks/use-cart';
+import { useShopifyContext } from '../../context/shopify';
 import { useCartCount } from '../../hooks/use-cart-count';
 import { LineItemsType, useCartItems } from '../../hooks/use-cart-items';
 import { useCheckoutUrl } from '../../hooks/use-checkout-url';
 import { classNames } from '../../utils/classnames';
 import { formatMoney } from '../../utils/format-money';
+import { Spinner } from '../spinner';
 import { LineItem } from './line-item';
 
 export function Cart(): React.ReactElement {
   const lineItems = useCartItems();
   const count = useCartCount();
   const [showDialog, setShowDialog] = React.useState(false);
-
+  const [note, setNote] = React.useState('');
   return (
     <div className="relative pb-20">
       <h1 className="text-center heading-1 sm:text-left">Cart</h1>
@@ -26,21 +28,28 @@ export function Cart(): React.ReactElement {
               )
             : 'Nothing to see here, your cart is empty!'}
         </div>
-        <CartSummary setShowDialog={setShowDialog} />
-        <Terms showDialog={showDialog} setShowDialog={setShowDialog} />
+        <CartSummary setNote={setNote} setShowDialog={setShowDialog} />
+        <Terms
+          note={note}
+          showDialog={showDialog}
+          setShowDialog={setShowDialog}
+        />
       </div>
     </div>
   );
 }
 
 type CartSummaryProps = {
+  setNote: React.Dispatch<React.SetStateAction<string>>;
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function CartSummary({ setShowDialog }: CartSummaryProps): React.ReactElement {
-  const cart = useCart();
+function CartSummary({
+  setNote,
+  setShowDialog,
+}: CartSummaryProps): React.ReactElement {
   const count = useCartCount();
-
+  const { cart } = useShopifyContext();
   return (
     <aside className="w-full lg:max-w-sm">
       <nav className="sticky top-28">
@@ -63,15 +72,39 @@ function CartSummary({ setShowDialog }: CartSummaryProps): React.ReactElement {
               <dd>Calculated at checkout</dd>
             </div>
           </dl>
+          <div className="mt-3">
+            <label htmlFor="notes">
+              <span className="block">Notes:</span>
+              <div className="mt-1">
+                <textarea
+                  rows={4}
+                  name="notes"
+                  id="notes"
+                  className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-pink-500 focus:border-pink-500 sm:text-sm"
+                  onChange={(event) => {
+                    setNote(event.target.value);
+                  }}
+                />
+              </div>
+            </label>
+          </div>
+
           <div className="mt-6">
-            <span className="button-wrapper">
+            <span
+              className={classNames(
+                'button-wrapper',
+                !count && 'hover:transform-none'
+              )}
+            >
               <button
                 type="button"
                 onClick={() => setShowDialog(true)}
                 disabled={!count}
-                className={`button w-full ${
-                  !count ? 'cursor-not-allowed opacity-75' : ''
-                }`}
+                className={classNames(
+                  'button w-full',
+                  !count &&
+                    '!text-gray-700 !bg-gray-100 cursor-not-allowed opacity-75 hover:shadow-none'
+                )}
               >
                 Checkout
               </button>
@@ -84,14 +117,38 @@ function CartSummary({ setShowDialog }: CartSummaryProps): React.ReactElement {
 }
 
 type TermsProps = {
+  note: string;
   showDialog: boolean;
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Terms({ showDialog, setShowDialog }: TermsProps): React.ReactElement {
-  const [isChecked, setIsChecked] = React.useState(false);
+function Terms({
+  note,
+  showDialog,
+  setShowDialog,
+}: TermsProps): React.ReactElement {
+  const [isLoading, setIsLoading] = React.useState(false);
   const checkout = useCheckoutUrl();
-
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm({ mode: 'all' });
+  const { cart, client } = useShopifyContext();
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const onSubmit = async () => {
+    setIsLoading(true);
+    if (note) {
+      await client.checkout.updateAttributes(cart.id, {
+        note,
+      });
+    }
+    if (checkout) {
+      // eslint-disable-next-line scanjs-rules/assign_to_href
+      window.location.href = checkout;
+    }
+    setIsLoading(false);
+  };
   return (
     <>
       <Transition.Root show={showDialog} as={React.Fragment}>
@@ -143,7 +200,7 @@ function Terms({ showDialog, setShowDialog }: TermsProps): React.ReactElement {
                     <XIcon className="w-6 h-6" aria-hidden />
                   </button>
                 </div>
-                <div className="text-center sm:text-left">
+                <div>
                   <h3 className="font-mono text-2xl leading-none text-pink-500">
                     Please note...
                   </h3>
@@ -160,33 +217,42 @@ function Terms({ showDialog, setShowDialog }: TermsProps): React.ReactElement {
                     </p>
                   </div>
                 </div>
-                <div className="mt-5 space-y-4 sm:mt-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-between">
-                  <label
-                    htmlFor="agree_to_terms"
-                    className="flex items-center text-sm text-gray-900"
-                  >
-                    <input
-                      id="agree_to_terms"
-                      name="agree_to_terms"
-                      type="checkbox"
-                      checked={isChecked}
-                      onChange={() => setIsChecked((prev) => !prev)}
-                      className="w-4 h-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500"
-                    />
-                    <span className="ml-2">Agree to terms</span>
-                  </label>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="mt-5 space-y-4 sm:mt-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-between">
+                    <div>
+                      <label
+                        htmlFor="agree_to_terms"
+                        className="flex items-center text-sm text-gray-900"
+                      >
+                        <input
+                          id="agree_to_terms"
+                          type="checkbox"
+                          {...register('agree_to_terms', { required: true })}
+                          className="w-4 h-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500"
+                        />
+                        <span className="ml-2">Agree to terms</span>
+                      </label>
+                      {errors.agree_to_terms ? (
+                        <p
+                          aria-live="polite"
+                          className="text-sm font-medium text-pink-600 sm:absolute sm:bottom-4"
+                        >
+                          You must agree to the terms to continue
+                        </p>
+                      ) : null}
+                    </div>
 
-                  <a
-                    href={isChecked ? (checkout as string) : undefined}
-                    className={classNames(
-                      'button',
-                      !isChecked &&
-                        '!text-gray-700 !bg-gray-100 cursor-not-allowed opacity-75'
-                    )}
-                  >
-                    Checkout
-                  </a>
-                </div>
+                    <button type="submit" className="button">
+                      {isLoading ? (
+                        <span className="px-8">
+                          <Spinner className="w-4 h-4 text-pink-600 animate-spin" />
+                        </span>
+                      ) : (
+                        'Checkout'
+                      )}
+                    </button>
+                  </div>
+                </form>
               </div>
             </Transition.Child>
           </div>
