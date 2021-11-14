@@ -29,12 +29,13 @@ function AddToCartAlert({
           <Dialog
             as="div"
             static
-            className="fixed inset-0 z-10 overflow-y-auto"
+            className="fixed inset-0 z-20 overflow-y-auto"
             open={isAlertShown}
             onClose={setIsAlertShown}
           >
             <div className="flex items-start justify-end min-h-screen pt-4 pb-20 text-center sm:block">
               <Dialog.Overlay
+                key="overlay"
                 as={motion.div}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -53,6 +54,7 @@ function AddToCartAlert({
                   leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 >
                   <motion.div
+                    key="add-to-cart"
                     aria-label="Product added to cart."
                     initial={{ x: '50%', opacity: 0 }}
                     animate={{ x: '0%', opacity: 1 }}
