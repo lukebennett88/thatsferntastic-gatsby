@@ -90,7 +90,11 @@ function CartSummary({
           </div>
 
           <div className="mt-6">
-            <span
+            <p className="p-4 font-mono text-pink-700 rounded bg-pink-50">
+              Sorry, @thatsferntastic is closed right now. You will be able to
+              check out once we reopen.
+            </p>
+            {/* <span
               className={classNames(
                 'button-wrapper',
                 !count && 'hover:transform-none'
@@ -108,7 +112,7 @@ function CartSummary({
               >
                 Checkout
               </button>
-            </span>
+            </span> */}
           </div>
         </div>
       </nav>
