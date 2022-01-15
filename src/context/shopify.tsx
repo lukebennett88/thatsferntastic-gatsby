@@ -23,7 +23,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 function ShopifyProvider({
   shopName,
   accessToken,
@@ -46,13 +45,11 @@ function ShopifyProvider({
   });
 
   React.useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, unicorn/consistent-function-scoping
     const getNewCart = async () => {
       const newCart = await client.checkout.create();
       setCart(newCart);
     };
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, consistent-return
     const refreshExistingCart = async (cartId: string) => {
       try {
         const refreshedCart = await client.checkout.fetch(cartId);

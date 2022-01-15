@@ -35,15 +35,13 @@ function NewsletterSignUpForm(): React.ReactElement {
       }),
     })
       .then((res) => res.json())
-      // eslint-disable-next-line promise/always-return
       .then(() => {
         setSubmitting(false);
         setSuccess(true);
       })
-      .catch((error_) => {
+      .catch((err) => {
         setSubmitting(false);
-        // eslint-disable-next-line no-console
-        console.error(error_);
+        console.error(err);
       });
   };
 

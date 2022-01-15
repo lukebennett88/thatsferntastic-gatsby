@@ -7,7 +7,7 @@ import { useShopifyContext } from '../../context/shopify';
 import { useCartCount } from '../../hooks/use-cart-count';
 import { LineItemsType, useCartItems } from '../../hooks/use-cart-items';
 import { useCheckoutUrl } from '../../hooks/use-checkout-url';
-import { classNames } from '../../utils/classnames';
+// import { classNames } from '../../utils/classnames';
 import { formatMoney } from '../../utils/format-money';
 import { Spinner } from '../spinner';
 import { LineItem } from './line-item';
@@ -46,8 +46,8 @@ type CartSummaryProps = {
 
 function CartSummary({
   setNote,
-  setShowDialog,
-}: CartSummaryProps): React.ReactElement {
+}: // setShowDialog,
+CartSummaryProps): React.ReactElement {
   const count = useCartCount();
   const { cart } = useShopifyContext();
   return (
@@ -139,7 +139,6 @@ function Terms({
     register,
   } = useForm({ mode: 'all' });
   const { cart, client } = useShopifyContext();
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const onSubmit = async () => {
     setIsLoading(true);
     if (note) {
@@ -148,7 +147,6 @@ function Terms({
       });
     }
     if (checkout) {
-      // eslint-disable-next-line scanjs-rules/assign_to_href
       window.location.href = checkout;
     }
     setIsLoading(false);
