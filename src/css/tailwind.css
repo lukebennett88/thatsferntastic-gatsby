@@ -75,15 +75,13 @@
 }
 
 @layer utilities {
-  @responsive {
-    .full-bleed {
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-    }
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
 
-    .reset-full-bleed {
-      @apply w-auto mx-0;
-    }
+  .reset-full-bleed {
+    @apply w-auto mx-0;
   }
 }
