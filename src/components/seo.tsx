@@ -39,10 +39,11 @@ function SEO({
   if (image && image.startsWith('https://')) metaImage = image;
 
   // if an image is passed to the SEO component and it's on our domain (e.g. it's an absolute path) prefix it with our domain
-  if (image && !image.startsWith('https://'))
+  if (image && !image.startsWith('https://')) {
     metaImage = `${sanitySiteSettings.siteUrl}${
       image || sanitySiteSettings.shareImage.asset.url
     }`;
+  }
 
   // if no image is passed, use the image from Sanity CDN
   if (!image) metaImage = sanitySiteSettings.shareImage.asset.url;

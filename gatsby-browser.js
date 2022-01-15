@@ -7,7 +7,6 @@ import * as React from 'react';
 import { StoreClosedMessage } from './src/components/store-closed-message.tsx';
 import { ShopifyProvider } from './src/context/shopify.tsx';
 
-
 export function wrapRootElement({ element }) {
   return (
     <ShopifyProvider

@@ -39,48 +39,47 @@ type AllShopifyProductsQueryReturn = {
 };
 
 function useAllShopifyProducts(): AllShopifyProducts {
-  const {
-    allShopifyProduct,
-  } = useStaticQuery<AllShopifyProductsQueryReturn>(graphql`
-    query AllShopifyProductQuery {
-      allShopifyProduct(
-        sort: { fields: updatedAt, order: DESC }
-        filter: {
-          availableForSale: { eq: true }
-          variants: { elemMatch: { availableForSale: { eq: true } } }
-        }
-      ) {
-        nodes {
-          id
-          availableForSale
-          description
-          handle
-          images {
-            localFile {
-              childImageSharp {
-                gatsbyImageData(width: 600, layout: CONSTRAINED)
+  const { allShopifyProduct } =
+    useStaticQuery<AllShopifyProductsQueryReturn>(graphql`
+      query AllShopifyProductQuery {
+        allShopifyProduct(
+          sort: { fields: updatedAt, order: DESC }
+          filter: {
+            availableForSale: { eq: true }
+            variants: { elemMatch: { availableForSale: { eq: true } } }
+          }
+        ) {
+          nodes {
+            id
+            availableForSale
+            description
+            handle
+            images {
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(width: 600, layout: CONSTRAINED)
+                }
               }
             }
-          }
-          priceRange {
-            minVariantPrice {
-              amount
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+              maxVariantPrice {
+                amount
+              }
             }
-            maxVariantPrice {
-              amount
+            productType
+            tags
+            title
+            updatedAt
+            variants {
+              shopifyId
             }
-          }
-          productType
-          tags
-          title
-          updatedAt
-          variants {
-            shopifyId
           }
         }
       }
-    }
-  `);
+    `);
   return allShopifyProduct;
 }
 

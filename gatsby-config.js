@@ -126,14 +126,16 @@ module.exports = {
             }
             `,
             serialize: ({ query: { allShopifyProduct } }) => {
-              return allShopifyProduct.nodes.filter((node) => node.availableForSale).map((node) => {
-                return {
-                  description: node.description,
-                  date: node.updatedAt,
-                  url: `https://www.thatsferntastic.com.au/products/${node.handle}/`,
-                  guid: node.handle,
-                }
-              })
+              return allShopifyProduct.nodes
+                .filter((node) => node.availableForSale)
+                .map((node) => {
+                  return {
+                    description: node.description,
+                    date: node.updatedAt,
+                    url: `https://www.thatsferntastic.com.au/products/${node.handle}/`,
+                    guid: node.handle,
+                  };
+                });
             },
             output: '/rss.xml',
             title: '@thatsferntastic products',

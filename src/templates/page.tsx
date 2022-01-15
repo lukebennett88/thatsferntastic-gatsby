@@ -23,7 +23,7 @@ function SanityPageTemplate({
       <article className="mx-auto max-w-prose">
         <h1 className="heading-1">{title}</h1>
         {content.map((c, index) => {
-          if (c._type === 'richText')
+          if (c._type === 'richText') {
             return (
               <SanityBlockContent
                 // eslint-disable-next-line react/no-array-index-key
@@ -36,6 +36,7 @@ function SanityPageTemplate({
                 className="mt-5 prose"
               />
             );
+          }
           return null;
         })}
       </article>
@@ -63,7 +64,7 @@ type SanityPage = {
 };
 
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     sanityPage(slug: { current: { eq: $slug } }) {
       title
       description

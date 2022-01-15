@@ -50,7 +50,7 @@ function useAddItemsToCart() {
 
     const newCart = await client.checkout.addLineItems(
       cart.id,
-      (items as unknown) as ShopifyBuy.LineItem[]
+      items as unknown as ShopifyBuy.LineItem[]
     );
     setCart(newCart);
   }

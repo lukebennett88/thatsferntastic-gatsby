@@ -52,7 +52,7 @@ type SanityBlogPost = {
 };
 
 export const query = graphql`
-  query($slug: String!) {
+  query ($slug: String!) {
     sanityBlogPost(slug: { current: { eq: $slug } }) {
       title
       description

@@ -133,11 +133,8 @@ function Combobox({
   onSelect: onSelectProp,
   ...props
 }: ComboboxProps): React.ReactElement {
-  const {
-    addOptionData,
-    getOptionData,
-    removeOptionData,
-  } = useOptionDataFactory();
+  const { addOptionData, getOptionData, removeOptionData } =
+    useOptionDataFactory();
 
   const onSelectRef = React.useRef(onSelectProp);
   React.useEffect(() => {
@@ -269,7 +266,7 @@ const Results = connectStateResults(
       return null;
     }
 
-    if (searchResults && searchResults.nbHits === 0)
+    if (searchResults && searchResults.nbHits === 0) {
       return (
         <ResultsWrapper>
           <p className="px-8 py-2 -mx-4">
@@ -277,6 +274,7 @@ const Results = connectStateResults(
           </p>
         </ResultsWrapper>
       );
+    }
 
     if (searchResults && searchResults.nbHits !== 0) {
       return (

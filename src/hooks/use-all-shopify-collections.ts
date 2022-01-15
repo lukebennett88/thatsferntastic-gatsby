@@ -15,19 +15,18 @@ type AllShopifyCollectionsQuery = {
 };
 
 function useAllShopifyCollections(): AllShopifyCollectionTypeNodes {
-  const {
-    allShopifyCollection,
-  } = useStaticQuery<AllShopifyCollectionsQuery>(graphql`
-    query AllShopifyCollectionsQuery {
-      allShopifyCollection(sort: { fields: handle, order: ASC }) {
-        nodes {
-          handle
-          id
-          title
+  const { allShopifyCollection } =
+    useStaticQuery<AllShopifyCollectionsQuery>(graphql`
+      query AllShopifyCollectionsQuery {
+        allShopifyCollection(sort: { fields: handle, order: ASC }) {
+          nodes {
+            handle
+            id
+            title
+          }
         }
       }
-    }
-  `);
+    `);
   return allShopifyCollection;
 }
 

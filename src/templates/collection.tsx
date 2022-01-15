@@ -36,7 +36,7 @@ type ShopifyCollection = {
 };
 
 export const query = graphql`
-  query($handle: String!) {
+  query ($handle: String!) {
     shopifyCollection(handle: { eq: $handle }) {
       id
       title

@@ -16,20 +16,19 @@ type AllShopifyVariantsQuery = {
 };
 
 function useAllShopifyProductTypes(): AllShopifyVariantTypeNodes {
-  const {
-    allShopifyProductVariant,
-  } = useStaticQuery<AllShopifyVariantsQuery>(graphql`
-    query AllShopifyProductVariantQuery {
-      allShopifyProductVariant {
-        nodes {
-          shopifyId
-          image {
-            originalSrc
+  const { allShopifyProductVariant } =
+    useStaticQuery<AllShopifyVariantsQuery>(graphql`
+      query AllShopifyProductVariantQuery {
+        allShopifyProductVariant {
+          nodes {
+            shopifyId
+            image {
+              originalSrc
+            }
           }
         }
       }
-    }
-  `);
+    `);
   return allShopifyProductVariant;
 }
 
