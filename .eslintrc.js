@@ -1,44 +1,118 @@
+const reactComponentTypeMessage = {
+  message:
+    'This type includes the children prop which is generally wrong, instead of using this type, type the props of the component',
+};
 module.exports = {
-  extends: ['auto'],
-  root: true,
-  rules: {
-    '@react/jsx-one-expression-per-line': 0,
-    '@typescript-eslint/ban-ts-comment': 1,
-    '@typescript-eslint/no-floating-promises': 0,
-    '@typescript-eslint/no-unsafe-assignment': 0,
-    '@typescript-eslint/no-unsafe-call': 0,
-    '@typescript-eslint/no-unsafe-member-access': 0,
-    '@typescript-eslint/no-unused-vars': 1,
-    '@typescript-eslint/no-use-before-define': 0,
-    'arrow-body-style': 0,
-    'eslint-comments/disable-enable-pair': 0,
-    'function-paren-newline': 0,
-    'implicit-arrow-linebreak': 0,
-    'import/prefer-default-export': 0,
-    'jsx-a11y/anchor-is-valid': 0,
-    'jsx-a11y/no-noninteractive-element-interactions': 0,
-    'jsx-a11y/no-noninteractive-tabindex': 0,
-    'no-secrets/no-secrets': 0,
-    'no-underscore-dangle': 0,
-    'no-unused-vars': 1,
-    'object-curly-newline': 0,
-    'react/jsx-filename-extension': 0,
-    'react/jsx-one-expression-per-line': 0,
-    'react/jsx-wrap-multilines': 0,
-    'react/no-array-index-key': 1,
-    'react/no-danger': 1,
-    'react/no-unescaped-entities': 0,
-    'react/no-unused-prop-types': 1,
-    'react/prop-types': 0,
-    'react/react-in-jsx-scope': 0,
-    'react/require-default-props': 0,
-    'scanjs-rules/assign_to_src': 0,
-    'scanjs-rules/identifier_localStorage': 0,
-    'scanjs-rules/property_localStorage': 0,
-    'sonarjs/no-duplicate-string': 1,
-    'unicorn/no-array-reduce': 0,
-    'unicorn/no-new-array': 0,
-    'unicorn/no-useless-undefined': 0,
-    'unicorn/prefer-spread': 0,
+  parser: '@typescript-eslint/parser',
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
   },
+  plugins: [
+    'react',
+    'react-hooks',
+    'simple-import-sort',
+    'import',
+    '@typescript-eslint',
+  ],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  rules: {
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        extendDefaults: false,
+        types: {
+          Function:
+            '`Function` types are unsafe. Use more specific function types instead. e.g. (arg: number) => string',
+          String: {
+            message:
+              'The `String` type refers to the String object which is probably not what you want, you probably want `string` instead which refers to the string primitive type.',
+            fixWith: 'string',
+          },
+          ComponentType: reactComponentTypeMessage,
+          FC: reactComponentTypeMessage,
+          SFC: reactComponentTypeMessage,
+          'React.ComponentType': reactComponentTypeMessage,
+          'React.FC': reactComponentTypeMessage,
+          'React.SFC': reactComponentTypeMessage,
+        },
+      },
+    ],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { args: 'after-used', ignoreRestSiblings: true, vars: 'all' },
+    ],
+    curly: ['error', 'multi-line'],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: [
+      'tailwind.config.js'
+    ] }],
+    'import/no-unresolved': 'error',
+    'import/order': 'error',
+    'jsx-quotes': 'error',
+    'no-trailing-spaces': 'error',
+    'no-undef': 'error',
+    'no-unused-expressions': 'error',
+    'object-curly-spacing': ['error', 'always'],
+    quotes: [
+      'error',
+      'single',
+      { avoidEscape: true, allowTemplateLiterals: true },
+    ],
+    'react-hooks/exhaustive-deps': 'error',
+    'react-hooks/rules-of-hooks': 'error',
+    'react/jsx-boolean-value': 'warn',
+    'react/jsx-no-undef': 'error',
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
+    'react/jsx-wrap-multilines': 'warn',
+    'react/no-did-mount-set-state': 'warn',
+    'react/no-did-update-set-state': 'warn',
+    'react/no-unknown-property': 'warn',
+    'react/react-in-jsx-scope': 'error',
+    'react/self-closing-comp': 'warn',
+    'react/sort-prop-types': 'warn',
+    semi: 'error',
+    strict: 'off',
+    'no-restricted-syntax': [
+      'error',
+      {
+        // Curious why we have this rule?
+        // - Enums only work for a subset of use cases that unions of string literals + objects work for and learning one language feature is easier than learning two language features
+        // - Enums are a new language feature which have runtime semantics which means they change TypeScript from JS + types to JS + types + extra language features which is harder to teach without clear advantages for this specific feature
+        selector: 'TSEnumDeclaration',
+        message: 'Use a union of string literals instead of an enum',
+      },
+    ],
+  },
+  extends: ['prettier'],
+
+  // Disable some rules for (code blocks within) Markdown docs
+  overrides: [
+    {
+      files: ['**/*.md'],
+      rules: {
+        'no-unused-vars': 'off',
+        'no-undef': 'off',
+      },
+    },
+    {
+      files: ['packages/fields/src/**/*.{js,ts,tsx}'],
+      rules: {
+        'import/no-commonjs': 'error',
+      },
+    },
+    {
+      files: ['**/*.{ts,tsx}'],
+      rules: {
+        // TypeScript already checks for the following things and they conflict with TypeScript
+        'import/no-unresolved': 'off',
+        'no-undef': 'off',
+      },
+    },
+  ],
 };
