@@ -1,16 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
-const forms = require('@tailwindcss/forms');
-const typography = require('@tailwindcss/typography');
-const aspectRatio = require('@tailwindcss/aspect-ratio');
-const lineClamp = require('tailwindcss-line-clamp');
-const tailwindFilters = require('tailwindcss-filters');
 
 module.exports = {
-  mode: 'jit',
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     backdropFilter: {
       blur: `blur(${defaultTheme.spacing[2]})`,
@@ -80,12 +72,11 @@ module.exports = {
       }),
     },
   },
-  variants: {
-    extend: {
-      backgroundColor: ['group-focus', 'odd'],
-      margin: ['first'],
-      opacity: ['group-hover'],
-    },
-  },
-  plugins: [aspectRatio, forms, lineClamp, typography, tailwindFilters],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
+    require('tailwindcss-line-clamp'),
+    require('tailwindcss-filters'),
+  ],
 };
